@@ -109,7 +109,7 @@ class QasGetQueryResults < QasSoapQuery
 
   def poll_for_response(query_instance)
     loop do
-      response = query(next_block_request(block_number, query_instance))
+      response = query(request_next_block(block_number, query_instance))
 
       if status(response) == 'queued'
         sleep_and_backoff
@@ -117,7 +117,7 @@ class QasGetQueryResults < QasSoapQuery
         yield response
 
         reset_backoff
-        next_block_number
+        set_next_block_to_fetch
       else
         break
       end
@@ -127,7 +127,7 @@ class QasGetQueryResults < QasSoapQuery
   private
   attr_accessor :block_number, :backoff
 
-  def next_block_request(block_number, query_instance)
+  def request_next_block(block_number, query_instance)
     payload = <<-EOXML
       <qas:QAS_GETQUERYRESULTS_REQ_MSG>
          <qas:QAS_GETQUERYRESULTS_REQ>
@@ -158,7 +158,7 @@ class QasGetQueryResults < QasSoapQuery
     self.backoff = backoff * 2
   end
 
-  def next_block_number
+  def set_next_block_to_fetch
     self.block_number += 1
   end
 end
