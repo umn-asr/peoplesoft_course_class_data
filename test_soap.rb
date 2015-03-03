@@ -61,6 +61,108 @@ class SoapRequest
   end
 end
 
+class QasSoapQuery
+  def initialize(soap_request, logger = LogFormat.new)
+    self.soap_request = soap_request
+    self.logger       = logger
+  end
+
+  def query(query_body)
+    response = soap_request.execute_request(query_type, query_body)
+    puts logger.prettify_xml(response)
+
+    response = Nokogiri.XML(response) do |config|
+      config.default_xml.noblanks
+    end
+    response
+  end
+
+  private
+  attr_accessor :soap_request, :logger
+end
+
+class QasStartSyncPollQuery < QasSoapQuery
+
+  def query(query_body)
+    response = super
+    response.remove_namespaces!
+    query_instance(response)
+  end
+
+  private
+  def query_instance(response)
+    response.at('QueryInstance').text
+  end
+
+  def query_type
+    "QAS_EXECUTEQRYSYNCPOLL_OPER.VERSION_1"
+  end
+end
+
+class QasGetQueryResults < QasSoapQuery
+
+  def initialize(soap_request, logger = LogFormat.new)
+    self.block_number = 1
+    self.backoff      = 2
+    super
+  end
+
+  def poll_for_response(query_instance)
+    loop do
+      response = query(next_block_request(block_number, query_instance))
+
+      if status(response) == 'queued'
+        sleep_and_backoff
+      elsif status(response) == 'blockRetrieved'
+        yield response
+
+        reset_backoff
+        next_block_number
+      else
+        break
+      end
+    end
+  end
+
+  private
+  attr_accessor :block_number, :backoff
+
+  def next_block_request(block_number, query_instance)
+    payload = <<-EOXML
+      <qas:QAS_GETQUERYRESULTS_REQ_MSG>
+         <qas:QAS_GETQUERYRESULTS_REQ>
+            <qas1:PTQASWRK class="R">
+               <qas1:BlockNumber>#{block_number}</qas1:BlockNumber>
+               <qas1:QueryInstance>#{query_instance}</qas1:QueryInstance>
+            </qas1:PTQASWRK>
+         </qas:QAS_GETQUERYRESULTS_REQ>
+      </qas:QAS_GETQUERYRESULTS_REQ_MSG>
+    EOXML
+    payload
+  end
+
+  def query_type
+    "QAS_GETQUERYRESULTS_OPER.VERSION_2"
+  end
+
+  def status(response)
+    response.xpath('//xmlns:status', 'xmlns' => 'http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_STATUS_RESP.VERSION_2').text
+  end
+
+  def reset_backoff
+    self.backoff = 2
+  end
+
+  def sleep_and_backoff
+    sleep(backoff)
+    self.backoff = backoff * 2
+  end
+
+  def next_block_number
+    self.block_number += 1
+  end
+end
+
 class ClassDataService
   def initialize(soap_request, logger = LogFormat.new)
     self.soap_request = soap_request
@@ -68,27 +170,13 @@ class ClassDataService
   end
 
   def query(institution, campus, term, &block)
-    query_instance = initialize_request(institution, campus, term)
-    get_results(query_instance, &block)
+    query_body = class_query(institution, campus, term)
+    query_instance = QasStartSyncPollQuery.new(soap_request).query(query_body)
+    QasGetQueryResults.new(soap_request).poll_for_response(query_instance, &block)
   end
 
   private
   attr_accessor :soap_request, :logger
-
-  def initialize_request(institution, campus, term)
-    response = soap_request.execute_request('QAS_EXECUTEQRYSYNCPOLL_OPER.VERSION_1', class_query(institution, campus, term))
-    puts logger.prettify_xml(response)
-
-    response = Nokogiri.XML(response) do |config|
-      config.default_xml.noblanks
-    end
-
-    response.remove_namespaces!
-
-    query_instance = response.at('QueryInstance').text
-
-    query_instance
-  end
 
   def class_query(institution, campus, term)
     query = <<-EOXML
@@ -125,53 +213,6 @@ class ClassDataService
       </qas:QAS_EXEQRYSYNCPOLL_REQ_MSG>
     EOXML
     query
-  end
-
-  def get_results(query_instance)
-
-    block_number = 1
-    continue = true
-
-    backoff = 2
-
-    # f = File.new("response_test_for_#{env}.xml",'w+')
-
-    while continue
-      response = soap_request.execute_request('QAS_GETQUERYRESULTS_OPER.VERSION_2', next_block(block_number, query_instance))
-
-      response = Nokogiri.XML(response) do |config|
-        config.default_xml.noblanks
-      end
-
-      status = response.xpath('//xmlns:status', 'xmlns' => 'http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_STATUS_RESP.VERSION_2').text
-
-      if status == 'queued'
-        sleep(backoff * 2)
-        continue = true
-      elsif status == 'blockRetrieved'
-        continue = true
-        block_number += 1
-        # f.write(response)
-
-        yield response
-      else
-        continue = false
-      end
-    end
-  end
-
-  def next_block(block_number, query_instance)
-    payload = <<-EOXML
-      <qas:QAS_GETQUERYRESULTS_REQ_MSG>
-         <qas:QAS_GETQUERYRESULTS_REQ>
-            <qas1:PTQASWRK class="R">
-               <qas1:BlockNumber>#{block_number}</qas1:BlockNumber>
-               <qas1:QueryInstance>#{query_instance}</qas1:QueryInstance>
-            </qas1:PTQASWRK>
-         </qas:QAS_GETQUERYRESULTS_REQ>
-      </qas:QAS_GETQUERYRESULTS_REQ_MSG>
-    EOXML
-    payload
   end
 end
 
