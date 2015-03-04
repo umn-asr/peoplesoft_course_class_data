@@ -1,13 +1,12 @@
 module PeoplesoftCourseClassData
   module Qas
-    class QueryWithPolledResponse
+    class GetQueryResults
       def initialize(soap_request)
         self.soap_request = soap_request
       end
 
-      def run(payload)
-        query_instance = StartSyncPollQuery.new(soap_request).run(payload)
-        GetQueryResults.new(soap_request).poll(query_instance)
+      def poll(query_id)
+
       end
 
       private

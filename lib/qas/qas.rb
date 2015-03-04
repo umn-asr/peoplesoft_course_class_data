@@ -1,1 +1,3 @@
 require_relative 'query_with_polled_response'
+require_relative 'start_sync_poll_query'
+require_relative 'get_query_results'
