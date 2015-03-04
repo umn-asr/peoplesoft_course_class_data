@@ -6,10 +6,17 @@ module PeoplesoftCourseClassData
       end
 
       def run(payload)
+        response = soap_request.execute_request('QAS_EXECUTEQRYSYNCPOLL_OPER.VERSION_1', payload)
+        query_instance(response)
       end
 
       private
       attr_accessor :soap_request
+
+      def query_instance(xml)
+        xml.remove_namespaces!
+        xml.at('QueryInstance').text
+      end
     end
   end
 end
