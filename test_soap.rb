@@ -17,23 +17,19 @@ end
 
 class SoapRequest
   def initialize(endpoint, credentials, logger = LogFormat.new)
-    self.endpoint = endpoint
-    self.username = credentials.username
-    self.password = credentials.password
+    self.endpoint     = endpoint
+    self.credentials  = credentials
     self.logger   = logger
   end
 
   def execute_request(action, message)
-     #puts "  Sending data to #{endpoint}:\n\n#{prettify_xml(payload)}\n\n"
-     #puts "  Response:\n\n"
-    # puts logger.prettify_xml(request(message))
     puts request(message)
     x = "curl -s -X POST -H 'Connection: Keep-Alive' -H 'User-Agent: Apache-HttpClient/4.1.1 (java 1.5)' -H 'Expect: ' -H 'SOAPAction: \"#{action}\"' -H 'Content-type: text/xml;charset=UTF-8' -H 'Accept-Encoding: gzip,deflate' -d '#{request(message)}' #{endpoint}"
     `#{x}`
   end
 
   private
-  attr_accessor :endpoint, :username, :password, :logger
+  attr_accessor :endpoint, :credentials, :logger
 
   def request(message)
     payload = <<-EOXML
@@ -52,8 +48,8 @@ class SoapRequest
       <soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
         <wsse:Security soap:mustUnderstand="1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
           <wsse:UsernameToken>
-            <wsse:Username>#{username}</wsse:Username>
-            <wsse:Password>#{password}</wsse:Password>
+            <wsse:Username>#{credentials.username}</wsse:Username>
+            <wsse:Password>#{credentials.password}</wsse:Password>
           </wsse:UsernameToken>
         </wsse:Security>
       </soapenv:Header>
