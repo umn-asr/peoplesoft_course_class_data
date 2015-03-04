@@ -111,10 +111,10 @@ class QasGetQueryResults < QasSoapQuery
         sleep_and_backoff
       elsif status(response) == 'blockRetrieved'
         yield response
-
         reset_backoff
         set_next_block_to_fetch
       else
+        yield response
         break
       end
     end
@@ -263,6 +263,6 @@ soap_request = SoapRequestBuilder.build(env)
 class_service = ClassDataService.new(soap_request)
 f = File.new("response_test_for_#{env}.xml",'w+')
 
-class_service.query('UMNTC', 'UMNTC', 1149) do |response|
+class_service.query('UMNMO', 'UMNMO', 1149) do |response|
   f.write(response)
 end
