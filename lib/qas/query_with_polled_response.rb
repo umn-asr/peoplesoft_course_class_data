@@ -7,7 +7,7 @@ module PeoplesoftCourseClassData
 
       def run(payload)
         query_instance = StartSyncPollQuery.new(soap_request).run(payload)
-        GetQueryResults.new(soap_request).poll(query_instance)
+        GetQueryResults.new(soap_request, query_instance).poll
       end
 
       private
