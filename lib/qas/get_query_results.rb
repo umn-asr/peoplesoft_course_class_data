@@ -1,6 +1,9 @@
 module PeoplesoftCourseClassData
   module Qas
     class GetQueryResults
+
+      class SoapEnvError < StandardError; end
+
       def initialize(soap_request, query_instance)
         self.soap_request   = soap_request
         self.query_instance = query_instance
@@ -16,9 +19,11 @@ module PeoplesoftCourseClassData
           elsif status(response) == 'blockRetrieved'
             yield response
             block_number += 1
-          else
+          elsif status(response) == 'finalBlockRetrieved'
             yield response
             break
+          else
+            raise SoapEnvError, response.xpath('//detail').to_s
           end
         end
       end

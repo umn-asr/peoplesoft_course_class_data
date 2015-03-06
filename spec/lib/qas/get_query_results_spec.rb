@@ -65,6 +65,16 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
       end
     end
 
+    context "receives an error" do
+      before do
+        allow(soap_request_double).to receive(:execute_request).and_return(error_response)
+      end
+
+      it "raises an SoapEnv error" do
+        expect{ |block| subject.poll(&block)}.to raise_error(PeoplesoftCourseClassData::Qas::GetQueryResults::SoapEnvError)
+      end
+    end
+
     describe "yeilding the request results" do
       it "does not yield on queued responses, and yields once for each blockRetrieved and finalBlockRetrieved" do
         queued_responses                = rand(2..5).times.map { queued_response }
@@ -297,4 +307,32 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
     response
   end
 
+  def error_response
+    response = <<-EOXML
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+      <SOAP-ENV:Body>
+        <SOAP-ENV:Fault>
+          <faultcode>SOAP-ENV:Server</faultcode>
+          <faultstring>null</faultstring>
+          <detail>
+            <IBResponse xmlns="" type="error">
+              <DefaultTitle>Integration Broker Response</DefaultTitle>
+              <StatusCode>20</StatusCode>
+              <MessageID>5</MessageID>
+              <DefaultMessage><![CDATA[XML parser error ParseXmlString Fatal Error: at file Integration Server  line: 5  column: 35  message: Expected end of tag 'data' (159,5)]]></DefaultMessage>
+              <MessageParameters>
+                <Parameter><![CDATA[ParseXmlString]]></Parameter>
+                <Parameter><![CDATA[Fatal Error: at file Integration Server  line: 5  column: 35  message: Expected end of tag 'data']]></Parameter>
+              </MessageParameters>
+            </IBResponse>
+          </detail>
+        </SOAP-ENV:Fault>
+      </SOAP-ENV:Body>
+    </SOAP-ENV:Envelope>
+    EOXML
+    response = Nokogiri.XML(response) do |config|
+      config.default_xml.noblanks
+    end
+    response
+  end
 end
