@@ -62,6 +62,18 @@ RSpec.describe PeoplesoftCourseClassData::Qas::SoapRequest do
         subject.execute_request(action, payload)
       end
     end
+
+    describe "the response format" do
+      let(:response_string) { "<some_enterprise_xml>EnterpriseData</some_enterprise_xml>" }
+      before do
+        allow(subject).to receive(:'`').and_return(response_string)
+      end
+
+      it "parses the reponse with Nokogiri::XML" do
+        expect(Nokogiri::XML::Document).to receive(:parse).with(response_string, any_args)
+        subject.execute_request(action, payload)
+      end
+    end
   end
 
 end

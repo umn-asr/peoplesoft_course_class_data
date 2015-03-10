@@ -1,4 +1,4 @@
-require_relative 'credentials'
+require 'nokogiri'
 
 module PeoplesoftCourseClassData
   module Qas
@@ -9,11 +9,15 @@ module PeoplesoftCourseClassData
       end
 
       def execute_request(action, payload)
-        `#{command(action, payload)}`
+        Nokogiri::XML(run_command(action, payload))
       end
 
       private
       attr_accessor :endpoint, :credentials
+
+      def run_command(action, payload)
+        `#{command(action, payload)}`
+      end
 
       def command(action, payload)
         xml = xml_request(payload)
