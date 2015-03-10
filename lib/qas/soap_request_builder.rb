@@ -1,5 +1,4 @@
 require_relative 'soap_request'
-require_relative 'credentials_builder'
 
 module PeoplesoftCourseClassData
   module Qas
