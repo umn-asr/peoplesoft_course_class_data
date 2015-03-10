@@ -22,6 +22,17 @@ describe PeoplesoftCourseClassData::Qas::SoapRequestBuilder do
   let(:env) { CONFIG.keys.sample }
   subject   { PeoplesoftCourseClassData::Qas::SoapRequestBuilder.new(env) }
 
+  describe ".build" do
+    it "instantiates a new SoapRequestBuilder with the env and calls build on it" do
+      soap_request_builder_double = instance_double("PeoplesoftCourseClassData::Qas::SoapRequestBuilder")
+      expect(PeoplesoftCourseClassData::Qas::SoapRequestBuilder).to receive(:new).with(env).and_return(soap_request_builder_double)
+      expect(soap_request_builder_double).to receive(:build).and_return(Object.new)
+
+      PeoplesoftCourseClassData::Qas::SoapRequestBuilder.build(env)
+
+    end
+  end
+
   describe "#build" do
     it "returns a SoapRequest" do
       expect(subject.build).to be_instance_of(PeoplesoftCourseClassData::Qas::SoapRequest)

@@ -4,6 +4,10 @@ require_relative 'credentials_builder'
 module PeoplesoftCourseClassData
   module Qas
     class SoapRequestBuilder
+      def self.build(env)
+        new(env).build
+      end
+
       def initialize(env)
         self.env = env
       end
