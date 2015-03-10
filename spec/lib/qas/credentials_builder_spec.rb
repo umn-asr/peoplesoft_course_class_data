@@ -1,4 +1,4 @@
-require_relative '../../lib/credentials_builder'
+require_relative '../../../lib/qas/credentials_builder'
 
 CONFIG = {
   dev: {
@@ -18,9 +18,9 @@ CONFIG = {
   }
 }
 
-describe PeoplesoftCourseClassData::CredentialsBuilder do
+describe PeoplesoftCourseClassData::Qas::CredentialsBuilder do
   let(:env)   { CONFIG.keys.sample }
-  subject     { PeoplesoftCourseClassData::CredentialsBuilder.new(env) }
+  subject     { PeoplesoftCourseClassData::Qas::CredentialsBuilder.new(env) }
   describe "#build" do
     it "returns something that responds to username and password" do
       built = subject.build
@@ -39,11 +39,11 @@ describe PeoplesoftCourseClassData::CredentialsBuilder do
 
   describe ".build" do
     it "intanitates a new builder wit the env and calls build on it" do
-      credentials_builder_double = instance_double("PeoplesoftCourseClassData::CredentialsBuilder")
-      expect(PeoplesoftCourseClassData::CredentialsBuilder).to receive(:new).with(env).and_return(credentials_builder_double)
+      credentials_builder_double = instance_double("PeoplesoftCourseClassData::Qas::CredentialsBuilder")
+      expect(PeoplesoftCourseClassData::Qas::CredentialsBuilder).to receive(:new).with(env).and_return(credentials_builder_double)
       expect(credentials_builder_double).to receive(:build).and_return(Object.new)
 
-      PeoplesoftCourseClassData::CredentialsBuilder.build(env)
+      PeoplesoftCourseClassData::Qas::CredentialsBuilder.build(env)
     end
   end
 end
