@@ -7,8 +7,8 @@ module PeoplesoftCourseClassData
       self.query_runner = query_runner || PeoplesoftCourseClassData::Qas::QueryWithPolledResponse.new(soap_request)
     end
 
-    def query(institution, campus, term)
-      query_runner.run(query_content(institution, campus, term))
+    def query(institution, campus, term, &block)
+      query_runner.run(query_content(institution, campus, term), &block)
     end
 
     private
