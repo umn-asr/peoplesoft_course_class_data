@@ -36,4 +36,14 @@ describe PeoplesoftCourseClassData::CredentialsBuilder do
       expect(built.password).to eq(CONFIG[env][:password])
     end
   end
+
+  describe ".build" do
+    it "intanitates a new builder wit the env and calls build on it" do
+      credentials_builder_double = instance_double("PeoplesoftCourseClassData::CredentialsBuilder")
+      expect(PeoplesoftCourseClassData::CredentialsBuilder).to receive(:new).with(env).and_return(credentials_builder_double)
+      expect(credentials_builder_double).to receive(:build).and_return(Object.new)
+
+      PeoplesoftCourseClassData::CredentialsBuilder.build(env)
+    end
+  end
 end

@@ -2,6 +2,10 @@ require_relative 'qas/credentials'
 
 module PeoplesoftCourseClassData
   class CredentialsBuilder
+    def self.build(env)
+      new(env).build
+    end
+
     def initialize(env)
       self.env = env
     end
