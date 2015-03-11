@@ -5,17 +5,42 @@ module QasResults
 end
 
 class QasRow
-
   def initialize(node_set)
     self.node_set = node_set
+  end
+
+  def course_id
+    node_set.xpath('ns:A.CATALOG_NBR', 'ns' => QasResults::NAMESPACE).text
+  end
+
+  def catalog_number
+    node_set.xpath('ns:A.CATALOG_NBR', 'ns' => QasResults::NAMESPACE).text
   end
 
   def subject
     node_set.xpath('ns:A.SUBJECT', 'ns' => QasResults::NAMESPACE).text
   end
 
+  def start_date
+    node_set.xpath('ns:A.START_DT', 'ns' => QasResults::NAMESPACE).text
+  end
+
+  def start_time
+    node_set.xpath('ns:A.MEETING_TIME_START', 'ns' => QasResults::NAMESPACE).text
+  end
+
+  def end_time
+    node_set.xpath('ns:A.MEETING_TIME_END', 'ns' => QasResults::NAMESPACE).text
+  end
+
+  def subject_description
+
+  end
+
   private
   attr_accessor :node_set
+
+
 
 end
 
