@@ -38,14 +38,16 @@ class QasRows
 end
 
 
-def noko_doc
-  f = File.open('noko_xml.xml')
-  doc = Nokogiri::XML(f)
+def noko_doc(file_name = 'afro_hist_physics.xml')
+  f = File.open(file_name)
+  doc = Nokogiri::XML(f) do |config|
+    config.default_xml.noblanks
+  end
   f.close
 
   doc
 end
 
-def rows(doc)
+def rows(doc = noko_doc)
   QasRows.new(doc).rows
 end
