@@ -22,8 +22,7 @@ class QasRow
 
   ROW_ATTRIBUTES.each do | method_name, config |
     define_method(method_name) do
-      xml_value = node_set.xpath("ns:#{config[:xml_field]}", 'ns' => QasResults::NAMESPACE).text
-      self.send config[:type], xml_value
+      self.send config[:type], raw_value(config[:xml_field])
     end
   end
 
@@ -33,6 +32,10 @@ class QasRow
 
   private
   attr_accessor :node_set
+
+  def raw_value(xml_field)
+    node_set.xpath("ns:#{xml_field}", 'ns' => QasResults::NAMESPACE).text
+  end
 
   def string(value)
     String(value)
