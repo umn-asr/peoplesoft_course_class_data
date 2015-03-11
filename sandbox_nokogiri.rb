@@ -5,42 +5,42 @@ module QasResults
 end
 
 class QasRow
+  ROW_ATTRIBUTES = {
+    course_id: {
+      xml_field:  'A.CRSE_ID',
+      type:       'string'
+    },
+    catalog_number: {
+      xml_field:  'A.CATALOG_NBR',
+      type:       'string'
+    },
+    start_date: {
+      xml_field: 'A.START_DT',
+      type:      'date'
+    }
+  }
+
+  ROW_ATTRIBUTES.each do | method_name, config |
+    define_method(method_name) do
+      xml_value = node_set.xpath("ns:#{config[:xml_field]}", 'ns' => QasResults::NAMESPACE).text
+      self.send config[:type], xml_value
+    end
+  end
+
   def initialize(node_set)
     self.node_set = node_set
-  end
-
-  def course_id
-    node_set.xpath('ns:A.CATALOG_NBR', 'ns' => QasResults::NAMESPACE).text
-  end
-
-  def catalog_number
-    node_set.xpath('ns:A.CATALOG_NBR', 'ns' => QasResults::NAMESPACE).text
-  end
-
-  def subject
-    node_set.xpath('ns:A.SUBJECT', 'ns' => QasResults::NAMESPACE).text
-  end
-
-  def start_date
-    node_set.xpath('ns:A.START_DT', 'ns' => QasResults::NAMESPACE).text
-  end
-
-  def start_time
-    node_set.xpath('ns:A.MEETING_TIME_START', 'ns' => QasResults::NAMESPACE).text
-  end
-
-  def end_time
-    node_set.xpath('ns:A.MEETING_TIME_END', 'ns' => QasResults::NAMESPACE).text
-  end
-
-  def subject_description
-
   end
 
   private
   attr_accessor :node_set
 
+  def string(value)
+    String(value)
+  end
 
+  def date(value)
+    Time.new(*value.split('-'))
+  end
 
 end
 
