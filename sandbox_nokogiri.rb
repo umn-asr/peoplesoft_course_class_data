@@ -14,6 +14,86 @@ class QasRow
       xml_field:  'A.CATALOG_NBR',
       type:       'string'
     },
+    description: {
+      xml_field: 'EXPR1_1',
+      type:      'string'
+    },
+    title: {
+      xml_field:  'A.DESCR1',
+      type:       'string'
+    },
+    subject_subject_id: {
+      xml_field:  'A.SUBJECT',
+      type:       'string'
+    },
+    subject_description: {
+      xml_field:  'A.DESCR',
+      type:       'string'
+    },
+    cle_attribute_family: {
+      xml_field:  'A.UM_CRSE_ATTR',
+      type:       'string'
+    },
+    cle_attribute_attribute_id: {
+      xml_field:  'A.UM_CRSE_ATT_VAL',
+      type:       'string'
+    },
+    sections_class_number: {
+      xml_field:  'A.CLASS_NBR',
+      type:       'string'
+    },
+    sections_number: {
+      xml_field:  'A.CLASS_SECTION',
+      type:       'string'
+    },
+    sections_component: {
+      xml_field:  'A.SSR_COMPONENT',
+      type:       'string'
+    },
+    sections_location: {
+      xml_field:  'A.LOCATION',
+      type:       'string'
+    },
+    sections_credits_minimum: {
+      xml_field:  'A.UNITS_MINIMUM',
+      type:       'integer'
+    },
+    sections_credits_maximum: {
+      xml_field:  'A.UNITS_MAXIMUM',
+      type:       'string'
+    },
+    sections_notes: {
+      xml_field:  'EXPR67_67',
+      type:       'string'
+    },
+    sections_instruction_mode_instruction_mode_id: {
+      xml_field:  'A.INSTRUCTION_MODE',
+      type:       'string'
+    },
+    sections_instruction_mode_description: {
+      xml_field:  'A.DESCR2',
+      type:       'string'
+    },
+    sections_grading_basis_grading_basis_id: {
+      xml_field:  'A.GRADING_BASIS',
+      type:       'string'
+    },
+    sections_grading_basis_description: {
+      xml_field:  'A.XLATLONGNAME',
+      type:       'string'
+    },
+    sections_instructors_name: {
+      xml_field:  'A.NAME_DISPLAY',
+      type:       'string '
+    },
+    sections_instructors_email: {
+      xml_field:  'A.EMAIL_ADDR',
+      type:       'string'
+    },
+    sections_instructors_role: {
+      xml_field:  'A.INSTR_ROLE',
+      type:       'string'
+    },
     start_date: {
       xml_field: 'A.START_DT',
       type:      'date'
