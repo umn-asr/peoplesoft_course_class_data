@@ -110,6 +110,11 @@ class QasRow
     self.node_set = node_set
   end
 
+  def sections_meeting_patterns_days
+    day_elements = %w[A.MON A.TUES A.WED A.UM_THURS A.FRI A.SAT A.UM_SUNDAY]
+    day_elements.reject { |day_element| raw_value(day_element).empty? }.map { |active_day| Day.for_xml_tag(active_day) }
+  end
+
   private
   attr_accessor :node_set
 
@@ -121,10 +126,91 @@ class QasRow
     String(value)
   end
 
+  def integer(value)
+    Integer(value)
+  end
+
   def date(value)
     Time.new(*value.split('-'))
   end
 
+  class Day
+    class Monday
+      def xml_tag
+        "A.MON"
+      end
+
+      def type_name
+        "monday"
+      end
+    end
+
+    class Tuesday
+      def xml_tag
+        "A.TUES"
+      end
+
+      def type_name
+        "tuesday"
+      end
+    end
+
+    class Wednesday
+      def xml_tag
+        "A.WED"
+      end
+
+      def type_name
+        "wednesday"
+      end
+    end
+
+    class Thursday
+      def xml_tag
+        "A.UM_THURS"
+      end
+
+      def type_name
+        "thursday"
+      end
+    end
+
+    class Friday
+      def xml_tag
+        "A.FRI"
+      end
+
+      def type_name
+        "firday"
+      end
+    end
+
+    class Saturday
+      def xml_tag
+        "A.SAT"
+      end
+
+      def type_name
+        "saturday"
+      end
+    end
+
+    class Sunday
+      def xml_tag
+        "A.UM_SUNDAY"
+      end
+
+      def type_name
+        "sunday"
+      end
+    end
+
+    ALL_DAYS = [Day::Monday, Day::Tuesday, Day::Wednesday, Day::Thursday, Day::Friday, Day::Saturday, Day::Sunday]
+
+    def self.for_xml_tag(xml_tag)
+      ALL_DAYS.map(&:new).detect { |day| day.xml_tag == xml_tag }
+    end
+  end
 end
 
 class QasRows
