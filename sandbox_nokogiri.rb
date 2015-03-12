@@ -7,52 +7,40 @@ end
 class QasRow
   ROW_ATTRIBUTES = {
     course_id: {
-      xml_field:  'A.CRSE_ID',
-      type:       'string'
+      xml_field:  'A.CRSE_ID'
     },
     catalog_number: {
-      xml_field:  'A.CATALOG_NBR',
-      type:       'string'
+      xml_field:  'A.CATALOG_NBR'
     },
     description: {
-      xml_field: 'EXPR1_1',
-      type:      'string'
+      xml_field: 'EXPR1_1'
     },
     title: {
-      xml_field:  'A.DESCR1',
-      type:       'string'
+      xml_field:  'A.DESCR1'
     },
     subject_subject_id: {
-      xml_field:  'A.SUBJECT',
-      type:       'string'
+      xml_field:  'A.SUBJECT'
     },
     subject_description: {
-      xml_field:  'A.DESCR',
-      type:       'string'
+      xml_field:  'A.DESCR'
     },
     cle_attribute_family: {
-      xml_field:  'A.UM_CRSE_ATTR',
-      type:       'string'
+      xml_field:  'A.UM_CRSE_ATTR'
     },
     cle_attribute_attribute_id: {
-      xml_field:  'A.UM_CRSE_ATT_VAL',
-      type:       'string'
+      xml_field:  'A.UM_CRSE_ATT_VAL'
     },
     sections_class_number: {
-      xml_field:  'A.CLASS_NBR',
-      type:       'string'
+      xml_field:  'A.CLASS_NBR'
     },
     sections_number: {
-      xml_field:  'A.CLASS_SECTION',
-      type:       'string'
+      xml_field:  'A.CLASS_SECTION'
     },
     sections_component: {
-      xml_field:  'A.SSR_COMPONENT',
-      type:       'string'
+      xml_field:  'A.SSR_COMPONENT'
     },
     sections_location: {
-      xml_field:  'A.LOCATION',
-      type:       'string'
+      xml_field:  'A.LOCATION'
     },
     sections_credits_minimum: {
       xml_field:  'A.UNITS_MINIMUM',
@@ -60,39 +48,37 @@ class QasRow
     },
     sections_credits_maximum: {
       xml_field:  'A.UNITS_MAXIMUM',
-      type:       'string'
+      type:       'integer'
     },
     sections_notes: {
-      xml_field:  'EXPR67_67',
-      type:       'string'
+      xml_field:  'EXPR67_67'
     },
     sections_instruction_mode_instruction_mode_id: {
-      xml_field:  'A.INSTRUCTION_MODE',
-      type:       'string'
+      xml_field:  'A.INSTRUCTION_MODE'
     },
     sections_instruction_mode_description: {
-      xml_field:  'A.DESCR2',
-      type:       'string'
+      xml_field:  'A.DESCR2'
     },
     sections_grading_basis_grading_basis_id: {
-      xml_field:  'A.GRADING_BASIS',
-      type:       'string'
+      xml_field:  'A.GRADING_BASIS'
     },
     sections_grading_basis_description: {
-      xml_field:  'A.XLATLONGNAME',
-      type:       'string'
+      xml_field:  'A.XLATLONGNAME'
     },
     sections_instructors_name: {
-      xml_field:  'A.NAME_DISPLAY',
-      type:       'string '
+      xml_field:  'A.NAME_DISPLAY'
     },
     sections_instructors_email: {
-      xml_field:  'A.EMAIL_ADDR',
-      type:       'string'
+      xml_field:  'A.EMAIL_ADDR'
     },
     sections_instructors_role: {
-      xml_field:  'A.INSTR_ROLE',
-      type:       'string'
+      xml_field:  'A.INSTR_ROLE'
+    },
+    sections_meeting_patterns_start_time: {
+      xml_field:  'A.MEETING_TIME_START'
+    },
+    sections_meeting_patterns_end_time: {
+      xml_field:  'A.MEETING_TIME_END'
     },
     start_date: {
       xml_field: 'A.START_DT',
@@ -102,7 +88,7 @@ class QasRow
 
   ROW_ATTRIBUTES.each do | method_name, config |
     define_method(method_name) do
-      self.send config[:type], raw_value(config[:xml_field])
+      self.send type_conversion(config), xml_value(config)
     end
   end
 
@@ -117,6 +103,13 @@ class QasRow
 
   private
   attr_accessor :node_set
+  def type_conversion(config)
+    config[:type] || 'string'
+  end
+
+  def xml_value(config)
+    raw_value(config[:xml_field])
+  end
 
   def raw_value(xml_field)
     node_set.xpath("ns:#{xml_field}", 'ns' => QasResults::NAMESPACE).text
