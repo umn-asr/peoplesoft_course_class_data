@@ -24,6 +24,9 @@ class QasRow
     subject_description: {
       xml_field:  'A.DESCR'
     },
+    equivalency_equivalency_id: {
+      xml_field:  'A.EQUIV_CRSE_ID'
+    },
     cle_attribute_family: {
       xml_field:  'A.UM_CRSE_ATTR'
     },
@@ -80,9 +83,28 @@ class QasRow
     sections_meeting_patterns_end_time: {
       xml_field:  'A.MEETING_TIME_END'
     },
-    start_date: {
-      xml_field: 'A.START_DT',
-      type:      'date'
+    sections_meeting_patterns_start_date: {
+      xml_field:  'A.START_DT',
+      type:       'date'
+    },
+    sections_meeting_patterns_end_date: {
+      xml_field:  'A.END_DT',
+      type:       'date'
+    },
+    sections_meeting_patterns_locations_location_id: {
+      xml_field:  'A.FACILITY_ID'
+    },
+    sections_meeting_patterns_locations_description: {
+      xml_field:  'A.DESCR3'
+    },
+    sections_combined_sections_catalog_number: {
+      xml_field:  'A.CATALOG_NBR_SRCH1'
+    },
+    sections_combined_sections_subject_id: {
+      xml_field:  'A.SUBJECT_SRCH1'
+    },
+    sections_combined_sections_section_number: {
+      xml_field:  'A.UM_CLASS_SECTION'
     }
   }
 
