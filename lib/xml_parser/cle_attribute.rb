@@ -4,6 +4,10 @@ module PeoplesoftCourseClassData
       def ==(other)
         (self.attribute_id == other.attribute_id) && (self.family == other.family)
       end
+
+      def merge(other)
+        #noop
+      end
     end
   end
 end
