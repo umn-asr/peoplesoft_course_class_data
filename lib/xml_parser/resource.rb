@@ -1,9 +1,6 @@
 module PeoplesoftCourseClassData
   module XmlParser
     class Resource
-      # ATTRIBUTES        = []
-      # CHILD_COLLECTIONS = []
-
       def self.configure_attributes(attributes)
         attributes.each do |attribute|
           puts "adding attribute #{attribute}"
@@ -11,14 +8,7 @@ module PeoplesoftCourseClassData
           self.send(:attr_writer, attribute)
           class_eval "private :#{attribute}="
         end
-      # (ATTRIBUTES + CHILD_COLLECTIONS).each do |attribute|
-      #   puts "adding attribute #{attribute}"
-      #   self.send(:attr_reader, attribute)
-      #   self.send(:attr_writer, attribute)
-      #   class_eval "private :key => "value", #{attribute}="
       end
-
-      # configure_attributes(ATTRIBUTES + CHILD_COLLECTIONS)
 
       def initialize(*args)
         self.class.attributes.each_with_index do |attribute, index|
