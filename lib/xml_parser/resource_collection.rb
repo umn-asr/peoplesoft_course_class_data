@@ -1,7 +1,15 @@
+require 'forwardable'
+
 module PeoplesoftCourseClassData
   module XmlParser
     class ResourceCollection
+      extend Forwardable
+      include Enumerable
+
+      def_delegator :resources, :each
+
       attr_reader :resources
+
       def initialize(resources)
         self.resources = Set.new
         add(resources)
@@ -9,10 +17,6 @@ module PeoplesoftCourseClassData
 
       def merge(other)
         self.class.new(resources.merge(other.resources))
-      end
-
-      def include?(other)
-        resources.include?(other)
       end
 
       private
