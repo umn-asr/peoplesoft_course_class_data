@@ -13,8 +13,6 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     configure_attributes(attributes + child_collections)
   end
 
-  # class PeoplesoftCourseClassData::XmlParser::Instructors < ResourceCollection
-
   class PeoplesoftCourseClassData::XmlParser::CombinedSection < described_class
     def self.attributes
       [:catalog_number]
@@ -26,8 +24,6 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
 
     configure_attributes(attributes)
   end
-
-  # class PeoplesoftCourseClassData::XmlParser::CombinedSections < ResourceCollection; end
 
   class PeoplesoftCourseClassData::XmlParser::Section < described_class
     def self.attributes
@@ -41,9 +37,6 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     configure_attributes(attributes + child_collections)
   end
 
-  # class PeoplesoftCourseClassData::XmlParser::Sections < ResourceCollection; end
-
-
   class PeoplesoftCourseClassData::XmlParser::CleAttribute < described_class
     def self.attributes
       [:attribute_id, :family]
@@ -55,8 +48,6 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
 
     configure_attributes(attributes)
   end
-
-  # class PeoplesoftCourseClassData::XmlParser::CleAttributes < ResourceCollection; end
 
   class PeoplesoftCourseClassData::XmlParser::CourseAspect < described_class
     def self.attributes
