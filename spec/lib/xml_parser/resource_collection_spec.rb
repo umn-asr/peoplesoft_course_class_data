@@ -18,9 +18,29 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
   let(:writing_intensive) { PeoplesoftCourseClassData::XmlParser::CleAttribute.new('WI', 'CLE') }
   let(:phys_core)         { PeoplesoftCourseClassData::XmlParser::CleAttribute.new('PHYS', 'CLE') }
 
-  subject { described_class.new([writing_intensive]) }
+  describe "new" do
+    context "with a collection" do
+      subject { described_class.new([writing_intensive, phys_core]) }
+
+      it "adds all objects to the collection" do
+        [writing_intensive, phys_core].each do |item|
+          expect(subject).to include(item)
+        end
+      end
+    end
+
+    context "with a single object" do
+      subject { described_class.new(writing_intensive) }
+
+      it "adds the single object to its collection" do
+        expect(subject).to include(writing_intensive)
+      end
+    end
+  end
 
   describe "#merge" do
+    subject { described_class.new([writing_intensive]) }
+
     let(:other) { described_class.new([phys_core]) }
 
     context "when other's attributes are the same" do
