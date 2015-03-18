@@ -2,7 +2,7 @@ require_relative 'resource'
 
 module PeoplesoftCourseClassData
   module XmlParser
-    class InstructionMode < Resource
+    class GradingBasis < Resource
       def self.attributes
         [:grading_basis_id, :description]
       end
