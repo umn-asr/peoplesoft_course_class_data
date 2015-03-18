@@ -61,6 +61,40 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     configure_attributes(attributes + child_collections)
   end
 
+  describe "equality" do
+    subject { PeoplesoftCourseClassData::XmlParser::Instructor.new('Jane Schmoe', 'jane@umn.edu') }
+    context "when the other has the same attribute values" do
+      let(:other) { PeoplesoftCourseClassData::XmlParser::Instructor.new('Jane Schmoe', 'jane@umn.edu') }
+
+      it "is equal" do
+        expect(subject).to eql(other)
+        expect(subject).to be == other
+      end
+
+      it "passes set equality" do
+        set = Set.new [subject]
+        expect(set).to include(other)
+      end
+
+      it "passes set uniqueness" do
+        set = Set.new [subject]
+        expect(set.merge([other]).count).to eq 1
+      end
+    end
+
+    context "when the other has a different attribute" do
+      let(:other_name)  { PeoplesoftCourseClassData::XmlParser::Instructor.new('Joe Schmoe', 'jane@umn.edu') }
+      let(:other_email) { PeoplesoftCourseClassData::XmlParser::Instructor.new('Jane Schmoe', 'joe@umn.edu') }
+      let(:other_all)   { PeoplesoftCourseClassData::XmlParser::Instructor.new('Joe Schmoe', 'joe@umn.edu') }
+
+      it "is not equal" do
+        [other_name, other_email, other_all].each do |other|
+          expect(subject).not_to eq(other)
+        end
+      end
+    end
+  end
+
   describe "#merge" do
     let(:jane)              { PeoplesoftCourseClassData::XmlParser::Instructor.new('Jane Schmoe', 'jane@umn.edu') }
     let(:joe)               { PeoplesoftCourseClassData::XmlParser::Instructor.new('Joe Schmoe', 'joe@umn.edu') }
