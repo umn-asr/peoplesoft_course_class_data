@@ -1,24 +1,16 @@
-require_relative 'section'
-require_relative 'sections'
-require_relative 'cle_attribute'
-require_relative 'cle_attributes'
-require_relative 'instructor'
-require_relative 'instructors'
-require_relative 'combined_section'
-require_relative 'combined_sections'
-
 require_relative 'resource'
-
+require_relative 'section'
+require_relative 'cle_attribute'
 
 module PeoplesoftCourseClassData
   module XmlParser
     class CourseAspect < Resource
       def self.attributes
-        [:course_id, :catalog_number, :description, :title]
+        [:course_id, :catalog_number, :description, :title, :subject]
       end
 
       def self.child_collections
-        [:sections, :cle_attributes]
+        [:cle_attributes, :sections]
       end
 
       configure_attributes(attributes + child_collections)

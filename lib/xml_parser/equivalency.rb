@@ -2,9 +2,9 @@ require_relative 'resource'
 
 module PeoplesoftCourseClassData
   module XmlParser
-    class Instructor < Resource
+    class Equivalency < Resource
       def self.attributes
-        [:name, :email, :role]
+        [:equivalency_id]
       end
 
       def self.child_collections

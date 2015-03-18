@@ -1,26 +1,17 @@
+require_relative 'resource'
+
 module PeoplesoftCourseClassData
   module XmlParser
-    class CombinedSection
+    class CombinedSection < Resource
+       def self.attributes
+         [:catalog_number, :subject_id, :section_number]
+       end
 
-      attr_reader :catalog_number
-      def initialize(catalog_number)
-        self.catalog_number = catalog_number
-      end
+       def self.child_collections
+         []
+       end
 
-      def ==(other)
-        self.catalog_number == other.catalog_number
-      end
-
-      def hash
-        catalog_number.hash
-      end
-
-      def merge(other)
-        #noop - this is a leaf
-      end
-
-      private
-      attr_writer :catalog_number
+       configure_attributes(attributes + child_collections)
     end
   end
 end

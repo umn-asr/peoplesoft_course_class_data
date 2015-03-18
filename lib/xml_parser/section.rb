@@ -1,19 +1,14 @@
-require_relative 'instructor'
-require_relative 'instructors'
-require_relative 'combined_section'
-require_relative 'combined_sections'
-
 require_relative 'resource'
 
 module PeoplesoftCourseClassData
   module XmlParser
     class Section < Resource
       def self.attributes
-        [:class_number, :number, :component]
+        [:class_number, :number, :component, :location, :credits_minimum, :credits_maximum, :instruction_mode, :grading_basis]
       end
 
       def self.child_collections
-        [:instructors, :combined_sections]
+        [:instructors, :meeting_patterns, :combined_sections]
       end
 
       configure_attributes(attributes + child_collections)
