@@ -1,3 +1,5 @@
+require_relative 'resource_collection'
+
 module PeoplesoftCourseClassData
   module XmlParser
     class Resource
@@ -16,8 +18,7 @@ module PeoplesoftCourseClassData
         end
         self.class.child_collections.each_with_index do |collection, index|
           index_with_offset = self.class.attributes.count + index
-          collection_class = Object.const_get "PeoplesoftCourseClassData::XmlParser::#{collection.to_s.split('_').map(&:capitalize).join('')}"
-          self.send "#{collection}=", collection_class.new(args[index_with_offset])
+          self.send "#{collection}=", ResourceCollection.new(args[index_with_offset])
         end
       end
 
