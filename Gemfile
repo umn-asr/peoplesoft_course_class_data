@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'nokogiri'
-gem 'savon'
+gem 'activesupport', '~> 4.2.0'
 
 group :development, :test do
   gem 'rspec', '~> 3.2'
