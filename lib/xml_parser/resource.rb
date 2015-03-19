@@ -62,7 +62,7 @@ module PeoplesoftCourseClassData
       end
 
       def json_tree
-        json_hash = {"type" => self.class.to_s.underscore }
+        json_hash = {"type" => self.class.to_s.demodulize.underscore }
         self.class.attributes.each do |attribute|
           value = self.public_send(attribute)
           if value.respond_to?(:json_tree)

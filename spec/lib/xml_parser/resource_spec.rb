@@ -230,6 +230,33 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
   end
 
   describe "to_json" do
+    context "the type key" do
+      it "adds a 'type' key with the snake_cased version of the class name" do
+        subject = TestInstructor.new("Jane Schmoe", "jane@umn.edu")
+
+        actual_key_value_pairs    = key_value_pairs(subject.to_json)
+        expected_key_value_pairs  = key_value_pairs({"type" => TestInstructor.to_s.underscore}.to_json)
+        expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+      end
+
+      context "when the class is namespaced" do
+        class PeoplesoftCourseClassData::XmlParser::TestInstructor < described_class
+          def self.attributes
+            [:name, :email]
+          end
+
+          configure_attributes(attributes)
+        end
+
+        it "removes namespaces from the class name" do
+          subject = PeoplesoftCourseClassData::XmlParser::TestInstructor.new("Jane Schmoe", "jane@umn.edu")
+
+          actual_key_value_pairs    = key_value_pairs(subject.to_json)
+          expected_key_value_pairs  = key_value_pairs({"type" => "test_instructor"}.to_json)
+          expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+        end
+      end
+    end
 
     context "attributes" do
       subject { TestInstructor.new("Jane Schmoe", "jane@umn.edu") }
@@ -237,12 +264,6 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
       it "turns the attributes into key/value pairs" do
         actual_key_value_pairs    = key_value_pairs(subject.to_json)
         expected_key_value_pairs  = key_value_pairs({"name" => "Jane Schmoe", "email" => "jane@umn.edu"}.to_json)
-        expect(actual_key_value_pairs).to include(expected_key_value_pairs)
-      end
-
-      it "adds a 'type' key with the snake_cased version of the class name" do
-        actual_key_value_pairs    = key_value_pairs(subject.to_json)
-        expected_key_value_pairs  = key_value_pairs({"type" => TestInstructor.to_s.underscore}.to_json)
         expect(actual_key_value_pairs).to include(expected_key_value_pairs)
       end
     end
