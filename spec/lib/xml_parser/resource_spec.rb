@@ -31,6 +31,44 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     end
   end
 
+  describe ".new" do
+    class Book < described_class;
+      def self.attributes
+        [:book_id, :title]
+      end
+
+      def self.child_collections
+        [:chapters, :appendices]
+      end
+
+      configure_attributes(attributes + child_collections)
+    end
+
+    let(:id)          { rand(100..999) }
+    let(:title)       { id.next.to_s }
+    let(:chapters)    { rand(10..20).times.map { Object.new } }
+    let(:appendices)  { rand(1..5).times.map { Object.new }   }
+
+    it "assigns arguments to the attributes in order" do
+      subject = Book.new(id, title)
+      expect(subject.book_id).to eq(id)
+      expect(subject.title).to eq(title)
+
+      subject = Book.new(title, id)
+      expect(subject.book_id).to eq(title)
+      expect(subject.title).to eq(id)
+    end
+
+    it "after attributes are exhausted it assigns builds ResourceCollections and assigns them to child_collections" do
+      subject = Book.new(id, title, chapters, appendices)
+
+      expect(subject.chapters.entries).to eq(chapters.entries)
+      expect(subject.appendices.entries).to eq(appendices.entries)
+    end
+
+  end
+
+
   describe "equality" do
     subject { TestInstructor.new('Jane Schmoe', 'jane@umn.edu') }
     context "when the other has the same attribute values" do
