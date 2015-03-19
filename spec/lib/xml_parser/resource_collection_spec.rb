@@ -62,4 +62,15 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
       end
     end
   end
+
+  describe "#json_tree" do
+    subject { described_class.new([writing_intensive, phys_core]) }
+    it "is an array" do
+      expect(subject.json_tree).to be_kind_of(Array)
+    end
+
+    it "hash a json representation of each member of the collection" do
+      expect(subject.json_tree).to eq([writing_intensive, phys_core].map(&:json_tree))
+    end
+  end
 end

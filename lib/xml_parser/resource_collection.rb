@@ -19,6 +19,10 @@ module PeoplesoftCourseClassData
         self.class.new(resources.merge(other.resources))
       end
 
+      def json_tree
+        map(&:json_tree)
+      end
+
       private
       attr_writer :resources
 
