@@ -3,7 +3,7 @@ require_relative '../../../lib/xml_parser/resource_collection'
 
 RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
 
-  class PeoplesoftCourseClassData::XmlParser::CleAttribute < PeoplesoftCourseClassData::XmlParser::Resource
+  class TestCleAttribute < PeoplesoftCourseClassData::XmlParser::Resource
     def self.attributes
       [:attribute_id, :family]
     end
@@ -15,8 +15,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
     configure_attributes(attributes)
   end
 
-  let(:writing_intensive) { PeoplesoftCourseClassData::XmlParser::CleAttribute.new('WI', 'CLE') }
-  let(:phys_core)         { PeoplesoftCourseClassData::XmlParser::CleAttribute.new('PHYS', 'CLE') }
+  let(:writing_intensive) { TestCleAttribute.new('WI', 'CLE') }
+  let(:phys_core)         { TestCleAttribute.new('PHYS', 'CLE') }
 
   describe "new" do
     context "with a collection" do
