@@ -1,4 +1,7 @@
-require_relative 'resource_collection'
+require_relative  'resource_collection'
+require           'json'
+require           'active_support/inflector'
+
 
 module PeoplesoftCourseClassData
   module XmlParser
@@ -52,6 +55,12 @@ module PeoplesoftCourseClassData
           end
         end
         self
+      end
+
+      def to_json
+        json_hash = {"type" => self.class.to_s.underscore }
+        self.class.attributes.inject(json_hash) { |hash, attribute| hash[attribute]=self.send attribute; hash }
+        json_hash.to_json
       end
 
       private

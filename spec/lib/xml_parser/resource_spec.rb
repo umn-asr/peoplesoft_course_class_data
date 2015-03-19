@@ -229,6 +229,31 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     end
   end
 
+  describe "to_json" do
+
+    context "attributes"
+      subject { TestInstructor.new("Jane Schmoe", "jane@umn.edu") }
+
+      it "turns the attributes into key/value pairs" do
+        actual_key_value_pairs    = key_value_pairs(subject.to_json)
+        expected_key_value_pairs  = key_value_pairs({"name" => "Jane Schmoe", "email" => "jane@umn.edu"}.to_json)
+        expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+      end
+
+      it "adds a 'type' key with the snake_cased version of the class name" do
+        actual_key_value_pairs    = key_value_pairs(subject.to_json)
+        expected_key_value_pairs  = key_value_pairs({"type" => TestInstructor.to_s.underscore}.to_json)
+        expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+      end
+    end
+
+    context "children"
+
+    def key_value_pairs(json_string)
+      json_string.gsub(/\{|\}/,'')
+    end
+  end
+
   class TestInstructor < described_class
     def self.attributes
       [:name, :email]
