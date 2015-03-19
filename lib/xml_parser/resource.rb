@@ -3,6 +3,14 @@ require_relative 'resource_collection'
 module PeoplesoftCourseClassData
   module XmlParser
     class Resource
+      def self.attributes
+        []
+      end
+
+      def self.child_collections
+        []
+      end
+
       def self.configure_attributes(attributes)
         attributes.each do |attribute|
           puts "adding attribute #{attribute}"

@@ -2,6 +2,35 @@ require_relative '../../../lib/xml_parser/resource'
 
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
 
+  describe ".configure_attributes" do
+    let(:attributes) { [:attribute_id, :description] }
+
+    class ConfigureMyAttributes < described_class; end
+
+    before do
+      ConfigureMyAttributes.configure_attributes(attributes)
+    end
+
+    subject { ConfigureMyAttributes.new }
+
+    it "adds public getters for each item" do
+      attributes.each do |attribute|
+        expect(subject).to respond_to(attribute)
+      end
+    end
+
+    it "adds private setters for each item" do
+      attributes_and_setters = attributes.inject({}) { |hash, attribute| hash[attribute]= "#{attribute.to_s}=".to_sym; hash}
+
+      attributes_and_setters.each do |attribute, setter|
+        value = rand(1..10)
+        subject.send setter, value
+        expect(subject.send attribute).to eq(value)
+        expect(subject).not_to respond_to("#{attribute}=")
+      end
+    end
+  end
+
   describe "equality" do
     subject { TestInstructor.new('Jane Schmoe', 'jane@umn.edu') }
     context "when the other has the same attribute values" do
