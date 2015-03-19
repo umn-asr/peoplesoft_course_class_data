@@ -2,10 +2,10 @@ require_relative  'resource_collection'
 require           'json'
 require           'active_support/inflector'
 
-
 module PeoplesoftCourseClassData
   module XmlParser
     class Resource
+
       def self.attributes
         []
       end
@@ -58,12 +58,21 @@ module PeoplesoftCourseClassData
       end
 
       def to_json
-        json_hash = {"type" => self.class.to_s.underscore }
-        self.class.attributes.inject(json_hash) { |hash, attribute| hash[attribute]=self.send attribute; hash }
-        json_hash.to_json
+        json_tree.to_json
       end
 
-      private
+      def json_tree
+        json_hash = {"type" => self.class.to_s.underscore }
+        self.class.attributes.each do |attribute|
+          value = self.public_send(attribute)
+          if value.respond_to?(:json_tree)
+            value = value.json_tree
+          end
+          json_hash[attribute] = value
+        end
+        json_hash
+      end
+
     end
   end
 end
