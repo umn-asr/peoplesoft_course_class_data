@@ -259,32 +259,64 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     end
 
     context "attributes" do
-      subject { TestInstructor.new("Jane Schmoe", "jane@umn.edu") }
+      context "when the attribute is a value" do
+        subject { TestInstructor.new("Jane Schmoe", "jane@umn.edu") }
 
-      it "turns the attributes into key/value pairs" do
-        actual_key_value_pairs    = key_value_pairs(subject.to_json)
-        expected_key_value_pairs  = key_value_pairs({"name" => "Jane Schmoe", "email" => "jane@umn.edu"}.to_json)
-        expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+        it "turns the attributes into key/value pairs" do
+          actual_key_value_pairs    = key_value_pairs(subject.to_json)
+          expected_key_value_pairs  = key_value_pairs({"name" => "Jane Schmoe", "email" => "jane@umn.edu"}.to_json)
+          expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+        end
+      end
+
+      context "when an attribute is a Resource" do
+        class CompoundResouce < described_class
+          def self.attributes
+            [:compound_id, :instructor]
+          end
+
+          configure_attributes(attributes)
+        end
+
+        let(:instructor) { TestInstructor.new("Jane Schmoe", "jane@umn.edu") }
+        let(:id)         { rand(1..100)}
+
+        subject { CompoundResouce.new(id, instructor) }
+
+        it "has the json representation of resource as the value of the attribute" do
+          actual_key_value_pairs    = key_value_pairs(subject.to_json)
+          expected_key_value_pairs  = key_value_pairs( { "instructor" => JSON.parse(instructor.to_json) }.to_json )
+          expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+        end
       end
     end
 
-    context "when an attribute is a Resource" do
-      class CompoundResouce < described_class
+    context "child_collections" do
+      class ResourceWithChildCollection <described_class
         def self.attributes
-          [:compound_id, :instructor]
+          [:resouce_id]
         end
 
-        configure_attributes(attributes)
+        def self.child_collections
+          [:test_instructors]
+        end
+
+        configure_attributes(attributes + child_collections)
       end
 
-      let(:instructor) { TestInstructor.new("Jane Schmoe", "jane@umn.edu") }
-      let(:id)         { rand(1..100)}
+      let(:test_instructors)  { [TestInstructor.new("Jane Schmoe", "jane@umn.edu"), TestInstructor.new("Joe Schmoe", "joe@umn.edu")] }
+      let(:resource_id)   { rand(1..100)}
 
-      subject { CompoundResouce.new(id, instructor) }
+      subject { ResourceWithChildCollection.new(resource_id, test_instructors) }
 
-      it "has the json representation of resource as the value of the attribute" do
+      it "calls .json_tree on the collection" do
+        expect(subject.test_instructors).to receive(:json_tree)
+        subject.to_json
+      end
+
+      it "assigns the json_tree representation of the collection to that key" do
         actual_key_value_pairs    = key_value_pairs(subject.to_json)
-        expected_key_value_pairs  = key_value_pairs( { "instructor" => JSON.parse(instructor.to_json) }.to_json )
+        expected_key_value_pairs  = key_value_pairs( { "test_instructors" => subject.test_instructors.json_tree }.to_json )
         expect(actual_key_value_pairs).to include(expected_key_value_pairs)
       end
     end
