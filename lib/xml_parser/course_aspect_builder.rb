@@ -62,7 +62,10 @@ module PeoplesoftCourseClassData
       end
 
       def meeting_pattern
-        MeetingPattern.new(*row_values_for("meeting_pattern"), location)
+        meeting_attributes = row_values_for("meeting_pattern")
+        meeting_attributes << location
+        meeting_attributes = meeting_attributes[0..-3] + meeting_attributes[-2..-1].reverse
+        MeetingPattern.new(*meeting_attributes)
       end
 
 
