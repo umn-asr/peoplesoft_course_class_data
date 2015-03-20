@@ -95,9 +95,12 @@ module PeoplesoftCourseClassData
       end
 
       def method_mapping
-        row.class::ROW_ATTRIBUTES.keys.inject({}) { |hash, method| hash[method]=method.to_s.split('__'); hash }
+        row_methods.inject({}) { |hash, method| hash[method]=method.to_s.split('__'); hash }
       end
 
+      def row_methods
+        row.class.instance_methods - Object.instance_methods
+      end
 
     end
   end
