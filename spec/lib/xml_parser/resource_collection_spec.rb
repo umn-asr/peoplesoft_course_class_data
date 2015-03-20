@@ -36,6 +36,14 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
         expect(subject).to include(writing_intensive)
       end
     end
+
+    context "with nil" do
+      subject { described_class.new(nil) }
+
+      it "adds nothing to the collection" do
+        expect(subject).to be_empty
+      end
+    end
   end
 
   describe "#merge" do

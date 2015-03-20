@@ -6,7 +6,7 @@ module PeoplesoftCourseClassData
       extend Forwardable
       include Enumerable
 
-      def_delegator :resources, :each
+      def_delegators :resources, :each, :empty?
 
       attr_reader :resources
 
@@ -27,6 +27,8 @@ module PeoplesoftCourseClassData
       attr_writer :resources
 
       def add(other)
+        return unless other
+
         if other.respond_to?(:each)
           resources.merge(other)
         else
