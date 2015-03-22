@@ -8,7 +8,7 @@ module PeoplesoftCourseClassData
 
       def_delegators :resources, :each, :empty?
 
-      attr_reader :resources
+      # attr_reader :resources
 
       def initialize(resources)
         self.resources = Set.new
@@ -16,7 +16,7 @@ module PeoplesoftCourseClassData
       end
 
       def merge(other)
-        self.class.new(resources.merge(other.resources))
+        self.class.new(resources.merge(other))
       end
 
       def json_tree
@@ -24,7 +24,7 @@ module PeoplesoftCourseClassData
       end
 
       private
-      attr_writer :resources
+      attr_accessor :resources
 
       def add(other)
         return unless other
