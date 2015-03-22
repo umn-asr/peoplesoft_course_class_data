@@ -23,6 +23,10 @@ module PeoplesoftCourseClassData
         end
       end
 
+      def self.type
+        self.to_s.demodulize.underscore
+      end
+
       def initialize(*args)
         self.class.attributes.each_with_index do |attribute, index|
           self.send "#{attribute}=", args[index]
@@ -62,7 +66,7 @@ module PeoplesoftCourseClassData
       end
 
       def json_tree
-        json_hash = {"type" => self.class.to_s.demodulize.underscore }
+        json_hash = {"type" => self.class.type }
         (self.class.attributes + self.class.child_collections).each do |attribute|
           value = self.public_send(attribute)
           if value.respond_to?(:json_tree)

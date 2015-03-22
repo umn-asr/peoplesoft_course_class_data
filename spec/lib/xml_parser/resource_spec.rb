@@ -256,6 +256,27 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
           expect(actual_key_value_pairs).to include(expected_key_value_pairs)
         end
       end
+
+      context "when .type is defined on the class" do
+        class CustomTypeName < described_class
+          def self.attributes
+            [:custom_type_name_id]
+          end
+
+          def self.type
+            "something other than custom_type_name"
+          end
+          configure_attributes(attributes)
+        end
+
+        it "the return value of the .type method is the value of the key" do
+          subject = CustomTypeName.new(rand(1..100))
+
+          actual_key_value_pairs    = key_value_pairs(subject.to_json)
+          expected_key_value_pairs  = key_value_pairs({"type" => CustomTypeName.type}.to_json)
+          expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+        end
+      end
     end
 
     context "attributes" do
