@@ -16,7 +16,6 @@ module PeoplesoftCourseClassData
 
       def self.configure_attributes(attributes)
         attributes.each do |attribute|
-          puts "adding attribute #{attribute}"
           self.send(:attr_reader, attribute)
           self.send(:attr_writer, attribute)
           class_eval "private :#{attribute}="
