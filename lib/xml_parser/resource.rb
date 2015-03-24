@@ -68,20 +68,23 @@ module PeoplesoftCourseClassData
       end
 
       def json_tree
-        json_hash = {"type" => self.class.type }
-        (self.class.attributes + self.class.child_collections).each do |attribute|
+        json_attributes.each_with_object({}) do |attribute, hash|
           value = self.public_send(attribute)
           if value.respond_to?(:json_tree)
             value = value.json_tree
           end
-
-          if !value.nil?
-            json_hash[attribute] = value
-          end
+          hash[attribute] = value
         end
-        json_hash
       end
 
+      def type
+        self.class.type
+      end
+
+      private
+      def json_attributes
+        ([:type] + self.class.attributes + self.class.child_collections).reject { |attribute| self.public_send(attribute).nil? }
+      end
     end
   end
 end
