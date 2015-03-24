@@ -51,13 +51,11 @@ module PeoplesoftCourseClassData
 
       def merge(other)
         self.class.child_collections.each do |collection|
-          other_child      = other.send(collection).first
-          matching_child   = self.send(collection).detect { |item| item == other_child }
-          if matching_child
-            matching_child.merge(other_child)
-          else
-            self.send(collection).merge(other.send(collection))
-          end
+          my_collection     = self.send(collection)
+          other_collection  = other.send(collection)
+
+          merge_matching_items(my_collection, other_collection)
+          add_new_items(my_collection, other_collection)
         end
         self
       end
@@ -81,6 +79,21 @@ module PeoplesoftCourseClassData
       end
 
       private
+
+      def merge_matching_items(my_collection, other_collection)
+        matching_items = my_collection & other_collection
+        matching_items.each do |matched_item|
+          my_version = my_collection.detect { |item| item == matched_item }
+          other_version  = other_collection.detect { |item| item == matched_item }
+          my_version.merge(other_version)
+        end
+      end
+
+      def add_new_items(my_collection, other_collection)
+        new_items = other_collection - my_collection
+        my_collection.merge(new_items)
+      end
+
       def json_attributes
         ([:type] + self.class.attributes + self.class.child_collections).reject { |attribute| self.public_send(attribute).nil? }
       end
