@@ -332,6 +332,16 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
           expected_key_value_pairs  = key_value_pairs( { "instructor" => JSON.parse(instructor.to_json) }.to_json )
           expect(actual_key_value_pairs).to include(expected_key_value_pairs)
         end
+
+        context "when the attribute's value is nil" do
+          subject { CompoundResouce.new(id, nil) }
+
+          it "does not add the key" do
+            actual_key_value_pairs    = key_value_pairs(subject.to_json)
+            expect(actual_key_value_pairs).not_to include("instructor")
+          end
+        end
+
       end
     end
 

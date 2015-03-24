@@ -74,7 +74,10 @@ module PeoplesoftCourseClassData
           if value.respond_to?(:json_tree)
             value = value.json_tree
           end
-          json_hash[attribute] = value
+
+          if !value.nil?
+            json_hash[attribute] = value
+          end
         end
         json_hash
       end
