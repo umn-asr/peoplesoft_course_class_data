@@ -101,6 +101,29 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         end
       end
     end
+
+    context "when the other is a different class" do
+      class Contact < described_class
+        def self.attributes
+          [:name, :email]
+        end
+
+        def self.child_collections
+          []
+        end
+
+        configure_attributes(attributes + child_collections)
+      end
+
+      let(:different_class_instance) { Contact.new('Jane Schmoe', 'jane@umn.edu') }
+      it "is not equal" do
+        expect(subject).not_to eq(different_class_instance)
+      end
+    end
+
+    it "can make comparisons to nil" do
+      expect(subject).not_to eq(nil)
+    end
   end
 
   describe "#merge" do

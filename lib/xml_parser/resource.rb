@@ -38,6 +38,8 @@ module PeoplesoftCourseClassData
       end
 
       def ==(other)
+        return false unless self.class == other.class
+
         self.class.attributes.inject(true) do |result, attribute|
           result && (self.send(attribute) == other.send(attribute))
         end
