@@ -6,9 +6,8 @@ module PeoplesoftCourseClassData
       extend Forwardable
       include Enumerable
 
-      def_delegators :resources, :each, :empty?
-
       # attr_reader :resources
+      def_delegators :resources, :each, :empty?, :&, :-
 
       def initialize(resources)
         self.resources = Set.new
