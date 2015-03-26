@@ -328,9 +328,9 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         subject { CompoundResouce.new(id, instructor) }
 
         it "has the json representation of resource as the value of the attribute" do
-          actual_key_value_pairs    = key_value_pairs(subject.to_json)
-          expected_key_value_pairs  = key_value_pairs( { "instructor" => JSON.parse(instructor.to_json) }.to_json )
-          expect(actual_key_value_pairs).to include(expected_key_value_pairs)
+          actual_key_value_pairs      = key_value_pairs(subject.to_json)
+          key_value_pair_for_resource = key_value_pairs( { "instructor" => JSON.parse(instructor.to_json) }.to_json )
+          expect(actual_key_value_pairs).to include(key_value_pair_for_resource)
         end
 
         context "when the attribute's value is nil" do
