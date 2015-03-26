@@ -13,6 +13,10 @@ module PeoplesoftCourseClassData
         [:cle_attributes, :sections]
       end
 
+      def self.type
+        "course"
+      end
+
       configure_attributes(attributes + child_collections)
     end
   end
