@@ -108,7 +108,7 @@ module Days
     end
 
     def abbreviation
-      "s"
+      "sa"
     end
   end
 
