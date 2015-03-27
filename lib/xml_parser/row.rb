@@ -110,8 +110,9 @@ module PeoplesoftCourseClassData
         end
       end
 
-      def initialize(node_set)
+      def initialize(node_set, namespace)
         self.node_set = node_set
+        self.namespace = namespace
       end
 
       def section__meeting_pattern__days
@@ -120,7 +121,7 @@ module PeoplesoftCourseClassData
       end
 
       private
-      attr_accessor :node_set
+      attr_accessor :node_set, :namespace
       def type_conversion(config)
         config[:type] || 'string'
       end
@@ -130,7 +131,7 @@ module PeoplesoftCourseClassData
       end
 
       def raw_value(xml_field)
-        node_set.xpath("ns:#{xml_field}", 'ns' => NAMESPACE).text
+        node_set.xpath("ns:#{xml_field}", 'ns' => namespace).text
       end
 
       def string(value)

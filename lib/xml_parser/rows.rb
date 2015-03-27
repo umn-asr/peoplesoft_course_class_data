@@ -6,7 +6,7 @@ module PeoplesoftCourseClassData
       end
 
       def rows
-        noko_rows.map { |row| Row.new(row) }
+        noko_rows.map { |row| Row.new(row, NAMESPACE) }
       end
 
       private
