@@ -5,6 +5,8 @@ module Days
     end
 
     def ==(other)
+      return false unless self.class == other.class
+
       self.name == other.name
     end
     alias_method :eql?, :==
