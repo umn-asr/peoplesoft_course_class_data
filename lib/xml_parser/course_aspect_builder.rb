@@ -31,7 +31,7 @@ module PeoplesoftCourseClassData
 
       RESOURCES.each do | class_name, method_name |
         define_method(method_name) do
-          class_name.send :new, *row_values_for(method_name)
+          build_resource(class_name, row_values_for(method_name))
         end
       end
 
@@ -54,18 +54,19 @@ module PeoplesoftCourseClassData
       end
 
       def course_aspect
-        CourseAspect.new(*row_values_for(nil), subject, equivalency, cle_attribute, section)
+
+        build_resource(CourseAspect, row_values_for(nil) + [subject, equivalency, cle_attribute, section])
       end
 
       def section
-        Section.new(*row_values_for("section"), instruction_mode, grading_basis, instructor, meeting_pattern, combined_section)
+        build_resource(Section, row_values_for("section") + [instruction_mode, grading_basis, instructor, meeting_pattern, combined_section])
       end
 
       def meeting_pattern
         meeting_attributes = row_values_for("meeting_pattern")
         meeting_attributes << location
         meeting_attributes = meeting_attributes[0..-3] + meeting_attributes[-2..-1].reverse
-        MeetingPattern.new(*meeting_attributes)
+        build_resource(MeetingPattern, meeting_attributes)
       end
 
 
@@ -87,6 +88,12 @@ module PeoplesoftCourseClassData
         #   Subject         => "subject"
         #
         # }
+      def build_resource(klass, arguments)
+        klass.new(*arguments) unless no_info(arguments)
+      end
+
+      def no_info(arguments)
+        arguments.compact.uniq.empty? || arguments.compact.uniq == ['']
       end
 
       def row_values_for(snake_case_resource)
