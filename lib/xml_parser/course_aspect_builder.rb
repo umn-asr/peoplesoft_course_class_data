@@ -17,13 +17,10 @@ module PeoplesoftCourseClassData
 
       RESOURCES = {
           CombinedSection => "combined_section",
-          # Day             => "day",
           Location        => "location",
-          ## MeetingPattern  => "meeting_pattern",
           Instructor      => "instructor",
           GradingBasis    => "grading_basis",
           InstructionMode => "instruction_mode",
-          ## Section         => "section",
           CleAttribute    => "cle_attribute",
           Equivalency     => "equivalency",
           Subject         => "subject"
@@ -45,11 +42,6 @@ module PeoplesoftCourseClassData
       end
 
       def build
-        # meeting_pattern = MeetingPattern.new(row_values_for("meeting_pattern"), location)
-        #
-        # section = meeting_pattern = MeetingPattern.new(row_values_for("meeting_pattern"), location)
-        #
-        # CourseAspect.new(row_values_for("course_aspect"), subject, equivalency, cle_attribute, section)
         course_aspect
       end
 
@@ -73,21 +65,6 @@ module PeoplesoftCourseClassData
       private
       attr_accessor :row
 
-      def resources
-        # {
-        #   CombinedSection => "combined_section",
-        #   # Day             => "day",
-        #   Location        => "location",
-        #   MeetingPattern  => "meeting_pattern",
-        #   Instructor      => "instructor",
-        #   GradingBasis    => "grading_basis",
-        #   InstructionMode => "instruction_mode"
-        #   Section         => "section",
-        #   CleAttribute    => "cle_attribute",
-        #   Equivalency     => "equivalency",
-        #   Subject         => "subject"
-        #
-        # }
       def build_resource(klass, arguments)
         klass.new(*arguments) unless no_info(arguments)
       end
