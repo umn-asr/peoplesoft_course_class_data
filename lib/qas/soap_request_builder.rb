@@ -19,15 +19,15 @@ module PeoplesoftCourseClassData
       attr_accessor :env
 
       def endpoint
-        PeoplesoftCourseClassData::CONFIG[env][:endpoint]
+        PeoplesoftCourseClassData::Config::CREDENTIALS[env][:endpoint]
       end
 
       def username
-        PeoplesoftCourseClassData::CONFIG[env][:username]
+        PeoplesoftCourseClassData::Config::CREDENTIALS[env][:username]
       end
 
       def password
-        PeoplesoftCourseClassData::CONFIG[env][:password]
+        PeoplesoftCourseClassData::Config::CREDENTIALS[env][:password]
       end
     end
   end
