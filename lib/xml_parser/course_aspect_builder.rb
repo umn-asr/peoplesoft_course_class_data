@@ -47,7 +47,7 @@ module PeoplesoftCourseClassData
 
       def course_aspect
 
-        build_resource(CourseAspect, row_values_for(nil) + [subject, equivalency, cle_attribute, section])
+        build_resource(CourseAspect, row_values_for("course") + [subject, equivalency, cle_attribute, section])
       end
 
       def section
