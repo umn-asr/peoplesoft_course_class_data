@@ -65,7 +65,7 @@ module PeoplesoftCourseClassData
       end
 
       def json_file
-        file_names.json
+        file_names.json_with_path
       end
 
       def file_names
