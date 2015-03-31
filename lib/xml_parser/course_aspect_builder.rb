@@ -70,7 +70,15 @@ module PeoplesoftCourseClassData
       end
 
       def no_info(arguments)
-        arguments.compact.uniq.empty? || arguments.compact.uniq == ['']
+        all_nil?(arguments) || all_empty_strings?(arguments)
+      end
+
+      def all_nil?(arguments)
+        arguments.compact.uniq.empty?
+      end
+
+      def all_empty_strings?(arguments)
+        arguments.reduce(true) { |result, argument| result && (argument == '') }
       end
 
       def row_values_for(snake_case_resource)
