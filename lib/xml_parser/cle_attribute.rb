@@ -11,6 +11,10 @@ module PeoplesoftCourseClassData
         []
       end
 
+      def self.type
+        'attribute'
+      end
+
       configure_attributes(attributes + child_collections)
     end
   end
