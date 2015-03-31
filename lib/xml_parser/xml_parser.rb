@@ -4,10 +4,12 @@ module PeoplesoftCourseClassData
   end
 end
 
+require 'nokogiri'
+
 require_relative 'parsed_row'
 require_relative 'row'
 require_relative 'rows'
-require_relative 'days/days'
+require_relative 'value/value'
 require_relative 'resource'
 require_relative 'resource_collection'
 require_relative 'cle_attribute'
