@@ -1,14 +1,16 @@
 require_relative 'config/credentials'
 require_relative 'config/query_parameters'
+require_relative 'config/file_root'
 
 require_relative 'lib/class_service'
 require_relative 'lib/file_names'
-require_relative 'lib/xml_parser/xml_parser'
+require_relative 'lib/xml_parser/class_json'
 
 module PeoplesoftCourseClassData
   class ClassJsonExport
-    def initialize(env, queries = ::PeoplesoftCourseClassData::QUERY_PARAMETERS)
+    def initialize(env, path = File.join(::PeoplesoftCourseClassData::Config::FILE_ROOT, 'tmp'), queries = ::PeoplesoftCourseClassData::Config::QUERY_PARAMETERS)
       self.env      = env
+      self.path     = path
       self.queries  = queries
     end
 
@@ -20,13 +22,13 @@ module PeoplesoftCourseClassData
     end
 
     private
-    attr_accessor :env, :queries
+    attr_accessor :env, :queries, :path
 
     def download_xml(query)
       File.open(xml_file(query), 'w+') do |f|
         f.write("<class_service_data>")
         class_service.query(query[:institution], query[:campus], query[:term]) do |response|
-          file.write(response)
+          f.write(response)
         end
         f.write("</class_service_data>")
       end
@@ -37,7 +39,7 @@ module PeoplesoftCourseClassData
     end
 
     def xml_file(query)
-      FileNames.new(env, query).xml
+      PeoplesoftCourseClassData::FileNames.new(env, query, path).xml_with_path
     end
 
     def class_service
