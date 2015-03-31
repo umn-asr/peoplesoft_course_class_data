@@ -135,19 +135,19 @@ module PeoplesoftCourseClassData
       end
 
       def string(value)
-        String(value)
+        Value::String.new(String(value))
       end
 
       def integer(value)
-        Integer(value)
+        Value::Integer.new(Integer(value))
       end
 
       def float(value)
-        Float(value)
+        Value::Float.new(Float(value))
       end
 
       def date(value)
-        Time.new(*value.split('-'))
+        Value::Date.new(Time.new(*value.split('-')))
       end
     end
   end

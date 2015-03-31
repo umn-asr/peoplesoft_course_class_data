@@ -1,4 +1,5 @@
 require_relative  'resource_collection'
+require_relative  'value/value'
 require           'json'
 require           'active_support/inflector'
 
@@ -67,15 +68,12 @@ module PeoplesoftCourseClassData
       def json_tree
         json_attributes.each_with_object({}) do |attribute, hash|
           value = self.public_send(attribute)
-          if value.respond_to?(:json_tree)
-            value = value.json_tree
-          end
-          hash[attribute] = value
+          hash[attribute] = value.json_tree
         end
       end
 
       def type
-        self.class.type
+        Value::String.new(self.class.type)
       end
 
       private
