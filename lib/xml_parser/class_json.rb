@@ -69,7 +69,7 @@ module PeoplesoftCourseClassData
       end
 
       def file_names
-        @file_names = ::PeoplesoftCourseClassData::FileNames.from_file_name(file_to_convert)
+        @file_names ||= ::PeoplesoftCourseClassData::FileNames.from_file_name(file_to_convert)
       end
     end
   end
