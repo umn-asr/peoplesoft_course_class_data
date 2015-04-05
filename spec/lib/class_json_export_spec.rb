@@ -1,4 +1,4 @@
-require_relative '../class_json_export'
+require_relative '../../lib/class_json_export'
 require 'ostruct'
 
 RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do

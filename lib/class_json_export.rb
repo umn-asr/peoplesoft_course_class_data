@@ -1,10 +1,10 @@
-require_relative 'config/credentials'
-require_relative 'config/query_parameters'
-require_relative 'config/file_root'
+require_relative '../config/credentials'
+require_relative '../config/query_parameters'
+require_relative '../config/file_root'
 
-require_relative 'lib/class_service'
-require_relative 'lib/file_names'
-require_relative 'lib/xml_parser/class_json'
+require_relative 'class_service'
+require_relative 'file_names'
+require_relative 'xml_parser/class_json'
 
 module PeoplesoftCourseClassData
   class ClassJsonExport
