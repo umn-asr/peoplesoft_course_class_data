@@ -40,9 +40,11 @@ end
 #  DaemonKit.logger.error "Caught exception in job #{job.job_id}: '#{exception}'"
 #end
 
-DaemonKit::Cron.scheduler.every("1m") do
-  DaemonKit.logger.debug "Scheduled task completed at #{Time.now}"
+DaemonKit::Cron.scheduler.cron "0 23 * * 0-6" do
+  path = "#{PeoplesoftCourseClassData::Config::FILE_ROOT}"
+  sh "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:download"
 end
+
 
 # Run our 'cron' dameon, suspending the current thread
 DaemonKit::Cron.run
