@@ -1,9 +1,7 @@
-require 'delegate'
-
 module PeoplesoftCourseClassData
   module XmlParser
     module Value
-      class Date < SimpleDelegator
+      class Date < Value::ParsedValue
         def json_tree
           strftime('%Y-%m-%d')
         end

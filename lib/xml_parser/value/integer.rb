@@ -1,9 +1,7 @@
-require 'delegate'
-
 module PeoplesoftCourseClassData
   module XmlParser
     module Value
-      class Integer < SimpleDelegator
+      class Integer < Value::ParsedValue
         def json_tree
           to_s
         end
