@@ -3,7 +3,7 @@ module PeoplesoftCourseClassData
     module Value
       class String < Value::ParsedValue
         def json_tree
-          __getobj__
+          __getobj__.encode("US-ASCII", invalid: :replace, undef: :replace)
         end
       end
     end
