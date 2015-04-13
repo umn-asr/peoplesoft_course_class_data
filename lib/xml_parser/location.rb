@@ -1,0 +1,17 @@
+require_relative 'resource'
+
+module PeoplesoftCourseClassData
+  module XmlParser
+    class Location < Resource
+      def self.attributes
+        [:location_id, :description]
+      end
+
+      def self.child_collections
+        []
+      end
+
+      configure_attributes(attributes + child_collections)
+    end
+  end
+end
