@@ -1,15 +1,3 @@
-require_relative 'cle_attribute'
-require_relative 'combined_section'
-require_relative 'equivalency'
-require_relative 'grading_basis'
-require_relative 'instruction_mode'
-require_relative 'instructor'
-require_relative 'meeting_pattern'
-require_relative 'section'
-require_relative 'subject'
-require_relative 'location'
-require_relative 'course_aspect'
-
 module PeoplesoftCourseClassData
   module XmlParser
 
