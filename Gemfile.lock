@@ -12,6 +12,9 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
+    capistrano-bundler (1.1.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
     capistrano-stats (1.1.1)
     colorize (0.7.5)
     daemon-kit (0.3.2)
@@ -60,6 +63,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport (~> 4.2.0)
   capistrano (= 3.3.5)
+  capistrano-bundler (~> 1.1)
   daemon-kit
   nokogiri
   rake

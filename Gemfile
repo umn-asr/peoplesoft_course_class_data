@@ -17,4 +17,5 @@ end
 
 group :development do
   gem 'capistrano', '= 3.3.5'
+  gem 'capistrano-bundler', '~> 1.1'
 end
