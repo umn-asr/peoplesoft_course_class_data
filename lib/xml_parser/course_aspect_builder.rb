@@ -21,7 +21,7 @@ module PeoplesoftCourseClassData
           Instructor      => "instructor",
           GradingBasis    => "grading_basis",
           InstructionMode => "instruction_mode",
-          CleAttribute    => "cle_attribute",
+          CourseAttribute => "course_attribute",
           Equivalency     => "equivalency",
           Subject         => "subject"
       }
@@ -47,7 +47,7 @@ module PeoplesoftCourseClassData
 
       def course_aspect
 
-        build_resource(CourseAspect, row_values_for("course") + [subject, equivalency, cle_attribute, section])
+        build_resource(CourseAspect, row_values_for("course") + [subject, equivalency, course_attribute, section])
       end
 
       def section
