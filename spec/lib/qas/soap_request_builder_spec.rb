@@ -39,13 +39,13 @@ describe PeoplesoftCourseClassData::Qas::SoapRequestBuilder do
     end
 
     it "sets the SoapRequest endpoint from the config" do
-      expect(PeoplesoftCourseClassData::Qas::SoapRequest).to receive(:new).with(::PeoplesoftCourseClassData::CONFIG[env][:endpoint], any_args)
+      expect(PeoplesoftCourseClassData::Qas::SoapRequest).to receive(:new).with(::PeoplesoftCourseClassData::Config::CREDENTIALS[env][:endpoint], any_args)
       subject.build
     end
 
     it "builds a credentials object for the SoapRequest" do
       credentials_double = instance_double("PeoplesoftCourseClassData::Qas::Credentials")
-      expect(PeoplesoftCourseClassData::Qas::Credentials).to receive(:new).with(::PeoplesoftCourseClassData::CONFIG[env][:username], ::PeoplesoftCourseClassData::CONFIG[env][:password]).and_return(credentials_double)
+      expect(PeoplesoftCourseClassData::Qas::Credentials).to receive(:new).with(::PeoplesoftCourseClassData::Config::CREDENTIALS[env][:username], ::PeoplesoftCourseClassData::Config::CREDENTIALS[env][:password]).and_return(credentials_double)
       expect(PeoplesoftCourseClassData::Qas::SoapRequest).to receive(:new).with(anything, credentials_double)
       subject.build
     end
