@@ -15,8 +15,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
     configure_attributes(attributes)
   end
 
-  let(:writing_intensive) { TestCleAttribute.new('WI', 'CLE') }
-  let(:phys_core)         { TestCleAttribute.new('PHYS', 'CLE') }
+  let(:writing_intensive) { TestCleAttribute.new(PeoplesoftCourseClassData::XmlParser::Value::String.new('WI'), PeoplesoftCourseClassData::XmlParser::Value::String.new('CLE')) }
+  let(:phys_core)         { TestCleAttribute.new(PeoplesoftCourseClassData::XmlParser::Value::String.new('PHYS'), PeoplesoftCourseClassData::XmlParser::Value::String.new('CLE')) }
 
   describe "new" do
     context "with a collection" do

@@ -1,7 +1,3 @@
-require_relative 'resource'
-require_relative 'section'
-require_relative 'cle_attribute'
-
 module PeoplesoftCourseClassData
   module XmlParser
     class CourseAspect < Resource
