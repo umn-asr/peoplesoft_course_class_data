@@ -15,3 +15,6 @@ group :development, :test do
   gem 'rspec', '~> 3.2'
 end
 
+group :development do
+  gem 'capistrano', '= 3.3.5'
+end
