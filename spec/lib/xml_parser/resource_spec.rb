@@ -255,7 +255,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
   describe "to_json" do
     context "the type key" do
       it "adds a 'type' key with the snake_cased version of the class name" do
-        subject = TestInstructor.new("Jane Schmoe", "jane@umn.edu")
+        subject = TestInstructor.new(PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu"))
 
         actual_key_value_pairs    = key_value_pairs(subject.to_json)
         expected_key_value_pairs  = key_value_pairs({"type" => TestInstructor.to_s.underscore}.to_json)
@@ -272,7 +272,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         end
 
         it "removes namespaces from the class name" do
-          subject = PeoplesoftCourseClassData::XmlParser::TestInstructor.new("Jane Schmoe", "jane@umn.edu")
+          subject = PeoplesoftCourseClassData::XmlParser::TestInstructor.new(PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu"))
 
           actual_key_value_pairs    = key_value_pairs(subject.to_json)
           expected_key_value_pairs  = key_value_pairs({"type" => "test_instructor"}.to_json)
@@ -293,7 +293,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         end
 
         it "the return value of the .type method is the value of the key" do
-          subject = CustomTypeName.new(rand(1..100))
+          subject = CustomTypeName.new(PeoplesoftCourseClassData::XmlParser::Value::Integer.new(rand(1..100)))
 
           actual_key_value_pairs    = key_value_pairs(subject.to_json)
           expected_key_value_pairs  = key_value_pairs({"type" => CustomTypeName.type}.to_json)
@@ -304,7 +304,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
 
     context "attributes" do
       context "when the attribute is a value" do
-        subject { TestInstructor.new("Jane Schmoe", "jane@umn.edu") }
+        subject { TestInstructor.new(PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu")) }
 
         it "turns the attributes into key/value pairs" do
           actual_key_value_pairs    = key_value_pairs(subject.to_json)
@@ -322,8 +322,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
           configure_attributes(attributes)
         end
 
-        let(:instructor) { TestInstructor.new("Jane Schmoe", "jane@umn.edu") }
-        let(:id)         { rand(1..100)}
+        let(:instructor) { TestInstructor.new(PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu")) }
+        let(:id)         { PeoplesoftCourseClassData::XmlParser::Value::Integer.new(rand(1..100))}
 
         subject { CompoundResouce.new(id, instructor) }
 
@@ -358,8 +358,11 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         configure_attributes(attributes + child_collections)
       end
 
-      let(:test_instructors)  { [TestInstructor.new("Jane Schmoe", "jane@umn.edu"), TestInstructor.new("Joe Schmoe", "joe@umn.edu")] }
-      let(:resource_id)   { rand(1..100)}
+      let(:test_instructors)  { [
+                                  TestInstructor.new(PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu")),
+                                  TestInstructor.new(PeoplesoftCourseClassData::XmlParser::Value::String.new("Joe Schmoe"), PeoplesoftCourseClassData::XmlParser::Value::String.new("joe@umn.edu"))
+                                  ] }
+      let(:resource_id)   { PeoplesoftCourseClassData::XmlParser::Value::Integer.new(rand(1..100))}
 
       subject { ResourceWithChildCollection.new(resource_id, test_instructors) }
 
