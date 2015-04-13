@@ -10,7 +10,7 @@ module PeoplesoftCourseClassData
       end
 
       def self.child_collections
-        [:cle_attributes, :sections]
+        [:course_attributes, :sections]
       end
 
       def self.type

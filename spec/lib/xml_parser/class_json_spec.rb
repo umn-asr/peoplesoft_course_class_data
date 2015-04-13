@@ -41,7 +41,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
   def sorted_class_data!(class_data)
     class_data["courses"].sort_by! { |course| course["course_id"] }
     class_data["courses"].each do |course|
-      course["cle_attributes"].sort_by! { |cle_attribute| cle_attribute["attribute_id"] }
+      course["course_attributes"].sort_by! { |course_attribute| course_attribute["attribute_id"] }
       course["sections"].sort_by! { |section| section["number"] }
       course["sections"].each do |section|
         section["instructors"].sort_by! { |instructor| instructor["name"] }

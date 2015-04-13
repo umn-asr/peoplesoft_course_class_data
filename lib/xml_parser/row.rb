@@ -23,10 +23,10 @@ module PeoplesoftCourseClassData
         course__equivalency__equivalency_id: {
           xml_field:  'A.EQUIV_CRSE_ID'
         },
-        course__cle_attribute__attribute_id: {
+        course__course_attribute__attribute_id: {
           xml_field:  'A.UM_CRSE_ATT_VAL'
         },
-        course__cle_attribute__family: {
+        course__course_attribute__family: {
           xml_field:  'A.UM_CRSE_ATTR'
         },
         course__section__class_number: {
