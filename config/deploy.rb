@@ -18,7 +18,7 @@ end
 
 after "deploy:finished", :reset_daemon do
   on roles(:app) do
-    execute "DAEMON_ENV=#{stage} bundle exec #{release_path}/bin/peoplesoft_course_class_data"
+    execute "DAEMON_ENV=#{fetch(:stage)} bundle exec #{release_path}/bin/peoplesoft_course_class_data"
   end
 end
 
