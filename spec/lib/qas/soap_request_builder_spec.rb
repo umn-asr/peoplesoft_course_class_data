@@ -1,6 +1,6 @@
 require_relative '../../../lib/qas/soap_request_builder'
 
-::PeoplesoftCourseClassData::CONFIG = {
+::PeoplesoftCourseClassData::Config::CREDENTIALS = {
                                         dev: {
                                           endpoint: "https://dev.qas.oit.umn.edu/query",
                                           username: "dev_username",
@@ -19,7 +19,7 @@ require_relative '../../../lib/qas/soap_request_builder'
                                       }
 
 describe PeoplesoftCourseClassData::Qas::SoapRequestBuilder do
-  let(:env) { ::PeoplesoftCourseClassData::CONFIG.keys.sample }
+  let(:env) { ::PeoplesoftCourseClassData::Config::CREDENTIALS.keys.sample }
   subject   { PeoplesoftCourseClassData::Qas::SoapRequestBuilder.new(env) }
 
   describe ".build" do
