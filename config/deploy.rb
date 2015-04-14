@@ -12,13 +12,13 @@ set :linked_files, %w{config/credentials.rb}
 after "deploy:updated", :link_shared_tmp_folder do
   # link in the shared tmp folder
   on roles(:app) do
-    run "ln -nfs /swadm/tmp #{release_path}/json_tmp"
+    execute "ln -nfs /swadm/tmp #{release_path}/json_tmp"
   end
 end
 
 after "deploy:finished", :reset_daemon do
   on roles(:app) do
-    run "DAEMON_ENV=#{stage} bundle exec #{release_path}/bin/peoplesoft_course_class_data"
+    execute "DAEMON_ENV=#{stage} bundle exec #{release_path}/bin/peoplesoft_course_class_data"
   end
 end
 
