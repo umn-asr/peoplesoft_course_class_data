@@ -4,4 +4,8 @@
 # Change the production log level to debug
 #config.log_level = :debug
 
-PeoplesoftCourseClassData::Config::ENV = 'prd'
+module ::PeoplesoftCourseClassData
+  module Config
+    PS_ENV = 'prd'
+  end
+end
