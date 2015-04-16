@@ -3,6 +3,10 @@ lock '3.3.5'
 
 set :application, 'peoplesoft_course_class_data'
 set :repo_url, 'https://github.com/umn-asr/peoplesoft_course_class_data'
+set :user, 'swadm'
+set :roles, %w{app}
+set :app_root, '/swadm/apps/peoplesoft_course_class_data'
+set :deploy_to, "#{fetch(:app_root)}"
 
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
