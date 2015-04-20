@@ -42,7 +42,9 @@ end
 
 DaemonKit::Cron.scheduler.cron "0 23 * * 0-6" do
   path = "#{PeoplesoftCourseClassData::Config::FILE_ROOT}"
-  sh "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:download"
+  env = PeoplesoftCourseClassData::Config::PS_ENV
+  sh "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:download['#{env}','#{path}/tmp']"
+  sh "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:copy_good_files['#{path}/tmp','#{path}/json_tmp']"
 end
 
 
