@@ -16,6 +16,8 @@ module PeoplesoftCourseClassData
       def query_instance(xml)
         xml.remove_namespaces!
         xml.at('QueryInstance').text
+      rescue
+        raise PeoplesoftCourseClassData::Qas::SoapEnvError, xml.at('DefaultMessage')
       end
     end
   end
