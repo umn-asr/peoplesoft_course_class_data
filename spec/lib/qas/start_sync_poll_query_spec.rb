@@ -36,6 +36,23 @@ RSpec.describe PeoplesoftCourseClassData::Qas::StartSyncPollQuery do
           expect{ subject.run(payload) }.to raise_error(/User password failed/)
         end
       end
+
+      context "some other goofy reponse" do
+        before do
+          response = Nokogiri.XML("<weirdness>Error!</weirdness>") do |config|
+                        config.default_xml.noblanks
+                      end
+          allow(soap_request_double).to receive(:execute_request) { response }
+        end
+
+        it "raises an UnexpectedResponse error" do
+          expect{ subject.run(payload) }.to raise_error(PeoplesoftCourseClassData::Qas::StartSyncPollQuery::UnexpectedResponse)
+        end
+
+        it "has the xml as the error message" do
+          expect{ subject.run(payload) }.to raise_error(/<weirdness>Error!<\/weirdness>/)
+        end
+      end
     end
   end
 
