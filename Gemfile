@@ -8,7 +8,7 @@ gem 'daemon-kit'
 gem 'rufus-scheduler', '~> 2.0'
 gem 'safely' # Optional, but recommended.
 # gem 'toadhopper' # For reporting exceptions to hoptoad
-# gem 'mail' # For reporting exceptions via mail
+gem 'mail' # For reporting exceptions via mail
 
 group :development, :test do
   gem 'rake' # added by daemon-kit

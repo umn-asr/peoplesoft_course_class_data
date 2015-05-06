@@ -36,15 +36,27 @@ end
 #end
 #
 # Example error handling (NOTE: all exceptions in scheduled tasks are logged)
-#DaemonKit::Cron.handle_exception do |job, exception|
-#  DaemonKit.logger.error "Caught exception in job #{job.job_id}: '#{exception}'"
-#end
+DaemonKit::Cron.handle_exception do |job, exception|
+  mail         = ::Mail.new
+  mail.from    = 'asrweb@umn.edu'
+  mail.to      = 'ASR-WEB-ERRORS@lists.umn.edu'
+  mail.subject = "Peoplesoft Course Class Data [#{ENV['DAEMON_ENV']}] - Exception"
+
+  mail.body = <<-EOF
+    An exception occured, details below:
+    Type: #{exception.class.name}
+    Message: #{exception.message}
+    EOF
+
+  mail.deliver
+end
 
 DaemonKit::Cron.scheduler.cron "0 23 * * 0-6" do
   path = "#{PeoplesoftCourseClassData::Config::FILE_ROOT}"
   env = PeoplesoftCourseClassData::Config::PS_ENV
-  sh "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:download['#{env}','#{path}/tmp']"
-  sh "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:copy_good_files['#{path}/tmp','#{path}/json_tmp']"
+  runner = ::RakeRunner::RakeRunner.new
+  runner.run "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:download['#{env}','#{path}/tmp']"
+  runner.run "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:copy_good_files['#{path}/tmp','#{path}/json_tmp']"
 end
 
 
