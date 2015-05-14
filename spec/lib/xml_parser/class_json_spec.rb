@@ -13,6 +13,10 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
     `cp #{fixture_directory}/reference.xml #{working_directory}/#{file_name.xml}`
   end
 
+  after do
+    `rm #{working_directory}/*`
+  end
+
   subject { described_class.new("#{working_directory}/#{file_name.xml}") }
 
   describe "to_file" do
