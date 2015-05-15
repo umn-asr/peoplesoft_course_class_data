@@ -13,6 +13,10 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
     `cp #{fixture_directory}/reference.xml #{working_directory}/#{file_name.xml}`
   end
 
+  after do
+    `rm #{working_directory}/*`
+  end
+
   subject { described_class.new("#{working_directory}/#{file_name.xml}") }
 
   describe "to_file" do
@@ -35,6 +39,40 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
       actual_file.close
 
       expect(actual_json).to eq(expected_json)
+    end
+
+    context "when the xml has no data for a sub resources" do
+      context "example 1 - grading basis" do
+        before do
+          `cp #{fixture_directory}/no_grading_basis.xml #{working_directory}/#{file_name.xml}`
+        end
+
+        it "does not build the grading basis attribute" do
+          subject.to_file
+
+          json = JSON.parse(File.read("#{working_directory}/#{file_name.json}"))
+          section_keys = json["courses"].flat_map { |course| course["sections"] }.flat_map(&:keys).uniq
+
+          expect(section_keys).not_to be_empty
+          expect(section_keys).not_to include("grading_basis")
+        end
+      end
+
+      context "example 2 - instruction mode" do
+        before do
+          `cp #{fixture_directory}/no_instruction_mode.xml #{working_directory}/#{file_name.xml}`
+        end
+
+        it "does not build the instruction mode attribute" do
+          subject.to_file
+
+          json = JSON.parse(File.read("#{working_directory}/#{file_name.json}"))
+          section_keys = json["courses"].flat_map { |course| course["sections"] }.flat_map(&:keys).uniq
+
+          expect(section_keys).not_to be_empty
+          expect(section_keys).not_to include("instruction_mode")
+        end
+      end
     end
   end
 
