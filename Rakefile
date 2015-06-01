@@ -1,8 +1,8 @@
 require File.expand_path('../config/boot',  __FILE__)
 
-require "rspec/core/rake_task"
 require 'rake'
 require 'daemon_kit/tasks'
+require "rspec/core/rake_task"
 
 RSpec::Core::RakeTask.new(:spec)
 
