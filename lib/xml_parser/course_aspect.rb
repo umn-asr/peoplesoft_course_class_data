@@ -2,7 +2,7 @@ module PeoplesoftCourseClassData
   module XmlParser
     class CourseAspect < Resource
       def self.attributes
-        [:course_id, :catalog_number, :description, :title, :subject, :equivalency]
+        [:course_id, :catalog_number, :description, :title, :repeatable, :units_repeat_limit, :repeat_limit,  :subject, :equivalency]
       end
 
       def self.child_collections
