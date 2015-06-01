@@ -4,41 +4,49 @@ RSpec.describe PeoplesoftCourseClassData::FileNames do
   let(:env)   { :prd }
   let(:query) { {institution: 'UMNTC', campus: 'UMNTC', term: '1149'} }
   let(:path)  { 'path/to/some/directory' }
-  subject { described_class.new(env, query, path) }
+  let(:service)  { "classes" }
+
+  let(:config) do
+    PeoplesoftCourseClassData::FileNameConfig.new(env, query, service, path)
+  end
+
+  subject { described_class.new(config) }
 
   describe "#xml" do
-    it "returns classes_for__env__institituion__campus__term.xml" do
-      expect(subject.xml).to eq("classes_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.xml")
+    it "returns service_for__env__institituion__campus__term.xml" do
+      expect(subject.xml).to eq("#{service}_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.xml")
     end
   end
 
   describe "#xml_with_path" do
-    it "returns classes_for__env__institituion__campus__term.xml" do
-      expect(subject.xml_with_path).to eq("#{path}/classes_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.xml")
+    it "returns service_for__env__institituion__campus__term.xml" do
+      expect(subject.xml_with_path).to eq("#{path}/#{service}_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.xml")
     end
 
     it "works when the path has a trailing /" do
       trailing_slash_path = 'path/with/trailing/slash/'
-      subject = described_class.new(env, query, trailing_slash_path)
-      expect(subject.xml_with_path).to eq("#{trailing_slash_path}classes_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.xml")
+      config = PeoplesoftCourseClassData::FileNameConfig.new(env, query, service, trailing_slash_path)
+      subject = described_class.new(config)
+      expect(subject.xml_with_path).to eq("#{trailing_slash_path}#{service}_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.xml")
     end
   end
 
   describe "#json" do
-    it "returns classes_for__env__institituion__campus__term.json" do
-      expect(subject.json).to eq("classes_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.json")
+    it "returns service_for__env__institituion__campus__term.json" do
+      expect(subject.json).to eq("#{service}_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.json")
     end
   end
 
   describe "#json_path" do
-    it "returns classes_for__env__institituion__campus__term.json" do
-      expect(subject.json_with_path).to eq("#{path}/classes_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.json")
+    it "returns service_for__env__institituion__campus__term.json" do
+      expect(subject.json_with_path).to eq("#{path}/#{service}_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.json")
     end
 
     it "works when the path has a trailing /" do
       trailing_slash_path = 'path/with/trailing/slash/'
-      subject = described_class.new(env, query, trailing_slash_path)
-      expect(subject.json_with_path).to eq("#{trailing_slash_path}classes_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.json")
+      config = PeoplesoftCourseClassData::FileNameConfig.new(env, query, service, trailing_slash_path)
+      subject = described_class.new(config)
+      expect(subject.json_with_path).to eq("#{trailing_slash_path}#{service}_for__#{env}__#{query[:institution]}__#{query[:campus]}__#{query[:term]}.json")
     end
   end
 
