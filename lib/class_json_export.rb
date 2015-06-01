@@ -32,18 +32,31 @@ module PeoplesoftCourseClassData
         end
         f.write("</class_service_data>")
       end
+
+      File.open(xml_file(query, "courses"), 'w+') do |f|
+        f.write("<course_service_data>")
+        course_service.query(query[:institution], query[:campus], query[:term]) do |response|
+          f.write(response)
+        end
+        f.write("</course_service_data>")
+      end
     end
 
     def convert_to_json(query)
       PeoplesoftCourseClassData::XmlParser::ClassJson.new(xml_file(query)).to_file
     end
 
-    def xml_file(query)
-      PeoplesoftCourseClassData::FileNames.new(env, query, path).xml_with_path
+    def xml_file(query, service = "classes")
+      config = PeoplesoftCourseClassData::FileNameConfig.new(env, query, service, path)
+      PeoplesoftCourseClassData::FileNames.new(config).xml_with_path
     end
 
     def class_service
       @class_service ||= PeoplesoftCourseClassData::ClassService.new(soap_request)
+    end
+
+    def course_service
+      @course_service ||= PeoplesoftCourseClassData::CourseService.new(soap_request)
     end
 
     def soap_request
