@@ -1,6 +1,7 @@
 module PeoplesoftCourseClassData
   module XmlParser
     class Row
+      #ORDER MATTERS
       ROW_ATTRIBUTES = {
         course__course_id: {
           xml_field:  'A.CRSE_ID'
@@ -22,6 +23,15 @@ module PeoplesoftCourseClassData
         },
         course__equivalency__equivalency_id: {
           xml_field:  'A.EQUIV_CRSE_ID'
+        },
+        course__repeatable: {
+          xml_field:  'A.CRSE_REPEATABLE'
+        },
+        course__units_repeat_limit: {
+          xml_field:  'A.UNITS_REPEAT_LIMIT'
+        },
+        course__repeat_limit: {
+          xml_field:  'A.CRSE_REPEAT_LIMIT'
         },
         course__course_attribute__attribute_id: {
           xml_field:  'A.UM_CRSE_ATT_VAL'
