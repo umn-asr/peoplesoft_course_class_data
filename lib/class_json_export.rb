@@ -51,5 +51,3 @@ module PeoplesoftCourseClassData
     end
   end
 end
-
-# PeoplesoftCourseClassData::ClassJsonExport.new(:dev).run
