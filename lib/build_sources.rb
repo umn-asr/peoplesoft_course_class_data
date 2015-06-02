@@ -1,3 +1,5 @@
+require_relative 'workflow'
+
 module PeoplesoftCourseClassData
   class BuildSources
     def self.run(parameters, env, orchestrator)
