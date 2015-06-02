@@ -51,7 +51,7 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
       subject.run
     end
 
-    it "creates two xml files for a single set of paramaters" do
+    it "creates two xml files for a single set of parameters" do
       subject.run
       xml_file_count = Dir.glob("#{path}/*xml").count
       expect(xml_file_count).to eq(2)
