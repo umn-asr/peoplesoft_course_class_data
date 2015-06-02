@@ -7,6 +7,8 @@ require_relative 'course_service'
 require_relative 'services'
 require_relative 'data_source'
 require_relative 'file_names'
+require_relative 'build_sources'
+require_relative 'get_data'
 require_relative 'xml_parser/class_json'
 
 module PeoplesoftCourseClassData
@@ -17,8 +19,13 @@ module PeoplesoftCourseClassData
       self.queries  = queries
     end
 
+    def run_step(step, results)
+    end
+
     def run
       queries.each do |query|
+        BuildSources.run(query, env, self)
+
         Services.all.each do |service|
           DataSource.build(service, query, env)
         end
