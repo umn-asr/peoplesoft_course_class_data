@@ -12,7 +12,7 @@ RSpec.describe PeoplesoftCourseClassData::BuildSources do
       allow(PeoplesoftCourseClassData::Services).to receive(:all).and_return([service_double])
       expect(PeoplesoftCourseClassData::DataSource).to receive(:build).with(service_double, parameters, env).and_return(source_double)
 
-      expect(orchestrator).to receive(:run_step).with(PeoplesoftCourseClassData::GetData, [source_double])
+      expect(orchestrator).to receive(:run_step).with(PeoplesoftCourseClassData::ParseData, [source_double])
       PeoplesoftCourseClassData::BuildSources.run(parameters, env, orchestrator)
     end
   end

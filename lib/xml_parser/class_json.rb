@@ -4,6 +4,11 @@ require_relative '../file_names'
 module PeoplesoftCourseClassData
   module XmlParser
     class ClassJson
+
+      def self.parse(xml_string)
+
+      end
+
       def initialize(file_to_convert)
         self.file_to_convert = file_to_convert
       end

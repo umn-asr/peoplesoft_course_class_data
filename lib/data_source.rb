@@ -10,6 +10,14 @@ module PeoplesoftCourseClassData
       self.env              = env
     end
 
+    def data
+
+    end
+
+    def service_name
+      service.to_s.demodulize.gsub(/Service\Z/, '')
+    end
+
     private
     attr_accessor :service, :query_parameters, :env
   end

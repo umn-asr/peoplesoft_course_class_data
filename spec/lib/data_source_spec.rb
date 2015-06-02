@@ -11,7 +11,11 @@ RSpec.describe PeoplesoftCourseClassData::DataSource do
     end
   end
 
-  describe "#term" do
-
+  describe "#service_name" do
+    it "returns the service from initalization, with 'PeoplesoftCourseClassData' and 'Service' removed" do
+      data_source = described_class.build(PeoplesoftCourseClassData::ClassService, query, env)
+      expect(data_source.service_name).to eq('Class')
+    end
   end
+
 end
