@@ -91,5 +91,15 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
 
       subject.run
     end
+
+    it "builds a DataSource for each DataSources for each query" do
+      services = [PeoplesoftCourseClassData::ClassService, PeoplesoftCourseClassData::CourseService]
+      allow(PeoplesoftCourseClassData::Services).to receive(:all).and_return(services)
+      services.each do |service|
+        expect(PeoplesoftCourseClassData::DataSource).to receive(:build).with(service, parameters, env)
+      end
+
+      subject.run
+    end
   end
 end

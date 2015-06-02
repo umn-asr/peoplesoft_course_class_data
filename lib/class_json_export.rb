@@ -3,6 +3,9 @@ require_relative '../config/query_parameters'
 require_relative '../config/file_root'
 
 require_relative 'class_service'
+require_relative 'course_service'
+require_relative 'services'
+require_relative 'data_source'
 require_relative 'file_names'
 require_relative 'xml_parser/class_json'
 
@@ -16,6 +19,9 @@ module PeoplesoftCourseClassData
 
     def run
       queries.each do |query|
+        Services.all.each do |service|
+          DataSource.build(service, query, env)
+        end
         download_xml(query)
         convert_to_json(query)
       end
