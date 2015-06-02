@@ -102,7 +102,7 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
       subject.run
     end
 
-    it "runs BuildSources for each query", :focus do
+    it "runs BuildSources for each query" do
       expect(PeoplesoftCourseClassData::BuildSources).to receive(:run).with(parameters, env, subject)
       subject.run
     end

@@ -1,6 +1,6 @@
 require_relative '../../lib/data_source'
 
-RSpec.describe PeoplesoftCourseClassData::DataSource, :focus do
+RSpec.describe PeoplesoftCourseClassData::DataSource do
   let(:env)     { :tst }
   let(:query)   { PeoplesoftCourseClassData::Config::QUERY_PARAMETERS.sample }
   let(:service) { Object }

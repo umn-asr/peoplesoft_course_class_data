@@ -1,6 +1,6 @@
 require_relative '../../lib/build_sources'
 
-RSpec.describe PeoplesoftCourseClassData::BuildSources, :focus do
+RSpec.describe PeoplesoftCourseClassData::BuildSources do
   let(:parameters)   { PeoplesoftCourseClassData::Config::QUERY_PARAMETERS.sample }
   let(:env)     { :tst }
   let(:orchestrator) { instance_double("PeoplesoftCourseClassData::ClassJsonExport") }
