@@ -1,9 +1,6 @@
 require_relative 'workflow'
 
 module PeoplesoftCourseClassData
-  class MergeData
-    def self.run
-
-    end
+  class WriteData
   end
 end
