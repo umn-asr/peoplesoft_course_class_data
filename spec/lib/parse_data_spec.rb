@@ -18,7 +18,7 @@ RSpec.describe PeoplesoftCourseClassData::ParseData do
         results << source_results
       end
 
-      expect(orchestrator).to receive(:run_step).with(PeoplesoftCourseClassData::MergeData, results)
+      expect(orchestrator).to receive(:run_step).with(PeoplesoftCourseClassData::SortData, results)
 
       described_class.run(sources, orchestrator)
     end

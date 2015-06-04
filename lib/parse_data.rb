@@ -7,7 +7,7 @@ module PeoplesoftCourseClassData
                   parser = "PeoplesoftCourseClassData::XmlParser::#{source.service_name}Json".safe_constantize
                   parser.parse(source.data)
                 end
-      orchestrator.run_step(MergeData, results)
+      orchestrator.run_step(SortData, results)
     end
   end
 end
