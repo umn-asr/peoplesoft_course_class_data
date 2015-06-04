@@ -1,7 +1,7 @@
 require_relative '../../lib/merge_data'
 require_relative '../../lib/xml_parser/course_aspect'
 
-RSpec.describe PeoplesoftCourseClassData::MergeData, :focus do
+RSpec.describe PeoplesoftCourseClassData::MergeData do
   describe "#run" do
     let(:orchestrator) { instance_double("PeoplesoftCourseClassData::ClassJsonExport") }
 
