@@ -10,7 +10,22 @@ module PeoplesoftCourseClassData
     end
 
     def data
+      service_instance = service.new(soap_request)
+      file_path = PeoplesoftCourseClassData::FileNames.new(
+        query_config,
+        PeoplesoftCourseClassData::Config::TMP_PATH,
+        service_name.downcase
+      ).xml_with_path
 
+      File.open(file_path, 'w+') do |f|
+        f.write("<class_service_data>")
+        service_instance.query(query_config.institution, query_config.campus, query_config.term) do |response|
+          f.write(response)
+        end
+        f.write("</class_service_data>")
+      end
+
+      File.read(file_path)
     end
 
     def service_name
@@ -19,5 +34,9 @@ module PeoplesoftCourseClassData
 
     private
     attr_accessor :service, :query_config
+
+    def soap_request
+     @soap_request ||= PeoplesoftCourseClassData::Qas::SoapRequestBuilder.build(query_config.env)
+    end
   end
 end
