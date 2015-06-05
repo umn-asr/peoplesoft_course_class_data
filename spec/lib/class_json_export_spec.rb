@@ -94,10 +94,16 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
       subject.run
     end
 
-    it "runs BuildSources for each query" do
+    it "builds a QueryConfig" do
+      expect(PeoplesoftCourseClassData::QueryConfig).to receive(:new).with(env, parameters)
+      expect(PeoplesoftCourseClassData::QueryResults).to receive(:new)
+      subject.run
+    end
+
+    it "gets results from QueryResults" do
       config_double = instance_double("PeoplesoftCourseClassData::QueryConfig")
-      expect(PeoplesoftCourseClassData::QueryConfig).to receive(:new).with(env, parameters).and_return(config_double)
-      expect(PeoplesoftCourseClassData::BuildSources).to receive(:run).with(config_double, subject)
+      allow(PeoplesoftCourseClassData::QueryConfig).to receive(:new).with(env, parameters).and_return(config_double)
+      expect(PeoplesoftCourseClassData::QueryResults).to receive(:new).with(config_double)
       subject.run
     end
   end

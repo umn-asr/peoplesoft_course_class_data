@@ -22,8 +22,7 @@ module PeoplesoftCourseClassData
     def run
       queries.each do |query|
         config = QueryConfig.new(env, query)
-
-        BuildSources.run(config, self)
+        results = QueryResults.new(config).to_json
 
         download_xml(query)
         convert_to_json(query)
