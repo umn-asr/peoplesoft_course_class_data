@@ -1,5 +1,10 @@
 module PeoplesoftCourseClassData
   class QueryResults
+
+    def self.as_json(config)
+      self.new(config).as_json
+    end
+
     def initialize(query_config)
       self.query_config = query_config
     end
@@ -8,11 +13,12 @@ module PeoplesoftCourseClassData
       step.run(results, self)
     end
 
-    def to_json
+    def as_json
       PeoplesoftCourseClassData::XmlParser::CampusTermCourses.new(campus, term, courses).to_json
     end
 
     private
+
     attr_accessor :query_config
 
     def campus

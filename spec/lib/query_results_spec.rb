@@ -4,7 +4,17 @@ RSpec.describe PeoplesoftCourseClassData::QueryResults do
   let(:query_config) { instance_double("PeoplesoftCourseClassData::QueryConfig", campus: 'UMNTC', term: '1149', env: :tst) }
   subject { described_class.new(query_config) }
 
-  describe "#to_json" do
+  describe "class.as_json" do
+    it "Creates an instance and calls its as_json method" do
+      expected = "Results"
+      results_double = instance_double("PeoplesoftCourseClassData::QueryResults")
+      expect(described_class).to receive(:new).with(query_config).and_return(results_double)
+      expect(results_double).to receive(:as_json).and_return(expected)
+      expect(described_class.as_json(query_config)).to eq(expected)
+    end
+  end
+
+  describe "#as_json" do
     it "builds a respresentation of the campus/term class data and returns it as json" do
       campus_resource = PeoplesoftCourseClassData::XmlParser::Campus.new(query_config.campus, query_config.campus)
       term_resource   = PeoplesoftCourseClassData::XmlParser::Term.new(query_config.term, query_config.term)
@@ -24,7 +34,7 @@ RSpec.describe PeoplesoftCourseClassData::QueryResults do
       expect(PeoplesoftCourseClassData::BuildSources).to receive(:run).with(query_config, subject).and_return(courses_resource)
       expect(PeoplesoftCourseClassData::XmlParser::CampusTermCourses).to receive(:new).with(campus_resource, term_resource, courses_resource).and_return(campus_term_course_resource)
 
-      expect(subject.to_json).to eq(expected)
+      expect(subject.as_json).to eq(expected)
     end
   end
 
