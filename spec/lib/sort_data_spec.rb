@@ -3,7 +3,7 @@ require_relative '../../lib/sort_data'
 RSpec.describe PeoplesoftCourseClassData::SortData do
   describe "#run" do
     it "returns collections of items with the same course_id" do
-      orchestrator = instance_double("PeoplesoftCourseClassData::ClassJsonExport")
+      orchestrator = instance_double("PeoplesoftCourseClassData::QueryResults")
 
       course_ids = (1..rand(3..5)).to_a
       class_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_ids.sample, "class_catalog_#{i}") }

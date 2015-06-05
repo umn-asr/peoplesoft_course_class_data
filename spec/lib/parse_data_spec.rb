@@ -7,7 +7,7 @@ RSpec.describe PeoplesoftCourseClassData::ParseData do
                   instance_double("PeoplesoftCourseClassData::DataSource", service_name: 'Class', data: "<xml>Classes</xml>"),
                   instance_double("PeoplesoftCourseClassData::DataSource", service_name: 'Course', data: "<xml>Courses</xml>")
                 ]
-      orchestrator = instance_double("PeoplesoftCourseClassData::ClassJsonExport")
+      orchestrator = instance_double("PeoplesoftCourseClassData::QueryResults")
 
       results = []
 

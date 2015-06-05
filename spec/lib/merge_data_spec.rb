@@ -3,7 +3,7 @@ require_relative '../../lib/xml_parser/course_aspect'
 
 RSpec.describe PeoplesoftCourseClassData::MergeData do
   describe "#run" do
-    let(:orchestrator) { instance_double("PeoplesoftCourseClassData::ClassJsonExport") }
+    let(:orchestrator) { instance_double("PeoplesoftCourseClassData::QueryResults") }
 
     it "merges each collection of course aspects together" do
       COURSE_ID_1 = 1
