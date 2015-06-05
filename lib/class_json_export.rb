@@ -23,9 +23,10 @@ module PeoplesoftCourseClassData
       queries.each do |query|
         config = QueryConfig.new(env, query)
         results = QueryResults.as_json(config)
-
-        download_xml(query)
-        convert_to_json(query)
+        p = FileNames.new(config, path).json_with_path
+        File.open(p, 'w') do |f|
+          f.write(results)
+        end
       end
     end
 

@@ -106,6 +106,22 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
       expect(PeoplesoftCourseClassData::QueryResults).to receive(:as_json).with(config_double)
       subject.run
     end
+
+    it "Saves the results to a file, using config and path" do
+      config_double = instance_double("PeoplesoftCourseClassData::QueryConfig")
+
+      names_double = instance_double("PeoplesoftCourseClassData::FileNames")
+      allow(names_double).to receive(:json_with_path).and_return("#{path}/test.json")
+
+      results_double = "results"
+      allow(PeoplesoftCourseClassData::QueryConfig).to receive(:new).with(env, parameters).and_return(config_double)
+      allow(PeoplesoftCourseClassData::QueryResults).to receive(:as_json).with(config_double).and_return(results_double)
+      expect(PeoplesoftCourseClassData::FileNames).to receive(:new).with(config_double, path).and_return(names_double)
+      subject.run
+
+      expect(File.read("#{path}/test.json")).to eq(results_double)
+      `rm -f #{path}/test.json`
+    end
   end
 
 end
