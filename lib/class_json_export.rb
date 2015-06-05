@@ -24,11 +24,10 @@ module PeoplesoftCourseClassData
 
     def run
       queries.each do |query|
-        BuildSources.run(query, env, self)
+        config = QueryConfig.new(env, query)
 
-        Services.all.each do |service|
-          DataSource.build(service, query, env)
-        end
+        BuildSources.run(config, self)
+
         download_xml(query)
         convert_to_json(query)
       end

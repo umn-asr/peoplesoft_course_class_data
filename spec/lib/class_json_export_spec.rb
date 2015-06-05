@@ -92,15 +92,13 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
       subject.run
     end
 
-    it "builds a DataSource for each DataSources for each query" do
-      services = [PeoplesoftCourseClassData::ClassService, PeoplesoftCourseClassData::CourseService]
-      allow(PeoplesoftCourseClassData::Services).to receive(:all).and_return(services)
-      services.each do |service|
-        expect(PeoplesoftCourseClassData::DataSource).to receive(:build).with(service, parameters, env)
-      end
-
+    it "runs BuildSources for each query" do
+      config_double = instance_double("PeoplesoftCourseClassData::QueryConfig")
+      expect(PeoplesoftCourseClassData::QueryConfig).to receive(:new).with(env, parameters).and_return(config_double)
+      expect(PeoplesoftCourseClassData::BuildSources).to receive(:run).with(config_double, subject)
       subject.run
     end
+  end
 
     it "runs BuildSources for each query" do
       expect(PeoplesoftCourseClassData::BuildSources).to receive(:run).with(parameters, env, subject)
