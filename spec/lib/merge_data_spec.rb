@@ -9,7 +9,7 @@ RSpec.describe PeoplesoftCourseClassData::MergeData, :focus do
       COURSE_ID_1 = 1
       COURSE_ID_2 = 2
 
-      collection_of_course_aspects = rand(5..10).times.map do { PeoplesoftCourseClassData::XmlParser::CourseAspect.new(COURSE_ID_1) }
+      collection_of_course_aspects = rand(5..10).times.map { PeoplesoftCourseClassData::XmlParser::CourseAspect.new(COURSE_ID_1) }
       another_collection_of_course_aspects = rand(5..10).times.map { PeoplesoftCourseClassData::XmlParser::CourseAspect.new(COURSE_ID_2) }
 
       collection_of_course_aspects[1..-1].each do |course_aspect|
