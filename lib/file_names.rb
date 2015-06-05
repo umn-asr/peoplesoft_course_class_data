@@ -3,7 +3,7 @@ require_relative 'file_name_config'
 module PeoplesoftCourseClassData
   class FileNames
 
-    attr_reader :env, :path, :institution, :campus, :term, :service
+    attr_reader :env, :path, :institution, :campus, :term, :prefix
 
     def self.from_file_name(name)
       path, file_name = File.split(name)
@@ -15,17 +15,17 @@ module PeoplesoftCourseClassData
               }
 
 
-      config = PeoplesoftCourseClassData::FileNameConfig.new(parsed_name[1], query, "", path)
-      new(config)
+      config = PeoplesoftCourseClassData::QueryConfig.new(parsed_name[1], query)
+      new(config, path, parsed_name[0])
     end
 
-    def initialize(config)
+    def initialize(config, path, prefix="classes")
       self.env         = config.env
       self.institution = config.institution
       self.campus      = config.campus
       self.term        = config.term
-      self.service     = config.service
-      self.path        = config.path
+      self.path        = path
+      self.prefix      = prefix
     end
 
     def xml
@@ -45,10 +45,10 @@ module PeoplesoftCourseClassData
     end
 
     private
-    attr_writer   :env, :path, :institution, :campus, :term, :service
+    attr_writer   :env, :path, :institution, :campus, :term, :prefix
 
     def base_name
-      "#{service}_for__#{env}__#{institution}__#{campus}__#{term}"
+      "#{prefix}_for__#{env}__#{institution}__#{campus}__#{term}"
     end
   end
 end
