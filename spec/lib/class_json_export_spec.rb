@@ -24,6 +24,8 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
       allow(PeoplesoftCourseClassData::ClassService).to receive(:new).with(soap_request_double).and_return(class_service_double)
       allow(PeoplesoftCourseClassData::CourseService).to receive(:new).with(soap_request_double).and_return(course_service_double)
 
+      allow(PeoplesoftCourseClassData::BuildSources).to receive(:run)
+
       allow(class_service_double).to receive(:query).and_yield(xml_response)
       allow(course_service_double).to receive(:query).and_yield(xml_response)
       allow(class_json_double).to receive(:to_file)
@@ -100,9 +102,12 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
     end
   end
 
-    it "runs BuildSources for each query" do
-      expect(PeoplesoftCourseClassData::BuildSources).to receive(:run).with(parameters, env, subject)
-      subject.run
+  describe "run_step" do
+    it "runs the provided step, providing the results and itself" do
+      next_step = class_double("PeoplesoftCourseClassData::BuildSources")
+      results = Object.new
+      expect(next_step).to receive(:run).with(results, subject)
+      subject.run_step(next_step, results)
     end
   end
 end
