@@ -4,6 +4,10 @@ module PeoplesoftCourseClassData
       self.query_config = query_config
     end
 
+    def run_step(step, results)
+      step.run(results, self)
+    end
+
     def to_json
       PeoplesoftCourseClassData::XmlParser::CampusTermCourses.new(campus, term, courses).to_json
     end

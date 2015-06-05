@@ -102,12 +102,4 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
     end
   end
 
-  describe "run_step" do
-    it "runs the provided step, providing the results and itself" do
-      next_step = class_double("PeoplesoftCourseClassData::BuildSources")
-      results = Object.new
-      expect(next_step).to receive(:run).with(results, subject)
-      subject.run_step(next_step, results)
-    end
-  end
 end

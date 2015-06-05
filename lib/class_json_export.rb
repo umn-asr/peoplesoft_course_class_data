@@ -19,10 +19,6 @@ module PeoplesoftCourseClassData
       self.queries  = queries
     end
 
-    def run_step(step, results)
-      step.run(results, self)
-    end
-
     def run
       queries.each do |query|
         config = QueryConfig.new(env, query)
