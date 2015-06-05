@@ -1,6 +1,6 @@
 require_relative '../../lib/file_names'
 
-RSpec.describe PeoplesoftCourseClassData::FileNames, :focus do
+RSpec.describe PeoplesoftCourseClassData::FileNames do
   let(:query_config)  { instance_double("PeoplesoftCourseClassData::QueryConfig", env: :tst, institution: 'UMNTC', campus: 'UMNTC', term: '1149') }
   let(:path)          { 'path/to/some/directory' }
   let(:prefix)        { 'prefix' }
