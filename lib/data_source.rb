@@ -18,11 +18,11 @@ module PeoplesoftCourseClassData
       ).xml_with_path
 
       File.open(file_path, 'w+') do |f|
-        f.write("<class_service_data>")
+        f.write("<#{base_tag_name}>")
         service_instance.query(query_config.institution, query_config.campus, query_config.term) do |response|
           f.write(response)
         end
-        f.write("</class_service_data>")
+        f.write("</#{base_tag_name}>")
       end
 
       File.read(file_path)
@@ -37,6 +37,10 @@ module PeoplesoftCourseClassData
 
     def soap_request
      @soap_request ||= PeoplesoftCourseClassData::Qas::SoapRequestBuilder.build(query_config.env)
+    end
+
+    def base_tag_name
+      "#{service_name.downcase}_service_data"
     end
   end
 end

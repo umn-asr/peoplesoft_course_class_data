@@ -20,8 +20,8 @@ RSpec.describe PeoplesoftCourseClassData::DataSource do
 
   describe "#data" do
     let(:soap_request_instance) { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
-    let(:service)               { PeoplesoftCourseClassData::ClassService }
-    let(:service_instance)      { instance_double("PeoplesoftCourseClassData::ClassService") }
+    let(:service)               { [PeoplesoftCourseClassData::ClassService, PeoplesoftCourseClassData::CourseService].sample }
+    let(:service_instance)      { instance_double(service.name) }
 
     subject { described_class.new(service, query_config) }
 
@@ -42,19 +42,23 @@ RSpec.describe PeoplesoftCourseClassData::DataSource do
       subject.data
     end
 
-    it "returns the data from the service, wrapped in a tag" do
-      query_data = "<xml>data</xml>"
-      expected   = "<service_data>#{query_data}</service_data>"
-      allow(service_instance).to receive(:query).with(query_config.institution, query_config.campus, query_config.term).and_yield(query_data)
-      expect(subject.data).to eq(expected)
-    end
+    describe "response" do
+      let(:taggified_service_name) { service.name.demodulize.gsub(/Service\Z/, '').downcase }
 
-    it "wraps all responses from the query in a single tag" do
-      response_1 = "<xml>response_1</xml>"
-      response_2 = "<xml>response_2</xml>"
-      expected   = "<service_data>#{response_1}#{response_2}</service_data>"
-      allow(service_instance).to receive(:query).with(query_config.institution, query_config.campus, query_config.term).and_yield(response_1).and_yield(response_2)
-      expect(subject.data).to eq(expected)
+      it "returns the data from the service, wrapped in a tag" do
+        query_data              = "<xml>data</xml>"
+        expected                = "<#{taggified_service_name}_service_data>#{query_data}</#{taggified_service_name}_service_data>"
+        allow(service_instance).to receive(:query).with(query_config.institution, query_config.campus, query_config.term).and_yield(query_data)
+        expect(subject.data).to eq(expected)
+      end
+
+      it "wraps all responses from the query in a single tag" do
+        response_1 = "<xml>response_1</xml>"
+        response_2 = "<xml>response_2</xml>"
+        expected   = "<#{taggified_service_name}_service_data>#{response_1}#{response_2}</#{taggified_service_name}_service_data>"
+        allow(service_instance).to receive(:query).with(query_config.institution, query_config.campus, query_config.term).and_yield(response_1).and_yield(response_2)
+        expect(subject.data).to eq(expected)
+      end
     end
   end
 
