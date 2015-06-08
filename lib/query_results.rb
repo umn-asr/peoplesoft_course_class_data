@@ -27,7 +27,7 @@ module PeoplesoftCourseClassData
     end
 
     def term
-      term_value = PeoplesoftCourseClassData::XmlParser::Value::String.new(query_config.term)
+      term_value = PeoplesoftCourseClassData::XmlParser::Value::String.new(query_config.term.to_s)
       PeoplesoftCourseClassData::XmlParser::Term.new(term_id: term_value, strm: term_value)
     end
 
