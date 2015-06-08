@@ -35,18 +35,15 @@ module PeoplesoftCourseClassData
 
       def course_aspect
 
-        build_resource(CourseAspect, row_values_for("course") + [subject, equivalency, course_attribute, section])
+        build_resource(CourseAspect, row_values_for("course").merge(subject: subject, equivalency: equivalency, course_attributes: course_attribute, sections: section))
       end
 
       def section
-        build_resource(Section, row_values_for("section") + [instruction_mode, grading_basis, instructor, meeting_pattern, combined_section])
+        build_resource(Section, row_values_for("section").merge(instruction_mode: instruction_mode, grading_basis: grading_basis, instructors: instructor, meeting_patterns: meeting_pattern, combined_sections: combined_section))
       end
 
       def meeting_pattern
-        meeting_attributes = row_values_for("meeting_pattern")
-        meeting_attributes << location
-        meeting_attributes = meeting_attributes[0..-3] + meeting_attributes[-2..-1].reverse
-        build_resource(MeetingPattern, meeting_attributes)
+        build_resource(MeetingPattern, row_values_for("meeting_pattern").merge(location: location))
       end
 
 
@@ -54,31 +51,35 @@ module PeoplesoftCourseClassData
       attr_accessor :row
 
       def build_resource(klass, arguments)
-        klass.new(*arguments) unless no_info(arguments)
+        klass.new(arguments) unless no_info(arguments.values)
       end
 
-      def no_info(arguments)
-        all_nil?(arguments) || all_empty_strings?(arguments)
+      def no_info(values)
+        all_nil?(values) || all_empty_strings?(values)
       end
 
-      def all_nil?(arguments)
-        arguments.compact.uniq.empty?
+      def all_nil?(values)
+        values.compact.uniq.empty?
       end
 
-      def all_empty_strings?(arguments)
-        arguments.reduce(true) { |result, argument| result && (argument == '') }
+      def all_empty_strings?(values)
+        values.reduce(true) { |result, value| result && (value == '') }
       end
 
       def row_values_for(snake_case_resource)
-        methods_for(snake_case_resource).map { |row_method| row.send row_method }
+        methods_for(snake_case_resource).inject({}) do |hash, method_mapping|
+          value = (row.send method_mapping.method_name)
+          hash[method_mapping.attribute] = value
+          hash
+        end
       end
 
       def methods_for(snake_case_resource)
-        method_mapping.select { |_, v| v[-2] == snake_case_resource }.keys
+        method_mapping.select { |mapping| mapping.resource == snake_case_resource }
       end
 
       def method_mapping
-        row_methods.inject({}) { |hash, method| hash[method]=method.to_s.split('__'); hash }
+        row_methods.map { |row_method| MethodMapping.new(row_method) }
       end
 
       def row_methods
@@ -86,5 +87,29 @@ module PeoplesoftCourseClassData
       end
 
     end
+
+    class MethodMapping
+      attr_reader :method_name
+
+      def initialize(method_name)
+        self.method_name = method_name
+      end
+
+      def resource
+        parsed_name[-2]
+      end
+
+      def attribute
+        parsed_name[-1].to_sym
+      end
+
+      private
+      attr_writer :method_name
+
+      def parsed_name
+        method_name.to_s.split('__')
+      end
+    end
+
   end
 end

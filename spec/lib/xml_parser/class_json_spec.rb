@@ -30,13 +30,13 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
 
     it "contains the correct json" do
       expected_file = File.open("#{fixture_directory}/reference.json", 'r')
-      expected_json = sorted_class_data!(JSON.parse(expected_file.read))
+      expected_json = JSON.parse(expected_file.read, object_class: OpenStruct, array_class: Set)
       expected_file.close
 
       subject.to_file
 
       actual_file = File.open("#{working_directory}/#{file_name.json}", 'r')
-      actual_json = sorted_class_data!(JSON.parse(actual_file.read))
+      actual_json = JSON.parse(actual_file.read, object_class: OpenStruct, array_class: Set)
       actual_file.close
 
       expect(actual_json).to eq(expected_json)
@@ -73,22 +73,6 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
           expect(section_keys).not_to be_empty
           expect(section_keys).not_to include("instruction_mode")
         end
-      end
-    end
-  end
-
-  def sorted_class_data!(class_data)
-    class_data["courses"].sort_by! { |course| course["course_id"] }
-    class_data["courses"].each do |course|
-      course["course_attributes"].sort_by! { |course_attribute| course_attribute["attribute_id"] }
-      course["sections"].sort_by! { |section| section["number"] }
-      course["sections"].each do |section|
-        section["instructors"].sort_by! { |instructor| instructor["name"] }
-        section["meeting_patterns"].sort_by! { |pattern| pattern["start_date"] }
-        section["meeting_patterns"].each do |pattern|
-          pattern["days"].sort_by! { |day| day["name"] }
-        end
-        section["combined_sections"].sort_by! { |combined_section| combined_section["catalog_number"]}
       end
     end
   end
