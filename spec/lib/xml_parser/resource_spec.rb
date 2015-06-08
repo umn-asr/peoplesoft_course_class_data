@@ -344,7 +344,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     context "child_collections" do
       class ResourceWithChildCollection <described_class
         def self.attributes
-          [:resouce_id]
+          [:resource_id]
         end
 
         def self.child_collections
