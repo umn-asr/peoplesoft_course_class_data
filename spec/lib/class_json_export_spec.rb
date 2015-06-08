@@ -13,6 +13,15 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
   let(:path)            { File.join(PeoplesoftCourseClassData::Config::FILE_ROOT, 'spec/tmp') }
 
   let(:name_config)     { PeoplesoftCourseClassData::FileNameConfig.new(env, parameters, "classes", path) }
+
+  let(:config_double)   { instance_double(
+                                            "PeoplesoftCourseClassData::QueryConfig",
+                                            env: env,
+                                            institution: parameters[:institution],
+                                            campus: parameters[:campus],
+                                            term: parameters[:term]
+                                          )
+                        }
   subject               { described_class.new(env, path, [parameters]) }
 
 
@@ -95,20 +104,20 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
     end
 
     it "builds a QueryConfig" do
-      expect(PeoplesoftCourseClassData::QueryConfig).to receive(:new).with(env, parameters)
+      expect(PeoplesoftCourseClassData::QueryConfig).to receive(:new).with(env, parameters).and_return(config_double)
       expect(PeoplesoftCourseClassData::QueryResults).to receive(:as_json)
       subject.run
     end
 
     it "gets results from QueryResults" do
-      config_double = instance_double("PeoplesoftCourseClassData::QueryConfig")
+
       allow(PeoplesoftCourseClassData::QueryConfig).to receive(:new).with(env, parameters).and_return(config_double)
       expect(PeoplesoftCourseClassData::QueryResults).to receive(:as_json).with(config_double)
       subject.run
     end
 
     it "Saves the results to a file, using config and path" do
-      config_double = instance_double("PeoplesoftCourseClassData::QueryConfig")
+
 
       names_double = instance_double("PeoplesoftCourseClassData::FileNames")
       allow(names_double).to receive(:json_with_path).and_return("#{path}/test.json")
