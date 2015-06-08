@@ -22,7 +22,7 @@ module PeoplesoftCourseClassData
       end
 
       def json_resource
-        PeoplesoftCourseClassData::XmlParser::CampusTermCourses.new(campus, term, courses)
+        PeoplesoftCourseClassData::XmlParser::CampusTermCourses.new(campus: campus, term: term, courses: courses)
       end
 
       def courses
@@ -58,12 +58,12 @@ module PeoplesoftCourseClassData
 
       def campus
         campus_value = PeoplesoftCourseClassData::XmlParser::Value::String.new(file_names.campus)
-        PeoplesoftCourseClassData::XmlParser::Campus.new(campus_value, campus_value)
+        PeoplesoftCourseClassData::XmlParser::Campus.new(campus_id: campus_value, abbreviation: campus_value)
       end
 
       def term
         term_value = PeoplesoftCourseClassData::XmlParser::Value::String.new(file_names.term)
-        PeoplesoftCourseClassData::XmlParser::Term.new(term_value, term_value)
+        PeoplesoftCourseClassData::XmlParser::Term.new(term_id: term_value, strm: term_value)
       end
 
       def json_file
