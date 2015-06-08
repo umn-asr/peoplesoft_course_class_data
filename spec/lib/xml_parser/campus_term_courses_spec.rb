@@ -4,7 +4,7 @@ require_relative '../../../lib/xml_parser/campus'
 
 RSpec.describe PeoplesoftCourseClassData::XmlParser::CampusTermCourses do
   describe "to_json" do
-    subject { subject_instance = described_class.new(PeoplesoftCourseClassData::XmlParser::Campus.new, PeoplesoftCourseClassData::XmlParser::Term.new, []) }
+    subject { subject_instance = described_class.new(campus: PeoplesoftCourseClassData::XmlParser::Campus.new, term: PeoplesoftCourseClassData::XmlParser::Term.new) }
     it "does not have a type key" do
       actual_key_value_pairs = key_value_pairs(subject.to_json)
       campus_term_course_type = key_value_pairs({'type' => described_class.type}.to_json)
