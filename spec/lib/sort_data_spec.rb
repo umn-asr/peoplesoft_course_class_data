@@ -6,8 +6,8 @@ RSpec.describe PeoplesoftCourseClassData::SortData do
       orchestrator = instance_double("PeoplesoftCourseClassData::QueryResults")
 
       course_ids = (1..rand(3..5)).to_a
-      class_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_ids.sample, "class_catalog_#{i}") }
-      course_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_ids.sample, "course_catalog_#{i}") }
+      class_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: course_ids.sample, catalog_number: "class_catalog_#{i}") }
+      course_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: course_ids.sample, catalog_number: "course_catalog_#{i}") }
 
       classified_data = [class_data, course_data].flatten.to_set.classify { |course_aspect| course_aspect.course_id }
       expected = classified_data.values
