@@ -4,10 +4,10 @@ require_relative '../../../lib/xml_parser/class_json'
 
 RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
 
-  let(:name_config)     { PeoplesoftCourseClassData::FileNameConfig.new(:tst, {institution: 'UMNTC', campus: 'UMNTC', term: '1149'}, "classes") }
-  let(:file_name)         { PeoplesoftCourseClassData::FileNames.new(name_config) }
+  let(:name_config)       { PeoplesoftCourseClassData::QueryConfig.new(:tst, {institution: 'UMNTC', campus: 'UMNTC', term: '1149'}) }
   let(:fixture_directory) { "#{PeoplesoftCourseClassData::Config::FILE_ROOT}/spec/fixtures" }
   let(:working_directory) { "#{PeoplesoftCourseClassData::Config::FILE_ROOT}/spec/tmp" }
+  let(:file_name)         { PeoplesoftCourseClassData::FileNames.new(name_config, working_directory) }
 
 
   before do
