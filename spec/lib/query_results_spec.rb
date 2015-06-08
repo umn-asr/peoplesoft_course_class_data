@@ -16,11 +16,11 @@ RSpec.describe PeoplesoftCourseClassData::QueryResults do
 
   describe "#as_json" do
     it "builds a respresentation of the campus/term class data and returns it as json" do
-      campus_resource = PeoplesoftCourseClassData::XmlParser::Campus.new(query_config.campus, query_config.campus)
-      term_resource   = PeoplesoftCourseClassData::XmlParser::Term.new(query_config.term, query_config.term)
+      campus_resource = PeoplesoftCourseClassData::XmlParser::Campus.new(campus_id: query_config.campus, abbreviation: query_config.campus)
+      term_resource   = PeoplesoftCourseClassData::XmlParser::Term.new(term_id: query_config.term, strm: query_config.term)
       courses_resource = [
-                            PeoplesoftCourseClassData::XmlParser::CourseAspect.new(1),
-                            PeoplesoftCourseClassData::XmlParser::CourseAspect.new(2)
+                            PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: 1),
+                            PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: 2)
                           ]
 
       expected = "some_json"
