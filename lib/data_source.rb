@@ -28,6 +28,14 @@ module PeoplesoftCourseClassData
       File.read(file_path)
     end
 
+    def campus
+      query_config.campus
+    end
+
+    def term
+      query_config.term
+    end
+
     def service_name
       service.to_s.demodulize.gsub(/Service\Z/, '')
     end
