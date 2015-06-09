@@ -7,7 +7,7 @@ RSpec.describe PeoplesoftCourseClassData::Services do
     end
 
     it "contains CourseService" do
-      expect(described_class.all).to include(PeoplesoftCourseClassData::ClassService)
+      expect(described_class.all).to include(PeoplesoftCourseClassData::CourseService)
     end
 
     it "does not return anything else" do
