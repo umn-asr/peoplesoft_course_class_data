@@ -18,7 +18,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
   describe "parse" do
     it "returns the expected json" do
       data_source_data = "<class_service_data>"
-      data_source_data += File.read("#{fixture_directory}/reference.xml")
+      data_source_data += File.read("#{fixture_directory}/reference_classes.xml")
       data_source_data += "</class_service_data>"
 
       allow(data_source).to receive(:data).and_return(data_source_data)
