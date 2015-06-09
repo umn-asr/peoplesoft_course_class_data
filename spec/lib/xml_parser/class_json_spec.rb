@@ -9,12 +9,6 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
   let(:query_config)  { PeoplesoftCourseClassData::QueryConfig.new(:tst, {institution: 'UMNTC', campus: 'UMNTC', term: '1149'}) }
   let(:data_source)   { PeoplesoftCourseClassData::DataSource.build(service, query_config) }
 
-  before do
-  end
-
-  after do
-  end
-
   describe "parse" do
     it "returns the expected json" do
       data_source_data = "<class_service_data>"
