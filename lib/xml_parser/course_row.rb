@@ -3,7 +3,7 @@ module PeoplesoftCourseClassData
     class CourseRow
       ROW_ATTRIBUTES = {
         course__course_id: {
-          xml_field:  'A.CRSE_ID'
+          xml_field:  'B.CRSE_ID'
         },
         course__course_title_long: {
           xml_field:  'A.COURSE_TITLE_LONG'
