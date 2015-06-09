@@ -2,7 +2,7 @@ require_relative '../../../config/file_root'
 
 require_relative '../../../lib/xml_parser/class_json'
 
-RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson, :focus do
+RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassJson do
   let(:fixture_directory) { "#{PeoplesoftCourseClassData::Config::FILE_ROOT}/spec/fixtures" }
 
   let(:service)       { PeoplesoftCourseClassData::ClassService }
