@@ -14,7 +14,7 @@ RSpec.describe PeoplesoftCourseClassData::ParseData do
       sources.each do |source|
         source_results = [Object.new]
         parser = "PeoplesoftCourseClassData::XmlParser::#{source.service_name}Json".safe_constantize
-        expect(parser).to receive(:parse).with(source.data).and_return(source_results)
+        expect(parser).to receive(:parse).with(source).and_return(source_results)
         results << source_results
       end
 
