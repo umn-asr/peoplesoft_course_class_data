@@ -5,7 +5,7 @@ module PeoplesoftCourseClassData
     def self.run(sources, orchestrator)
       results = sources.map do |source|
                   parser = "PeoplesoftCourseClassData::XmlParser::#{source.service_name}Json".safe_constantize
-                  parser.parse(source.data)
+                  parser.parse(source)
                 end
       orchestrator.run_step(SortData, results)
     end
