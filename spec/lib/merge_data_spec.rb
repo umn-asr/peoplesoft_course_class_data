@@ -18,7 +18,6 @@ RSpec.describe PeoplesoftCourseClassData::MergeData do
         expect(another_collection_of_course_aspects.first).to receive(:merge).with(course_aspect).and_return(another_collection_of_course_aspects.first)
       end
 
-      expect(orchestrator).to receive(:run_step).with(PeoplesoftCourseClassData::WriteData, [collection_of_course_aspects.first, another_collection_of_course_aspects.first])
       described_class.run([collection_of_course_aspects, another_collection_of_course_aspects], orchestrator)
     end
   end
