@@ -13,6 +13,12 @@ module PeoplesoftCourseClassData
         "course"
       end
 
+      def ==(other)
+        return false unless self.class == other.class
+        self.course_id == other.course_id
+      end
+      alias_method :eql?, :==
+
       configure_attributes(attributes + child_collections)
     end
   end
