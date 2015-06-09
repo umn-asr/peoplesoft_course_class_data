@@ -29,10 +29,23 @@ RSpec.describe PeoplesoftCourseClassData::QueryResults do
       coerced_campus = PeoplesoftCourseClassData::XmlParser::Value::String.new(query_config.campus)
       coerced_term   = PeoplesoftCourseClassData::XmlParser::Value::String.new(query_config.term)
 
-      expect(PeoplesoftCourseClassData::XmlParser::Campus).to receive(:new).with(coerced_campus, coerced_campus).and_return(campus_resource)
-      expect(PeoplesoftCourseClassData::XmlParser::Term).to receive(:new).with(coerced_term, coerced_term).and_return(term_resource)
+      expect(PeoplesoftCourseClassData::XmlParser::Campus).to receive(:new).with(
+        campus_id: coerced_campus,
+        abbreviation: coerced_campus
+      ).and_return(campus_resource)
+
+      expect(PeoplesoftCourseClassData::XmlParser::Term).to receive(:new).with(
+        term_id: coerced_term,
+        strm: coerced_term
+      ).and_return(term_resource)
+
       expect(PeoplesoftCourseClassData::BuildSources).to receive(:run).with(query_config, subject).and_return(courses_resource)
-      expect(PeoplesoftCourseClassData::XmlParser::CampusTermCourses).to receive(:new).with(campus_resource, term_resource, courses_resource).and_return(campus_term_course_resource)
+
+      expect(PeoplesoftCourseClassData::XmlParser::CampusTermCourses).to receive(:new).with(
+        campus: campus_resource,
+        term: term_resource,
+        courses: courses_resource
+      ).and_return(campus_term_course_resource)
 
       expect(subject.as_json).to eq(expected)
     end
