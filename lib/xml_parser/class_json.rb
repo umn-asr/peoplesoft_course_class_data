@@ -1,43 +1,34 @@
 require_relative 'xml_parser'
-require_relative '../file_names'
 
 module PeoplesoftCourseClassData
   module XmlParser
     class ClassJson
-
-      def self.parse(xml_string)
-
+      def self.parse(data_source)
+        self.new(data_source).xml_to_json
       end
 
-      def initialize(file_to_convert)
-        self.file_to_convert = file_to_convert
+      def initialize(data_source)
+        self.xml_string = data_source.data
+        self.campus = data_source.campus
+        self.term = data_source.term
       end
-
-      def to_file
-        File.open(json_file, 'w+') do |f|
-          f.write(xml_to_json)
-        end
-      end
-
-      private
-      attr_accessor :file_to_convert
 
       def xml_to_json
         json_resource.to_json
       end
+
+      private
+
+      attr_writer :campus, :term
+      attr_accessor :xml_string
+
 
       def json_resource
         PeoplesoftCourseClassData::XmlParser::CampusTermCourses.new(campus: campus, term: term, courses: courses)
       end
 
       def courses
-        course_ids = modeled_rows.map(&:course_id).uniq
-
-        course_ids.map do |course_id|
-          course_rows = modeled_rows.select { |row| row.course_id == course_id }
-          course = course_rows.inject(:merge)
-          course
-        end
+        modeled_rows
       end
 
       def modeled_rows
@@ -53,30 +44,19 @@ module PeoplesoftCourseClassData
       end
 
       def build_node_set
-        file      = File.open(file_to_convert)
-        node_set  = Nokogiri::XML(file) do |config|
-                      config.default_xml.noblanks
-                    end
-        file.close
-        node_set
+        Nokogiri::XML(xml_string) do |config|
+          config.default_xml.noblanks
+        end
       end
 
       def campus
-        campus_value = PeoplesoftCourseClassData::XmlParser::Value::String.new(file_names.campus)
+        campus_value = PeoplesoftCourseClassData::XmlParser::Value::String.new(@campus)
         PeoplesoftCourseClassData::XmlParser::Campus.new(campus_id: campus_value, abbreviation: campus_value)
       end
 
       def term
-        term_value = PeoplesoftCourseClassData::XmlParser::Value::String.new(file_names.term)
+        term_value = PeoplesoftCourseClassData::XmlParser::Value::String.new(@term)
         PeoplesoftCourseClassData::XmlParser::Term.new(term_id: term_value, strm: term_value)
-      end
-
-      def json_file
-        file_names.json_with_path
-      end
-
-      def file_names
-        @file_names ||= ::PeoplesoftCourseClassData::FileNames.from_file_name(file_to_convert)
       end
     end
   end
