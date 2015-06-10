@@ -11,10 +11,15 @@ RSpec.describe PeoplesoftCourseClassData::ParseData do
 
       results = []
 
+
       sources.each do |source|
-        source_results = [Object.new]
+        allow(source).to receive(:data).and_return("<xml>XML!</xml>")
+        expect(PeoplesoftCourseClassData::XmlParser::NodeSet).to receive(:build).with(source.data).and_return(source.data)
+
         parser = "PeoplesoftCourseClassData::XmlParser::#{source.service_name}Json".safe_constantize
-        expect(parser).to receive(:parse).with(source).and_return(source_results)
+        source_results = [Object.new]
+        expect(parser).to receive(:parse).with(source.data).and_return(source_results)
+
         results << source_results
       end
 
