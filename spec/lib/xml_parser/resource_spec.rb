@@ -1,5 +1,3 @@
-require_relative '../../../lib/xml_parser/resource'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
 
   describe ".configure_attributes" do

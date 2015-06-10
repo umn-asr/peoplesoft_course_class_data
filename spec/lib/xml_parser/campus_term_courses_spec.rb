@@ -1,7 +1,3 @@
-require_relative '../../../lib/xml_parser/campus_term_courses'
-require_relative '../../../lib/xml_parser/term'
-require_relative '../../../lib/xml_parser/campus'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::CampusTermCourses do
   describe "to_json" do
     subject { subject_instance = described_class.new(campus: PeoplesoftCourseClassData::XmlParser::Campus.new, term: PeoplesoftCourseClassData::XmlParser::Term.new) }

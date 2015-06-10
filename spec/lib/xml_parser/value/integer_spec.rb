@@ -1,5 +1,3 @@
-require_relative '../../../../lib/xml_parser/value/integer'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Value::Integer do
   let(:integer) { rand(1..999_999) }
   subject { described_class.new(integer) }

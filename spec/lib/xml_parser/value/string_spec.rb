@@ -1,5 +1,3 @@
-require_relative '../../../../lib/xml_parser/value/string'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Value::String do
   let(:string) { "a string" }
   subject { described_class.new(string) }

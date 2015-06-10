@@ -1,5 +1,3 @@
-require_relative '../../../../lib/xml_parser/value/parsed_value'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Value::ParsedValue do
   describe "equality checks" do
     it "meets array uniquness requirements" do

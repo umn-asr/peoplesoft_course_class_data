@@ -1,6 +1,3 @@
-require_relative '../../../lib/xml_parser/resource'
-require_relative '../../../lib/xml_parser/resource_collection'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
 
   class TestCleAttribute < PeoplesoftCourseClassData::XmlParser::Resource

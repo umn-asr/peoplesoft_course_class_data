@@ -1,5 +1,3 @@
-require_relative '../../../../lib/xml_parser/value/float'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Value::Float do
   let(:float) { rand(1.1..999.9) }
   subject { described_class.new(float) }
