@@ -2,7 +2,7 @@ require_relative 'xml_parser'
 
 module PeoplesoftCourseClassData
   module XmlParser
-    class CourseJson
+    class AspectParser
       def self.parse(node_set)
         self.new(node_set).courses
       end
@@ -20,7 +20,11 @@ module PeoplesoftCourseClassData
       attr_accessor :node_set
 
       def parsed_rows
-        @parsed_rows ||= PeoplesoftCourseClassData::XmlParser::CourseRows.new(node_set).rows
+        @parsed_rows ||= row_parser.new(node_set).rows
+      end
+
+      def row_parser
+        raise 'Child must implement'
       end
     end
   end

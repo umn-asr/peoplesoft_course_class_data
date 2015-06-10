@@ -6,6 +6,7 @@ end
 
 require 'nokogiri'
 
+require_relative 'aspect_parser'
 require_relative 'parsed_row'
 require_relative 'row'
 require_relative 'rows'

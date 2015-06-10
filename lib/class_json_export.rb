@@ -10,8 +10,8 @@ require_relative 'services'
 require_relative 'data_source'
 require_relative 'file_names'
 require_relative 'build_sources'
-require_relative 'xml_parser/class_json'
-require_relative 'xml_parser/course_json'
+require_relative 'xml_parser/class_parser'
+require_relative 'xml_parser/course_parser'
 
 module PeoplesoftCourseClassData
   class ClassJsonExport
