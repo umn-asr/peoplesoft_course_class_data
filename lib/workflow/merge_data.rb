@@ -1,5 +1,3 @@
-require_relative 'workflow'
-
 module PeoplesoftCourseClassData
   class MergeData
     def self.run(collections, orchestrator)

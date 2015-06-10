@@ -1,5 +1,3 @@
-require_relative 'resource'
-
 module PeoplesoftCourseClassData
   module XmlParser
     class Section < Resource

@@ -1,6 +1,3 @@
-require_relative '../../../lib/qas/qas'
-require          'nokogiri'
-
 RSpec.describe PeoplesoftCourseClassData::Qas::StartSyncPollQuery do
   let(:soap_request_double)  { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
 

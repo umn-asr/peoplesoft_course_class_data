@@ -1,5 +1,3 @@
-require_relative '../../lib/build_sources'
-
 RSpec.describe PeoplesoftCourseClassData::BuildSources do
   let(:query_config) { instance_double("PeoplesoftCourseClassData::QueryConfig") }
   let(:orchestrator) { instance_double("PeoplesoftCourseClassData::QueryResults") }

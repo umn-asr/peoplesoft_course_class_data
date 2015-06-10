@@ -1,6 +1,3 @@
-require_relative '../../../lib/qas/qas'
-require_relative '../../../lib/qas/query_with_polled_response'
-
 RSpec.describe PeoplesoftCourseClassData::Qas::QueryWithPolledResponse do
   let(:soap_request_double)  { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
 

@@ -1,5 +1,3 @@
-require_relative '../../lib/sort_data'
-
 RSpec.describe PeoplesoftCourseClassData::SortData do
   describe "#run" do
     it "returns collections of items with the same course_id" do

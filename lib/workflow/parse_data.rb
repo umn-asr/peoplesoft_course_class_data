@@ -1,5 +1,3 @@
-require_relative 'workflow'
-
 module PeoplesoftCourseClassData
   class ParseData
     def self.run(sources, orchestrator)

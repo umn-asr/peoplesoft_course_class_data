@@ -1,5 +1,3 @@
-require_relative 'file_name_config'
-
 module PeoplesoftCourseClassData
   class FileNames
 

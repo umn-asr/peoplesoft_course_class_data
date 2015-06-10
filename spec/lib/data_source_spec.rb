@@ -1,5 +1,3 @@
-require_relative '../../lib/data_source'
-
 RSpec.describe PeoplesoftCourseClassData::DataSource do
   let(:query_config)   do
                           instance_double(

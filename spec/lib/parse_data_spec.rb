@@ -1,5 +1,3 @@
-require_relative '../../lib/parse_data'
-
 RSpec.describe PeoplesoftCourseClassData::ParseData do
   describe ".run" do
     it "gets the data from the sources, and parses with the appropriate parser" do

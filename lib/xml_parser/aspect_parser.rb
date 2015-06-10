@@ -1,5 +1,3 @@
-require_relative 'xml_parser'
-
 module PeoplesoftCourseClassData
   module XmlParser
     class AspectParser

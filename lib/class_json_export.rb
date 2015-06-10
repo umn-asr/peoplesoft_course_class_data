@@ -2,17 +2,6 @@ require_relative '../config/credentials'
 require_relative '../config/query_parameters'
 require_relative '../config/file_root'
 
-require_relative 'class_service'
-require_relative 'course_service'
-require_relative 'query_config'
-require_relative 'query_results'
-require_relative 'services'
-require_relative 'data_source'
-require_relative 'file_names'
-require_relative 'build_sources'
-require_relative 'xml_parser/class_parser'
-require_relative 'xml_parser/course_parser'
-
 module PeoplesoftCourseClassData
   class ClassJsonExport
     def initialize(env, path = File.join(::PeoplesoftCourseClassData::Config::FILE_ROOT, 'tmp'), queries = ::PeoplesoftCourseClassData::Config::QUERY_PARAMETERS)

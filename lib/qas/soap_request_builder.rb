@@ -1,5 +1,3 @@
-require_relative 'soap_request'
-
 module PeoplesoftCourseClassData
   module Qas
     class SoapRequestBuilder

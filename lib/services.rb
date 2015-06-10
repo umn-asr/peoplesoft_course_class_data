@@ -5,3 +5,5 @@ module PeoplesoftCourseClassData
     end
   end
 end
+
+Dir.glob(File.join(File.dirname(__FILE__), "services", "*.rb")) { |file| require file }

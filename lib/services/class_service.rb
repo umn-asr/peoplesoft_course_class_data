@@ -1,5 +1,3 @@
-require_relative 'qas/qas'
-
 module PeoplesoftCourseClassData
   class ClassService
     def initialize(soap_request, query_runner = nil)

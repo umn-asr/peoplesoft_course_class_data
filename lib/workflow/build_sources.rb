@@ -1,5 +1,3 @@
-require_relative 'workflow'
-
 module PeoplesoftCourseClassData
   class BuildSources
     def self.run(query_config, orchestrator)

@@ -1,5 +1,3 @@
-require_relative '../../lib/course_service'
-
 RSpec.describe PeoplesoftCourseClassData::CourseService do
   describe "query" do
     let(:args)                { ["FOO", "BAR", 1234] }

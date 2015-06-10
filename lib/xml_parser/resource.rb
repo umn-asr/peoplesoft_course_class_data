@@ -1,5 +1,3 @@
-require_relative  'resource_collection'
-require_relative  'value/value'
 require           'json'
 require           'active_support/inflector'
 
