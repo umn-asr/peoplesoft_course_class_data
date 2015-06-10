@@ -12,16 +12,12 @@ module PeoplesoftCourseClassData
       end
 
       def courses
-        modeled_rows
+        @courses ||= parsed_rows.map { |r| PeoplesoftCourseClassData::XmlParser::CourseAspectBuilder.build_from_row(r) }
       end
 
       private
 
       attr_accessor :node_set
-
-      def modeled_rows
-        @modeled_rows ||= parsed_rows.map { |r| PeoplesoftCourseClassData::XmlParser::CourseAspectBuilder.build_from_row(r) }
-      end
 
       def parsed_rows
         @parsed_rows ||= PeoplesoftCourseClassData::XmlParser::Rows.new(node_set).rows
