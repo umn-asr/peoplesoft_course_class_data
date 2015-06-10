@@ -1,8 +1,4 @@
-require_relative '../../../config/file_root'
-
-require_relative '../../../lib/xml_parser/class_parser'
-
-RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassParser do
+RSpec.describe PeoplesoftCourseClassData::XmlParser::AspectParser do
   let(:fixture_directory) { "#{PeoplesoftCourseClassData::Config::FILE_ROOT}/spec/fixtures" }
 
   describe "parse" do
@@ -13,19 +9,17 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassParser do
 
       node_set = PeoplesoftCourseClassData::XmlParser::NodeSet.build(data_source_data)
 
-      course_rows_double = instance_double("PeoplesoftCourseClassData::XmlParser::ClassRows")
-      expect(PeoplesoftCourseClassData::XmlParser::ClassRows).to receive(:new).with(node_set).and_return(course_rows_double)
-
-      rows_double = []
-      rows_double << instance_double("PeoplesoftCourseClassData::XmlParser::ClassRow")
-
-      expect(course_rows_double).to receive(:rows).and_return(rows_double)
+      row_parser_double = class_double("PeoplesoftCourseClassData::XmlParser::ClassRows")
+      parsed_rows_double = instance_double("PeoplesoftCourseClassData::XmlParser::ClassRows")
+      rows_double = [Object.new]
+      allow(row_parser_double).to receive(:new).and_return(parsed_rows_double)
+      allow(parsed_rows_double).to receive(:rows).and_return(rows_double)
 
       course_aspect_double = instance_double("PeoplesoftCourseClassData::XmlParser::CourseAspect")
 
       expect(PeoplesoftCourseClassData::XmlParser::CourseAspectBuilder).to receive(:build_from_row).with(rows_double.first).and_return(course_aspect_double)
 
-      results = described_class.parse(node_set)
+      results = described_class.parse(node_set, row_parser_double)
       expect(results).to eq([course_aspect_double])
     end
   end

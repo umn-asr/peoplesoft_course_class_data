@@ -14,9 +14,9 @@ RSpec.describe PeoplesoftCourseClassData::ParseData do
         allow(source).to receive(:data).and_return("<xml>XML!</xml>")
         expect(PeoplesoftCourseClassData::XmlParser::NodeSet).to receive(:build).with(source.data).and_return(source.data)
 
-        parser = "PeoplesoftCourseClassData::XmlParser::#{source.service_name}Parser".safe_constantize
+        row_parser = "PeoplesoftCourseClassData::XmlParser::#{source.service_name}Rows".safe_constantize
         source_results = [Object.new]
-        expect(parser).to receive(:parse).with(source.data).and_return(source_results)
+        expect(PeoplesoftCourseClassData::XmlParser::AspectParser).to receive(:parse).with(source.data, row_parser).and_return(source_results)
 
         results << source_results
       end
