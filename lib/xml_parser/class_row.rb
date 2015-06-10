@@ -1,6 +1,6 @@
 module PeoplesoftCourseClassData
   module XmlParser
-    class ClassRow
+    class ClassRow < Row
       ROW_ATTRIBUTES = {
         course__course_id: {
           xml_field:  'A.CRSE_ID'
@@ -110,44 +110,9 @@ module PeoplesoftCourseClassData
         end
       end
 
-      def initialize(node_set, namespace)
-        self.node_set = node_set
-        self.namespace = namespace
-      end
-
       def course__section__meeting_pattern__days
         day_elements = %w[A.MON A.TUES A.WED A.UM_THURS A.FRI A.SAT A.UM_SUNDAY]
         day_elements.reject { |day_element| raw_value(day_element).empty? }.map { |active_day| Days.for_xml_tag(active_day) }
-      end
-
-      private
-      attr_accessor :node_set, :namespace
-      def type_conversion(config)
-        config[:type] || 'string'
-      end
-
-      def xml_value(config)
-        raw_value(config[:xml_field])
-      end
-
-      def raw_value(xml_field)
-        node_set.xpath("ns:#{xml_field}", 'ns' => namespace).text
-      end
-
-      def string(value)
-        Value::String.new(String(value))
-      end
-
-      def integer(value)
-        Value::Integer.new(Integer(value))
-      end
-
-      def float(value)
-        Value::Float.new(Float(value))
-      end
-
-      def date(value)
-        Value::Date.new(Time.new(*value.split('-')))
       end
     end
   end
