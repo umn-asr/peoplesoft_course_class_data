@@ -1,6 +1,6 @@
 require_relative '../lib/class_json_export'
 
-RSpec.describe 'XmlToJsonIntegration', :focus do
+RSpec.describe 'XmlToJsonIntegration' do
   describe "ClassJsonExport#run with actual xml data" do
     it "matches the reference json" do
       env        = :prd
