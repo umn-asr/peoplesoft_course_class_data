@@ -6,7 +6,7 @@ module PeoplesoftCourseClassData
       private
 
       def row_parser
-        PeoplesoftCourseClassData::XmlParser::Rows
+        PeoplesoftCourseClassData::XmlParser::ClassRows
       end
     end
   end

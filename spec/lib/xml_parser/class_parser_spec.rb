@@ -13,11 +13,11 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ClassParser do
 
       node_set = PeoplesoftCourseClassData::XmlParser::NodeSet.build(data_source_data)
 
-      course_rows_double = instance_double("PeoplesoftCourseClassData::XmlParser::Rows")
-      expect(PeoplesoftCourseClassData::XmlParser::Rows).to receive(:new).with(node_set).and_return(course_rows_double)
+      course_rows_double = instance_double("PeoplesoftCourseClassData::XmlParser::ClassRows")
+      expect(PeoplesoftCourseClassData::XmlParser::ClassRows).to receive(:new).with(node_set).and_return(course_rows_double)
 
       rows_double = []
-      rows_double << instance_double("PeoplesoftCourseClassData::XmlParser::Row")
+      rows_double << instance_double("PeoplesoftCourseClassData::XmlParser::ClassRow")
 
       expect(course_rows_double).to receive(:rows).and_return(rows_double)
 

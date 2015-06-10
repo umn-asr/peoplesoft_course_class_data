@@ -1,6 +1,6 @@
 module PeoplesoftCourseClassData
   module XmlParser
-    class Row
+    class ClassRow
       ROW_ATTRIBUTES = {
         course__course_id: {
           xml_field:  'A.CRSE_ID'
