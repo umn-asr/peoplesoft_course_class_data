@@ -10,6 +10,10 @@ RSpec.describe PeoplesoftCourseClassData::DataSource do
                       end
   let(:service) { Object }
 
+  after do
+    `rm -f tmp/*.xml`
+  end
+
   describe ".build" do
     it "creates a new DataSource" do
       expect(described_class.build(service, query_config)).to be_instance_of(PeoplesoftCourseClassData::DataSource)
