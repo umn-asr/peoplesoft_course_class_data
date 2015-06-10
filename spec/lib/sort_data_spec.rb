@@ -7,8 +7,13 @@ RSpec.describe PeoplesoftCourseClassData::SortData do
       class_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: course_ids.sample, catalog_number: "class_catalog_#{i}") }
       course_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: course_ids.sample, catalog_number: "course_catalog_#{i}") }
 
-      classified_data = [class_data, course_data].flatten.to_set.classify { |course_aspect| course_aspect.course_id }
-      expected = classified_data.values
+      expected = course_ids.map do |id|
+        matched_course_aspects = class_data.select{ |course_aspect| course_aspect.course_id == id}
+        matched_course_aspects << course_data.select{ |course_aspect| course_aspect.course_id == id}
+        matched_course_aspects.flatten
+      end
+
+      expected.reject! { |course_collection| course_collection.empty? }
 
       expect(orchestrator).to receive(:run_step).with(PeoplesoftCourseClassData::MergeData, expected)
       described_class.run([class_data, course_data], orchestrator)
