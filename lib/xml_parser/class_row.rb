@@ -11,9 +11,6 @@ module PeoplesoftCourseClassData
         course__description: {
           xml_field: 'EXPR1_1'
         },
-        course__title: {
-          xml_field:  'A.DESCR1'
-        },
         course__subject__subject_id: {
           xml_field:  'A.SUBJECT'
         },

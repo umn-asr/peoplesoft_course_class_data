@@ -5,7 +5,7 @@ module PeoplesoftCourseClassData
         course__course_id: {
           xml_field:  'B.CRSE_ID'
         },
-        course__course_title_long: {
+        course__title: {
           xml_field:  'A.COURSE_TITLE_LONG'
         },
         course__offer_frequency: {
