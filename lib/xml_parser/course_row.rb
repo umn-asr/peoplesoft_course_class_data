@@ -21,7 +21,13 @@ module PeoplesoftCourseClassData
         course__units_repeat_limit: {
           xml_field:  'A.UNITS_REPEAT_LIMIT',
           type:       'integer'
-        }
+        },
+        course__catalog_number: {
+          xml_field:  'B.CATALOG_NBR'
+        },
+        course__description: {
+          xml_field: 'A.DESCRLONG'
+        },
       }
 
       ROW_ATTRIBUTES.each do | method_name, config |
