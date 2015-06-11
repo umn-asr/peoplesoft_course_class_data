@@ -28,6 +28,14 @@ module PeoplesoftCourseClassData
         course__description: {
           xml_field: 'A.DESCRLONG'
         },
+        course__credits_minimum: {
+          xml_field:  'A.UNITS_MINIMUM',
+          type:       'float'
+        },
+        course__credits_maximum: {
+          xml_field:  'A.UNITS_MAXIMUM',
+          type:       'float'
+        },
       }
 
       ROW_ATTRIBUTES.each do | method_name, config |

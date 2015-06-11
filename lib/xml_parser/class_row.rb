@@ -32,14 +32,6 @@ module PeoplesoftCourseClassData
         course__section__location: {
           xml_field:  'A.LOCATION'
         },
-        course__section__credits_minimum: {
-          xml_field:  'A.UNITS_MINIMUM',
-          type:       'float'
-        },
-        course__section__credits_maximum: {
-          xml_field:  'A.UNITS_MAXIMUM',
-          type:       'float'
-        },
         course__section__notes: {
           xml_field:  'EXPR67_67'
         },

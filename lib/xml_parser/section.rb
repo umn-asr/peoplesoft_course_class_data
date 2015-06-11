@@ -2,7 +2,7 @@ module PeoplesoftCourseClassData
   module XmlParser
     class Section < Resource
       def self.attributes
-        [:class_number, :number, :component, :location, :credits_minimum, :credits_maximum, :notes, :instruction_mode, :grading_basis]
+        [:class_number, :number, :component, :location, :notes, :instruction_mode, :grading_basis]
       end
 
       def self.child_collections
