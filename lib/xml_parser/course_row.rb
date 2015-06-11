@@ -11,6 +11,17 @@ module PeoplesoftCourseClassData
         course__offer_frequency: {
           xml_field:  'K.DESCR'
         },
+        course__repeatable: {
+          xml_field:  'A.CRSE_REPEATABLE'
+        },
+        course__repeat_limit: {
+          xml_field:  'A.CRSE_REPEAT_LIMIT',
+          type:       'integer'
+        },
+        course__units_repeat_limit: {
+          xml_field:  'A.UNITS_REPEAT_LIMIT',
+          type:       'integer'
+        }
       }
 
       ROW_ATTRIBUTES.each do | method_name, config |
