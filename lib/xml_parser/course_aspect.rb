@@ -9,6 +9,8 @@ module PeoplesoftCourseClassData
         [:course_attributes, :sections]
       end
 
+      configure_attributes(attributes + child_collections)
+
       def self.type
         "course"
       end
@@ -19,7 +21,6 @@ module PeoplesoftCourseClassData
       end
       alias_method :eql?, :==
 
-      configure_attributes(attributes + child_collections)
       def merge(other)
         merge_attributes(other)
         super
