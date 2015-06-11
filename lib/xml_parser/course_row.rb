@@ -20,7 +20,7 @@ module PeoplesoftCourseClassData
         },
         course__units_repeat_limit: {
           xml_field:  'A.UNITS_REPEAT_LIMIT',
-          type:       'integer'
+          type:       'float'
         },
         course__catalog_number: {
           xml_field:  'B.CATALOG_NBR'
