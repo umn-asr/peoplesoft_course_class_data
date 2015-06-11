@@ -20,6 +20,22 @@ module PeoplesoftCourseClassData
       alias_method :eql?, :==
 
       configure_attributes(attributes + child_collections)
+      def merge(other)
+        merge_attributes(other)
+        super
+      end
+
+      private
+
+      def merge_attributes(other)
+        blank_attributes.each do |attribute|
+          self.send("#{attribute}=", other.send(attribute))
+        end
+      end
+
+      def blank_attributes
+        self.class.attributes.select { |attribute| self.send(attribute).blank?}
+      end
     end
   end
 end
