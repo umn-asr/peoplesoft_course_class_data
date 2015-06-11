@@ -39,7 +39,7 @@ module PeoplesoftCourseClassData
       end
 
       def blank_attributes
-        self.class.attributes.select { |attribute| self.send(attribute).blank?}
+        self.class.attributes.select { |attribute| self.send(attribute).nil? || self.send(attribute) == '' }
       end
     end
   end
