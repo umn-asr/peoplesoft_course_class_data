@@ -1,5 +1,6 @@
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
-  let(:namespace) { 'http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_XMLP_RESP.VERSION_1' }
+  let(:namespace)   { 'http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_XMLP_RESP.VERSION_1' }
+  let(:row_nodeset) { row(nodeset) }
   subject { InheritsFromRow.new(row_nodeset, namespace) }
 
   describe "gerenated methods" do
@@ -23,6 +24,14 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
       it "coverts the data to the specified type" do
         expect(subject.course__enrollment_cap).to be_kind_of(PeoplesoftCourseClassData::XmlParser::Value::Integer)
         expect(subject.course__section__credits_maximum).to be_kind_of(PeoplesoftCourseClassData::XmlParser::Value::Float)
+      end
+    end
+
+    context "when the row is from a document with multiple rows" do
+      subject { InheritsFromRow.new(row(multi_row_node_set), namespace) }
+
+      it "only returns the data for the supplied row, i.e don't use //ns:key in Row to find the values" do
+        expect(subject.course__course_id).to eq('795342')
       end
     end
   end
@@ -49,11 +58,39 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
     end
   end
 
-  def row_nodeset
-    namespaced_node_set.xpath('//ns:row', 'ns' => namespace).first
+  def row(full_nodeset)
+    full_nodeset.xpath('//ns:row', 'ns' => namespace).first
   end
 
-  def namespaced_node_set
+  def nodeset
+    xml = <<-EOXML
+    <?xml version="1.0" encoding="UTF-8"?>
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <soapenv:Body>
+        <QAS_GETQUERYRESULTS_RESP_MSG xmlns="http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_GETQUERYRESULTS_RESP_MSG.VERSION_2">
+          <query xmlns="#{namespace}" numrows="800" queryname="UM_SR003_0021_CLASS_DATA">
+            <row rownumber="1">
+              <A.CRSE_ID><![CDATA[795342]]></A.CRSE_ID>
+              <A.CATALOG_NBR><![CDATA[3120]]></A.CATALOG_NBR>
+              <A.UNITS_MAXIMUM>3.5</A.UNITS_MAXIMUM>
+              <A.ENRL_CAP>25</A.ENRL_CAP>
+            </row>
+          </query>
+          <QAS_QUERYRESULTS_STATUS_RESP xmlns="http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_STATUS_RESP.VERSION_2">
+            <status>finalBlockRetrieved</status>
+          </QAS_QUERYRESULTS_STATUS_RESP>
+        </QAS_GETQUERYRESULTS_RESP_MSG>
+      </soapenv:Body>
+    </soapenv:Envelope>
+
+          EOXML
+    nokogiri_doc = Nokogiri::XML(xml) do |config|
+      config.default_xml.noblanks
+    end
+    nokogiri_doc
+  end
+
+  def multi_row_node_set
     xml = <<-EOXML
     <?xml version="1.0" encoding="UTF-8"?>
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
