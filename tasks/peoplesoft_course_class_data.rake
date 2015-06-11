@@ -1,4 +1,4 @@
-require_relative '../lib/class_json_export'
+require_relative '../lib/peoplesoft_course_class_data'
 
 namespace :peoplesoft_course_class_data do
   task :download, [:env, :directory] do |t, args|
