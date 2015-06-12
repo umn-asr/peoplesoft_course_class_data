@@ -93,36 +93,6 @@
           <F.CRSE_ATTR_VALUE><![CDATA[PHYS]]></F.CRSE_ATTR_VALUE>
           <A.DESCRLONG><![CDATA[Fundamental principles of physics in the context of everyday world. Use of kinematics/dynamics principles and quantitative/qualitative problem solving techniques to understand natural phenomena. Lecture, recitation, lab.]]></A.DESCRLONG>
         </row>
-        <row rownumber="15396">
-          <B.INSTITUTION><![CDATA[UMNTC]]></B.INSTITUTION>
-          <E.DESCR><![CDATA[Twin Cities/Rochester]]></E.DESCR>
-          <B.CAMPUS><![CDATA[UMNTC]]></B.CAMPUS>
-          <G.DESCR><![CDATA[Twin Cities]]></G.DESCR>
-          <C.STRM><![CDATA[1149]]></C.STRM>
-          <B.SUBJECT><![CDATA[PHYS]]></B.SUBJECT>
-          <B.CATALOG_NBR><![CDATA[1101W]]></B.CATALOG_NBR>
-          <H.DESCR><![CDATA[Physics]]></H.DESCR>
-          <B.CRSE_ID><![CDATA[002066]]></B.CRSE_ID>
-          <B.ACAD_GROUP><![CDATA[TIOT]]></B.ACAD_GROUP>
-          <I.DESCR100><![CDATA[College of Science and Engineering]]></I.DESCR100>
-          <B.ACAD_ORG><![CDATA[11140]]></B.ACAD_ORG>
-          <J.DESCR><![CDATA[Physics & Astronomy, Sch of]]></J.DESCR>
-          <A.COURSE_TITLE_LONG><![CDATA[Introductory College Physics I]]></A.COURSE_TITLE_LONG>
-          <A.UNITS_MINIMUM>4</A.UNITS_MINIMUM>
-          <A.CRSE_REPEAT_LIMIT>1</A.CRSE_REPEAT_LIMIT>
-          <A.UNITS_MAXIMUM>4</A.UNITS_MAXIMUM>
-          <A.UNITS_REPEAT_LIMIT>4</A.UNITS_REPEAT_LIMIT>
-          <A.CRSE_REPEATABLE><![CDATA[N]]></A.CRSE_REPEATABLE>
-          <A.GRADING_BASIS><![CDATA[OPT]]></A.GRADING_BASIS>
-          <L.XLATLONGNAME><![CDATA[Student Option]]></L.XLATLONGNAME>
-          <A.EQUIV_CRSE_ID/>
-          <D.DESCR/>
-          <B.SSR_CRSE_TYPOFF_CD><![CDATA[9V3V5V]]></B.SSR_CRSE_TYPOFF_CD>
-          <K.DESCR><![CDATA[Every Fall, Spring & Summer]]></K.DESCR>
-          <F.CRSE_ATTR><![CDATA[DELM]]></F.CRSE_ATTR>
-          <F.CRSE_ATTR_VALUE><![CDATA[08]]></F.CRSE_ATTR_VALUE>
-          <A.DESCRLONG><![CDATA[Fundamental principles of physics in the context of everyday world. Use of kinematics/dynamics principles and quantitative/qualitative problem solving techniques to understand natural phenomena. Lecture, recitation, lab.]]></A.DESCRLONG>
-        </row>
         <row rownumber="15397">
           <B.INSTITUTION><![CDATA[UMNTC]]></B.INSTITUTION>
           <E.DESCR><![CDATA[Twin Cities/Rochester]]></E.DESCR>

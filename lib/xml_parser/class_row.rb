@@ -14,12 +14,6 @@ module PeoplesoftCourseClassData
         course__equivalency__equivalency_id: {
           xml_field:  'A.EQUIV_CRSE_ID'
         },
-        course__course_attribute__attribute_id: {
-          xml_field:  'A.UM_CRSE_ATT_VAL'
-        },
-        course__course_attribute__family: {
-          xml_field:  'A.UM_CRSE_ATTR'
-        },
         course__section__class_number: {
           xml_field:  'A.CLASS_NBR'
         },

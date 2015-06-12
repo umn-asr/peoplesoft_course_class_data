@@ -36,6 +36,12 @@ module PeoplesoftCourseClassData
           xml_field:  'A.UNITS_MAXIMUM',
           type:       'float'
         },
+        course__course_attribute__attribute_id: {
+          xml_field:  'F.CRSE_ATTR_VALUE'
+        },
+        course__course_attribute__family: {
+          xml_field:  'F.CRSE_ATTR'
+        },
       }
 
       ROW_ATTRIBUTES.each do | method_name, config |
