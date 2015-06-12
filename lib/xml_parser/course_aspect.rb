@@ -5,7 +5,7 @@ module PeoplesoftCourseClassData
         [
           :course_id, :catalog_number, :description, :title, :repeatable, :repeat_limit, :units_repeat_limit,
           :offer_frequency, :credits_minimum, :credits_maximum,
-          :subject, :equivalency
+          :subject, :equivalency, :grading_basis
         ]
       end
 

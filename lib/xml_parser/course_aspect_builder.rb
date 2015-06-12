@@ -35,11 +35,11 @@ module PeoplesoftCourseClassData
 
       def course_aspect
 
-        build_resource(CourseAspect, row_values_for("course").merge(subject: subject, equivalency: equivalency, course_attributes: course_attribute, sections: section))
+        build_resource(CourseAspect, row_values_for("course").merge(subject: subject, equivalency: equivalency, grading_basis: grading_basis, course_attributes: course_attribute, sections: section))
       end
 
       def section
-        build_resource(Section, row_values_for("section").merge(instruction_mode: instruction_mode, grading_basis: grading_basis, instructors: instructor, meeting_patterns: meeting_pattern, combined_sections: combined_section))
+        build_resource(Section, row_values_for("section").merge(instruction_mode: instruction_mode, instructors: instructor, meeting_patterns: meeting_pattern, combined_sections: combined_section))
       end
 
       def meeting_pattern

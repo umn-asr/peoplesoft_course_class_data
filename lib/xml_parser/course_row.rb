@@ -51,6 +51,12 @@ module PeoplesoftCourseClassData
         course__equivalency__equivalency_id: {
           xml_field:  'A.EQUIV_CRSE_ID'
         },
+        course__grading_basis__grading_basis_id: {
+          xml_field:  'A.GRADING_BASIS'
+        },
+        course__grading_basis__description: {
+          xml_field:  'L.XLATLONGNAME'
+        },
       }
 
       ROW_ATTRIBUTES.each do | method_name, config |
