@@ -5,12 +5,6 @@ module PeoplesoftCourseClassData
         course__course_id: {
           xml_field:  'A.CRSE_ID'
         },
-        course__subject__subject_id: {
-          xml_field:  'A.SUBJECT'
-        },
-        course__subject__description: {
-          xml_field:  'A.DESCR'
-        },
         course__equivalency__equivalency_id: {
           xml_field:  'A.EQUIV_CRSE_ID'
         },

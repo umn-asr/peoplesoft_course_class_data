@@ -42,6 +42,12 @@ module PeoplesoftCourseClassData
         course__course_attribute__family: {
           xml_field:  'F.CRSE_ATTR'
         },
+        course__subject__subject_id: {
+          xml_field:  'B.SUBJECT'
+        },
+        course__subject__description: {
+          xml_field:  'H.DESCR'
+        },
       }
 
       ROW_ATTRIBUTES.each do | method_name, config |
