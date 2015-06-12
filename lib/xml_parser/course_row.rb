@@ -48,6 +48,9 @@ module PeoplesoftCourseClassData
         course__subject__description: {
           xml_field:  'H.DESCR'
         },
+        course__equivalency__equivalency_id: {
+          xml_field:  'A.EQUIV_CRSE_ID'
+        },
       }
 
       ROW_ATTRIBUTES.each do | method_name, config |
