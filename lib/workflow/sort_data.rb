@@ -1,12 +1,8 @@
 module PeoplesoftCourseClassData
   class SortData
     def self.run(parsed_data, orchestrator)
-      all_course_aspects  = parsed_data.flatten
-      course_ids          = all_course_aspects.map(&:course_id).uniq.sort
-      sorted_data         = course_ids.map do |course_id|
-                              all_course_aspects.select { |course_aspect| course_aspect.course_id == course_id }
-                            end
-      orchestrator.run_step(MergeData, sorted_data)
+      results = Grouping.group(parsed_data).by(:course_id)
+      orchestrator.run_step(MergeData, results)
     end
   end
 end

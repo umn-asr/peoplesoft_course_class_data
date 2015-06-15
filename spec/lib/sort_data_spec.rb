@@ -6,17 +6,16 @@ RSpec.describe PeoplesoftCourseClassData::SortData do
       course_ids = (1..rand(3..5)).to_a
       class_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: course_ids.sample, catalog_number: "class_catalog_#{i}") }
       course_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: course_ids.sample, catalog_number: "course_catalog_#{i}") }
+      parsed_data = [class_data, course_data]
 
-      expected = course_ids.map do |id|
-        matched_course_aspects = class_data.select{ |course_aspect| course_aspect.course_id == id}
-        matched_course_aspects << course_data.select{ |course_aspect| course_aspect.course_id == id}
-        matched_course_aspects.flatten
-      end
+      expected = Array.new
 
-      expected.reject! { |course_collection| course_collection.empty? }
+      grouping = instance_double("PeoplesoftCourseClassData::Grouping")
+      allow(PeoplesoftCourseClassData::Grouping).to receive(:group).with(parsed_data).and_return(grouping)
+      allow(grouping).to receive(:by).with(:course_id).and_return(expected)
 
       expect(orchestrator).to receive(:run_step).with(PeoplesoftCourseClassData::MergeData, expected)
-      described_class.run([class_data, course_data], orchestrator)
+      described_class.run(parsed_data, orchestrator)
     end
   end
 end
