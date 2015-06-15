@@ -7,4 +7,8 @@ namespace :rake_runner_test_tasks do
   task :success do |t|
     puts "hooray"
   end
+
+  task :sh_success do |t|
+    sh "echo hooray"
+  end
 end
