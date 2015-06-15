@@ -58,7 +58,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
     end
   end
 
-  def row(full_nodeset)
+  def row(xml_string)
+    full_nodeset = PeoplesoftCourseClassData::XmlParser::NodeSet.build(xml_string)
     full_nodeset.xpath('//ns:row', 'ns' => namespace).first
   end
 
@@ -82,12 +83,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
         </QAS_GETQUERYRESULTS_RESP_MSG>
       </soapenv:Body>
     </soapenv:Envelope>
-
           EOXML
-    nokogiri_doc = Nokogiri::XML(xml) do |config|
-      config.default_xml.noblanks
-    end
-    nokogiri_doc
   end
 
   def multi_row_node_set
@@ -118,9 +114,5 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
     </soapenv:Envelope>
 
           EOXML
-    nokogiri_doc = Nokogiri::XML(xml) do |config|
-      config.default_xml.noblanks
-    end
-    nokogiri_doc
   end
 end
