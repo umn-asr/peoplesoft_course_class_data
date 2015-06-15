@@ -1,6 +1,6 @@
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
   let(:namespace)   { 'http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_XMLP_RESP.VERSION_1' }
-  let(:row_nodeset) { row(nodeset) }
+  let(:row_nodeset) { row(xml) }
   subject { InheritsFromRow.new(row_nodeset, namespace) }
 
   describe "gerenated methods" do
@@ -28,7 +28,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
     end
 
     context "when the row is from a document with multiple rows" do
-      subject { InheritsFromRow.new(row(multi_row_node_set), namespace) }
+      subject { InheritsFromRow.new(row(multi_row_xml), namespace) }
 
       it "only returns the data for the supplied row, i.e don't use //ns:key in Row to find the values" do
         expect(subject.course__course_id).to eq('795342')
@@ -63,7 +63,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
     full_nodeset.xpath('//ns:row', 'ns' => namespace).first
   end
 
-  def nodeset
+  def xml
     xml = <<-EOXML
     <?xml version="1.0" encoding="UTF-8"?>
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -86,7 +86,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
           EOXML
   end
 
-  def multi_row_node_set
+  def multi_row_xml
     xml = <<-EOXML
     <?xml version="1.0" encoding="UTF-8"?>
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
