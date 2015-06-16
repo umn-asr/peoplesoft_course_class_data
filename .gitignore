@@ -1,3 +1,5 @@
 .bundle/*
 vendor/*
 config/credentials.rb
+log/*
+.capistrano
