@@ -1,5 +1,3 @@
-require_relative '../../../lib/xml_parser/course_attribute'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::CourseAttribute do
 
   describe ".type" do

@@ -1,5 +1,3 @@
-require_relative  'resource_collection'
-require_relative  'value/value'
 require           'json'
 require           'active_support/inflector'
 
@@ -27,13 +25,13 @@ module PeoplesoftCourseClassData
         self.to_s.demodulize.underscore
       end
 
-      def initialize(*args)
-        self.class.attributes.each_with_index do |attribute, index|
-          self.send "#{attribute}=", args[index]
-        end
-        self.class.child_collections.each_with_index do |collection, index|
-          index_with_offset = self.class.attributes.count + index
-          self.send "#{collection}=", ResourceCollection.new(args[index_with_offset])
+      def initialize(args = {})
+        args.each do |key, value|
+          if self.class.child_collections.include?(key)
+            self.send "#{key}=", ResourceCollection.new(value)
+          else
+            self.send "#{key}=", value
+          end
         end
       end
 

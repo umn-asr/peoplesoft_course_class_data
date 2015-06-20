@@ -1,7 +1,5 @@
-require_relative 'qas/qas'
-
 module PeoplesoftCourseClassData
-  class ClassService
+  class CourseService
     def initialize(soap_request, query_runner = nil)
       self.soap_request = soap_request
       self.query_runner = query_runner || PeoplesoftCourseClassData::Qas::QueryWithPolledResponse.new(soap_request)
@@ -18,7 +16,7 @@ module PeoplesoftCourseClassData
       <<-EOXML
           <qas:QAS_EXEQRYSYNCPOLL_REQ_MSG>
              <qas1:QAS_EXEQRYSYNCPOLL_REQ>
-                <QueryName>UM_SR003_0021_CLASS_DATA</QueryName>
+                <QueryName>UMSR_ECAS_COURSE_CATALOG_QRY</QueryName>
                 <isConnectedQuery>N</isConnectedQuery>
                 <OwnerType>PUBLIC</OwnerType>
                 <BlockSizeKB>0</BlockSizeKB>
@@ -27,17 +25,17 @@ module PeoplesoftCourseClassData
                 <OutResultFormat>NONFILE</OutResultFormat>
                 <Prompts>
                    <PROMPT>
-                      <PSQueryName>UM_SR003_0021_CLASS_DATA</PSQueryName>
+                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY</PSQueryName>
                       <UniquePromptName>INSTITUTION</UniquePromptName>
                       <FieldValue>#{institution}</FieldValue>
                    </PROMPT>
                    <PROMPT>
-                      <PSQueryName>UM_SR003_0021_CLASS_DATA</PSQueryName>
+                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY</PSQueryName>
                       <UniquePromptName>CAMPUS</UniquePromptName>
                       <FieldValue>#{campus}</FieldValue>
                    </PROMPT>
                    <PROMPT>
-                      <PSQueryName>UM_SR003_0021_CLASS_DATA</PSQueryName>
+                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY</PSQueryName>
                       <UniquePromptName>STRM</UniquePromptName>
                       <FieldValue>#{term}</FieldValue>
                    </PROMPT>

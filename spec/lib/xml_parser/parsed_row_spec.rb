@@ -1,7 +1,3 @@
-require_relative '../../../lib/xml_parser/parsed_row'
-# require_relative '../../../lib/xml_parser/xml_parser'
-require 'nokogiri'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::ParsedRow do
   subject { InheritsFromParsedRow.new(node_set) }
   describe "configure" do

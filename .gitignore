@@ -2,4 +2,6 @@
 vendor/*
 config/credentials.rb
 log/*
-.capistrano
+tmp/*
+.capistrano/*
+spec/tmp/*

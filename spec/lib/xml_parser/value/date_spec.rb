@@ -1,5 +1,3 @@
-require_relative '../../../../lib/xml_parser/value/date'
-
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Value::Date do
   let(:time)  { Time.new }
   subject     { described_class.new(time) }

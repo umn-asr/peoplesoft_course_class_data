@@ -16,6 +16,11 @@ RSpec.describe RakeRunner::RakeRunner do
       cmd = "bundle exec rake -f #{rake_file} rake_runner_test_tasks:success"
       subject.run(cmd)
     end
+
+    it "does not raise errors even with Rake#sh's goofy use of sterr" do
+      cmd = "bundle exec rake -f #{rake_file} rake_runner_test_tasks:sh_success"
+      subject.run(cmd)
+    end
   end
 
 end
