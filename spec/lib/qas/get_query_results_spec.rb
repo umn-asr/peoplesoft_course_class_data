@@ -36,6 +36,25 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
 
         subject.poll(&Proc.new {})
       end
+
+      context "it keeps receiving 'queued'" do
+        let(:maximum_attempts)  { rand(2..5) }
+
+        subject { described_class.new(soap_request_double, query_instance, PeoplesoftCourseClassData::Qas::GetQueryResults::PollingConfiguration.new(maximum_attempts)) }
+
+        it "will raise an error after the maximum number of attempts" do
+          queued_data_responses = (maximum_attempts).times.map { queued_response }
+          allow(soap_request_double).to receive(:execute_request).and_return(*queued_data_responses)
+          expect{ |block| subject.poll(&block)}.to raise_error(PeoplesoftCourseClassData::Qas::GetQueryResults::MaximumAttemptsExceededError)
+        end
+
+        it "will not raise an error if data is retrieved before the maximum is exceeded" do
+          responses_with_data = (maximum_attempts - 1).times.map { queued_response }
+          responses_with_data << final_block_retrieved_response
+          allow(soap_request_double).to receive(:execute_request).and_return(*responses_with_data)
+          subject.poll(&Proc.new {})
+        end
+      end
     end
 
     context "recieves a 'blockRetrieved' response" do
