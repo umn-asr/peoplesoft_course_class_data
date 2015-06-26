@@ -54,6 +54,17 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
           allow(soap_request_double).to receive(:execute_request).and_return(*responses_with_data)
           subject.poll(&Proc.new {})
         end
+
+        it "a block retrieved response will the attempt count so no error is raised" do
+          mixed_responses = (maximum_attempts - 1).times.map { queued_response }
+          mixed_responses << block_retrieved_response
+          mixed_responses << queued_response
+          mixed_responses << final_block_retrieved_response
+
+          expect(mixed_responses.count).to be > maximum_attempts #sanity check
+          allow(soap_request_double).to receive(:execute_request).and_return(*mixed_responses)
+          subject.poll(&Proc.new {})
+        end
       end
     end
 

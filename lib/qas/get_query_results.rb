@@ -32,6 +32,7 @@ module PeoplesoftCourseClassData
             sleep 2
           elsif status(response) == 'blockRetrieved'
             yield response
+            attempts = 0
             block_number += 1
           elsif status(response) == 'finalBlockRetrieved'
             yield response
