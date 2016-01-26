@@ -26,6 +26,9 @@ module PeoplesoftCourseClassData
         course__section__instruction_mode__description: {
           xml_field:  'A.DESCR2'
         },
+        course__section__enrollment_cap: {
+          xml_field:  'A.ENRL_CAP'
+        },
         course__section__instructor__name: {
           xml_field:  'A.NAME_DISPLAY'
         },
