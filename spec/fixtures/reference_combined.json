@@ -53,6 +53,7 @@
           "location": "TCEASTBANK",
           "notes": "3-hr common final exam",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "250",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -116,6 +117,7 @@
           "location": "TCEASTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "21",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -169,6 +171,7 @@
           "location": "TCEASTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "18",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -229,6 +232,7 @@
           "location": "TCEASTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "21",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -282,6 +286,7 @@
           "location": "TCEASTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "18",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -342,6 +347,7 @@
           "location": "TCEASTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "21",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -395,6 +401,7 @@
           "location": "TCEASTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "18",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -455,6 +462,7 @@
           "location": "TCEASTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "21",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -508,6 +516,7 @@
           "location": "TCEASTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "18",
           "instruction_mode": {
             "type": "instruction_mode",
@@ -609,6 +618,7 @@
           "location": "TCWESTBANK",
           "notes": "",
           "status": "A",
+          "print": "Y",
           "enrollment_cap": "25",
           "instruction_mode": {
             "type": "instruction_mode",
