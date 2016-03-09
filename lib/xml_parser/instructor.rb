@@ -2,7 +2,7 @@ module PeoplesoftCourseClassData
   module XmlParser
     class Instructor < Resource
       def self.attributes
-        [:name, :email, :role]
+        [:name, :email, :role, :print]
       end
 
       def self.child_collections
