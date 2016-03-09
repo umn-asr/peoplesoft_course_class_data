@@ -38,6 +38,9 @@ module PeoplesoftCourseClassData
         course__section__instructor__role: {
           xml_field:  'A.INSTR_ROLE'
         },
+        course__section__instructor__print: {
+          xml_field:  'A.SCHED_PRINT_INSTR'
+        },
         course__section__meeting_pattern__start_time: {
           xml_field:  'A.MEETING_TIME_START'
         },
