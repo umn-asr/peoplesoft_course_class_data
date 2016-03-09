@@ -23,6 +23,9 @@ module PeoplesoftCourseClassData
         course__section__status: {
           xml_field:  'A.CLASS_STAT'
         },
+        course__section__print: {
+          xml_field:  'A.SCHEDULE_PRINT'
+        },
         course__section__instruction_mode__instruction_mode_id: {
           xml_field:  'A.INSTRUCTION_MODE'
         },
