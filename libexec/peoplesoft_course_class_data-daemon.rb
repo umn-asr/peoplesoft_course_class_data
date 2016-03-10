@@ -55,8 +55,14 @@ DaemonKit::Cron.scheduler.cron "0 23 * * 0-6" do
   path = "#{PeoplesoftCourseClassData::Config::FILE_ROOT}"
   env = PeoplesoftCourseClassData::Config::PS_ENV
   runner = ::RakeRunner::RakeRunner.new
+
+  DaemonKit.logger.info "task: 'peoplesoft_course_class_data:download'; status: started"
   runner.run "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:download['#{env}','#{path}/tmp']"
+  DaemonKit.logger.info "task: 'peoplesoft_course_class_data:download'; status: completed"
+
+  DaemonKit.logger.info "task: 'peoplesoft_course_class_data:copy_good_files'; status: started"
   runner.run "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:copy_good_files['#{path}/tmp','#{path}/json_tmp']"
+  DaemonKit.logger.info "task: 'peoplesoft_course_class_data:copy_good_files'; status: completed"
 end
 
 
