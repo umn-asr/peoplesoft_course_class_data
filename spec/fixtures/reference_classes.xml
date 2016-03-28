@@ -75,6 +75,78 @@
           <A.CLASS_TYPE><![CDATA[E]]></A.CLASS_TYPE>
           <A.DESCRSHORT><![CDATA[BlegH 155]]></A.DESCRSHORT>
         </row>
+        <row rownumber="39605">
+          <A.INSTITUTION><![CDATA[UMNTC]]></A.INSTITUTION>
+          <A.CAMPUS><![CDATA[UMNTC]]></A.CAMPUS>
+          <A.STRM><![CDATA[1149]]></A.STRM>
+          <A.SESSION_CODE><![CDATA[001]]></A.SESSION_CODE>
+          <A.SUBJECT><![CDATA[PHYS]]></A.SUBJECT>
+          <A.DESCR><![CDATA[Physics]]></A.DESCR>
+          <A.CATALOG_NBR><![CDATA[1101W]]></A.CATALOG_NBR>
+          <A.CLASS_SECTION><![CDATA[103]]></A.CLASS_SECTION>
+          <A.SSR_COMPONENT><![CDATA[LAB]]></A.SSR_COMPONENT>
+          <A.DESCR1><![CDATA[Intro College Phys I]]></A.DESCR1>
+          <A.CLASS_STAT><![CDATA[A]]></A.CLASS_STAT>
+          <A.LOCATION><![CDATA[TCEASTBANK]]></A.LOCATION>
+          <A.INSTRUCTION_MODE><![CDATA[P]]></A.INSTRUCTION_MODE>
+          <A.DESCR2><![CDATA[In Person Term Based]]></A.DESCR2>
+          <A.ENRL_CAP>18</A.ENRL_CAP>
+          <A.ENRL_TOT>18</A.ENRL_TOT>
+          <A.UNITS_MINIMUM>4</A.UNITS_MINIMUM>
+          <A.UNITS_MAXIMUM>4</A.UNITS_MAXIMUM>
+          <A.GRADING_BASIS><![CDATA[OPT]]></A.GRADING_BASIS>
+          <A.XLATLONGNAME><![CDATA[Student Option]]></A.XLATLONGNAME>
+          <A.CRS_TOPIC_ID>0</A.CRS_TOPIC_ID>
+          <A.DESCRFORMAL/>
+          <A.SCHEDULE_PRINT><![CDATA[Y]]></A.SCHEDULE_PRINT>
+          <A.EQUIV_CRSE_ID/>
+          <A.CRSE_REPEATABLE><![CDATA[N]]></A.CRSE_REPEATABLE>
+          <A.UNITS_REPEAT_LIMIT>4</A.UNITS_REPEAT_LIMIT>
+          <A.CRSE_REPEAT_LIMIT>1</A.CRSE_REPEAT_LIMIT>
+          <A.CLASS_MTG_NBR>1</A.CLASS_MTG_NBR>
+          <A.FACILITY_ID><![CDATA[PHYS000130]]></A.FACILITY_ID>
+          <A.MEETING_TIME_START>16:40</A.MEETING_TIME_START>
+          <A.MEETING_TIME_END>18:35</A.MEETING_TIME_END>
+          <A.MON><![CDATA[M]]></A.MON>
+          <A.TUES/>
+          <A.WED/>
+          <A.UM_THURS/>
+          <A.FRI/>
+          <A.SAT/>
+          <A.UM_SUNDAY/>
+          <A.START_DT>2014-09-02</A.START_DT>
+          <A.END_DT>2014-12-10</A.END_DT>
+          <A.INSTR_ASSIGN_SEQ>4</A.INSTR_ASSIGN_SEQ>
+          <A.EMPLID><![CDATA[0000000]]></A.EMPLID>
+          <A.INSTR_ROLE><![CDATA[PI]]></A.INSTR_ROLE>
+          <A.SCHED_PRINT_INSTR><![CDATA[N]]></A.SCHED_PRINT_INSTR>
+          <A.CRSE_ATTR/>
+          <A.CRSE_ATTR_VALUE/>
+          <A.START_DT_CHN/>
+          <A.END_DT_AFT/>
+          <A.UM_ENRL_CAP2>0</A.UM_ENRL_CAP2>
+          <A.RQRMNT_GROUP/>
+          <A.CLASS_NOTES_SEQ>0</A.CLASS_NOTES_SEQ>
+          <A.DESCR3><![CDATA[Tate Laboratory 130]]></A.DESCR3>
+          <EXPR67_67/>
+          <A.NAME_DISPLAY><![CDATA[Vincent Noireaux]]></A.NAME_DISPLAY>
+          <A.EMAIL_ADDR><![CDATA[remove@umn.edu]]></A.EMAIL_ADDR>
+          <EXPR1_1><![CDATA[Fundamental principles of physics in the context of everyday world. Use of kinematics/dynamics principles and quantitative/qualitative problem solving techniques to understand natural phenomena. Lecture, recitation, lab.]]></EXPR1_1>
+          <A.SUBJECT_SRCH/>
+          <A.CATALOG_NBR_SRCH/>
+          <A.UM_CRSE_ATTR><![CDATA[CLE]]></A.UM_CRSE_ATTR>
+          <A.UM_CRSE_ATT_VAL><![CDATA[WI]]></A.UM_CRSE_ATT_VAL>
+          <A.DESCR50><![CDATA[Writing Intensive]]></A.DESCR50>
+          <A.COMBINED_SECTION/>
+          <A.CLASS_NBR_CMBND>0</A.CLASS_NBR_CMBND>
+          <A.SUBJECT_SRCH1/>
+          <A.CATALOG_NBR_SRCH1/>
+          <A.UM_CLASS_SECTION/>
+          <A.CRSE_ID><![CDATA[002066]]></A.CRSE_ID>
+          <A.CLASS_NBR>10788</A.CLASS_NBR>
+          <A.CLASS_TYPE><![CDATA[E]]></A.CLASS_TYPE>
+          <A.DESCRSHORT><![CDATA[Phys 130]]></A.DESCRSHORT>
+        </row>
         <row rownumber="521">
           <A.INSTITUTION><![CDATA[UMNTC]]></A.INSTITUTION>
           <A.CAMPUS><![CDATA[UMNTC]]></A.CAMPUS>
@@ -290,6 +362,78 @@
           <A.CLASS_NBR>26191</A.CLASS_NBR>
           <A.CLASS_TYPE><![CDATA[E]]></A.CLASS_TYPE>
           <A.DESCRSHORT><![CDATA[BlegH 155]]></A.DESCRSHORT>
+        </row>
+        <row rownumber="39604">
+          <A.INSTITUTION><![CDATA[UMNTC]]></A.INSTITUTION>
+          <A.CAMPUS><![CDATA[UMNTC]]></A.CAMPUS>
+          <A.STRM><![CDATA[1149]]></A.STRM>
+          <A.SESSION_CODE><![CDATA[001]]></A.SESSION_CODE>
+          <A.SUBJECT><![CDATA[PHYS]]></A.SUBJECT>
+          <A.DESCR><![CDATA[Physics]]></A.DESCR>
+          <A.CATALOG_NBR><![CDATA[1101W]]></A.CATALOG_NBR>
+          <A.CLASS_SECTION><![CDATA[103]]></A.CLASS_SECTION>
+          <A.SSR_COMPONENT><![CDATA[LAB]]></A.SSR_COMPONENT>
+          <A.DESCR1><![CDATA[Intro College Phys I]]></A.DESCR1>
+          <A.CLASS_STAT><![CDATA[A]]></A.CLASS_STAT>
+          <A.LOCATION><![CDATA[TCEASTBANK]]></A.LOCATION>
+          <A.INSTRUCTION_MODE><![CDATA[P]]></A.INSTRUCTION_MODE>
+          <A.DESCR2><![CDATA[In Person Term Based]]></A.DESCR2>
+          <A.ENRL_CAP>18</A.ENRL_CAP>
+          <A.ENRL_TOT>18</A.ENRL_TOT>
+          <A.UNITS_MINIMUM>4</A.UNITS_MINIMUM>
+          <A.UNITS_MAXIMUM>4</A.UNITS_MAXIMUM>
+          <A.GRADING_BASIS><![CDATA[OPT]]></A.GRADING_BASIS>
+          <A.XLATLONGNAME><![CDATA[Student Option]]></A.XLATLONGNAME>
+          <A.CRS_TOPIC_ID>0</A.CRS_TOPIC_ID>
+          <A.DESCRFORMAL/>
+          <A.SCHEDULE_PRINT><![CDATA[Y]]></A.SCHEDULE_PRINT>
+          <A.EQUIV_CRSE_ID/>
+          <A.CRSE_REPEATABLE><![CDATA[N]]></A.CRSE_REPEATABLE>
+          <A.UNITS_REPEAT_LIMIT>4</A.UNITS_REPEAT_LIMIT>
+          <A.CRSE_REPEAT_LIMIT>1</A.CRSE_REPEAT_LIMIT>
+          <A.CLASS_MTG_NBR>1</A.CLASS_MTG_NBR>
+          <A.FACILITY_ID><![CDATA[PHYS000130]]></A.FACILITY_ID>
+          <A.MEETING_TIME_START>16:40</A.MEETING_TIME_START>
+          <A.MEETING_TIME_END>18:35</A.MEETING_TIME_END>
+          <A.MON><![CDATA[M]]></A.MON>
+          <A.TUES/>
+          <A.WED/>
+          <A.UM_THURS/>
+          <A.FRI/>
+          <A.SAT/>
+          <A.UM_SUNDAY/>
+          <A.START_DT>2014-09-02</A.START_DT>
+          <A.END_DT>2014-12-10</A.END_DT>
+          <A.INSTR_ASSIGN_SEQ>4</A.INSTR_ASSIGN_SEQ>
+          <A.EMPLID><![CDATA[0000000]]></A.EMPLID>
+          <A.INSTR_ROLE><![CDATA[PI]]></A.INSTR_ROLE>
+          <A.SCHED_PRINT_INSTR><![CDATA[N]]></A.SCHED_PRINT_INSTR>
+          <A.CRSE_ATTR/>
+          <A.CRSE_ATTR_VALUE/>
+          <A.START_DT_CHN/>
+          <A.END_DT_AFT/>
+          <A.UM_ENRL_CAP2>0</A.UM_ENRL_CAP2>
+          <A.RQRMNT_GROUP/>
+          <A.CLASS_NOTES_SEQ>0</A.CLASS_NOTES_SEQ>
+          <A.DESCR3><![CDATA[Tate Laboratory 130]]></A.DESCR3>
+          <EXPR67_67/>
+          <A.NAME_DISPLAY><![CDATA[Vincent Noireaux]]></A.NAME_DISPLAY>
+          <A.EMAIL_ADDR><![CDATA[remove@umn.edu]]></A.EMAIL_ADDR>
+          <EXPR1_1><![CDATA[Fundamental principles of physics in the context of everyday world. Use of kinematics/dynamics principles and quantitative/qualitative problem solving techniques to understand natural phenomena. Lecture, recitation, lab.]]></EXPR1_1>
+          <A.SUBJECT_SRCH/>
+          <A.CATALOG_NBR_SRCH/>
+          <A.UM_CRSE_ATTR><![CDATA[CLE]]></A.UM_CRSE_ATTR>
+          <A.UM_CRSE_ATT_VAL><![CDATA[PHYS]]></A.UM_CRSE_ATT_VAL>
+          <A.DESCR50><![CDATA[Physical Sciences]]></A.DESCR50>
+          <A.COMBINED_SECTION/>
+          <A.CLASS_NBR_CMBND>0</A.CLASS_NBR_CMBND>
+          <A.SUBJECT_SRCH1/>
+          <A.CATALOG_NBR_SRCH1/>
+          <A.UM_CLASS_SECTION/>
+          <A.CRSE_ID><![CDATA[002066]]></A.CRSE_ID>
+          <A.CLASS_NBR>10788</A.CLASS_NBR>
+          <A.CLASS_TYPE><![CDATA[E]]></A.CLASS_TYPE>
+          <A.DESCRSHORT><![CDATA[Phys 130]]></A.DESCRSHORT>
         </row>
         <row rownumber="524">
           <A.INSTITUTION><![CDATA[UMNTC]]></A.INSTITUTION>
@@ -3600,150 +3744,6 @@
           <A.UM_CLASS_SECTION/>
           <A.CRSE_ID><![CDATA[002066]]></A.CRSE_ID>
           <A.CLASS_NBR>10792</A.CLASS_NBR>
-          <A.CLASS_TYPE><![CDATA[E]]></A.CLASS_TYPE>
-          <A.DESCRSHORT><![CDATA[Phys 130]]></A.DESCRSHORT>
-        </row>
-        <row rownumber="39604">
-          <A.INSTITUTION><![CDATA[UMNTC]]></A.INSTITUTION>
-          <A.CAMPUS><![CDATA[UMNTC]]></A.CAMPUS>
-          <A.STRM><![CDATA[1149]]></A.STRM>
-          <A.SESSION_CODE><![CDATA[001]]></A.SESSION_CODE>
-          <A.SUBJECT><![CDATA[PHYS]]></A.SUBJECT>
-          <A.DESCR><![CDATA[Physics]]></A.DESCR>
-          <A.CATALOG_NBR><![CDATA[1101W]]></A.CATALOG_NBR>
-          <A.CLASS_SECTION><![CDATA[103]]></A.CLASS_SECTION>
-          <A.SSR_COMPONENT><![CDATA[LAB]]></A.SSR_COMPONENT>
-          <A.DESCR1><![CDATA[Intro College Phys I]]></A.DESCR1>
-          <A.CLASS_STAT><![CDATA[A]]></A.CLASS_STAT>
-          <A.LOCATION><![CDATA[TCEASTBANK]]></A.LOCATION>
-          <A.INSTRUCTION_MODE><![CDATA[P]]></A.INSTRUCTION_MODE>
-          <A.DESCR2><![CDATA[In Person Term Based]]></A.DESCR2>
-          <A.ENRL_CAP>18</A.ENRL_CAP>
-          <A.ENRL_TOT>18</A.ENRL_TOT>
-          <A.UNITS_MINIMUM>4</A.UNITS_MINIMUM>
-          <A.UNITS_MAXIMUM>4</A.UNITS_MAXIMUM>
-          <A.GRADING_BASIS><![CDATA[OPT]]></A.GRADING_BASIS>
-          <A.XLATLONGNAME><![CDATA[Student Option]]></A.XLATLONGNAME>
-          <A.CRS_TOPIC_ID>0</A.CRS_TOPIC_ID>
-          <A.DESCRFORMAL/>
-          <A.SCHEDULE_PRINT><![CDATA[Y]]></A.SCHEDULE_PRINT>
-          <A.EQUIV_CRSE_ID/>
-          <A.CRSE_REPEATABLE><![CDATA[N]]></A.CRSE_REPEATABLE>
-          <A.UNITS_REPEAT_LIMIT>4</A.UNITS_REPEAT_LIMIT>
-          <A.CRSE_REPEAT_LIMIT>1</A.CRSE_REPEAT_LIMIT>
-          <A.CLASS_MTG_NBR>1</A.CLASS_MTG_NBR>
-          <A.FACILITY_ID><![CDATA[PHYS000130]]></A.FACILITY_ID>
-          <A.MEETING_TIME_START>16:40</A.MEETING_TIME_START>
-          <A.MEETING_TIME_END>18:35</A.MEETING_TIME_END>
-          <A.MON><![CDATA[M]]></A.MON>
-          <A.TUES/>
-          <A.WED/>
-          <A.UM_THURS/>
-          <A.FRI/>
-          <A.SAT/>
-          <A.UM_SUNDAY/>
-          <A.START_DT>2014-09-02</A.START_DT>
-          <A.END_DT>2014-12-10</A.END_DT>
-          <A.INSTR_ASSIGN_SEQ>4</A.INSTR_ASSIGN_SEQ>
-          <A.EMPLID><![CDATA[0000000]]></A.EMPLID>
-          <A.INSTR_ROLE><![CDATA[PI]]></A.INSTR_ROLE>
-          <A.SCHED_PRINT_INSTR><![CDATA[N]]></A.SCHED_PRINT_INSTR>
-          <A.CRSE_ATTR/>
-          <A.CRSE_ATTR_VALUE/>
-          <A.START_DT_CHN/>
-          <A.END_DT_AFT/>
-          <A.UM_ENRL_CAP2>0</A.UM_ENRL_CAP2>
-          <A.RQRMNT_GROUP/>
-          <A.CLASS_NOTES_SEQ>0</A.CLASS_NOTES_SEQ>
-          <A.DESCR3><![CDATA[Tate Laboratory 130]]></A.DESCR3>
-          <EXPR67_67/>
-          <A.NAME_DISPLAY><![CDATA[Vincent Noireaux]]></A.NAME_DISPLAY>
-          <A.EMAIL_ADDR><![CDATA[remove@umn.edu]]></A.EMAIL_ADDR>
-          <EXPR1_1><![CDATA[Fundamental principles of physics in the context of everyday world. Use of kinematics/dynamics principles and quantitative/qualitative problem solving techniques to understand natural phenomena. Lecture, recitation, lab.]]></EXPR1_1>
-          <A.SUBJECT_SRCH/>
-          <A.CATALOG_NBR_SRCH/>
-          <A.UM_CRSE_ATTR><![CDATA[CLE]]></A.UM_CRSE_ATTR>
-          <A.UM_CRSE_ATT_VAL><![CDATA[PHYS]]></A.UM_CRSE_ATT_VAL>
-          <A.DESCR50><![CDATA[Physical Sciences]]></A.DESCR50>
-          <A.COMBINED_SECTION/>
-          <A.CLASS_NBR_CMBND>0</A.CLASS_NBR_CMBND>
-          <A.SUBJECT_SRCH1/>
-          <A.CATALOG_NBR_SRCH1/>
-          <A.UM_CLASS_SECTION/>
-          <A.CRSE_ID><![CDATA[002066]]></A.CRSE_ID>
-          <A.CLASS_NBR>10788</A.CLASS_NBR>
-          <A.CLASS_TYPE><![CDATA[E]]></A.CLASS_TYPE>
-          <A.DESCRSHORT><![CDATA[Phys 130]]></A.DESCRSHORT>
-        </row>
-        <row rownumber="39605">
-          <A.INSTITUTION><![CDATA[UMNTC]]></A.INSTITUTION>
-          <A.CAMPUS><![CDATA[UMNTC]]></A.CAMPUS>
-          <A.STRM><![CDATA[1149]]></A.STRM>
-          <A.SESSION_CODE><![CDATA[001]]></A.SESSION_CODE>
-          <A.SUBJECT><![CDATA[PHYS]]></A.SUBJECT>
-          <A.DESCR><![CDATA[Physics]]></A.DESCR>
-          <A.CATALOG_NBR><![CDATA[1101W]]></A.CATALOG_NBR>
-          <A.CLASS_SECTION><![CDATA[103]]></A.CLASS_SECTION>
-          <A.SSR_COMPONENT><![CDATA[LAB]]></A.SSR_COMPONENT>
-          <A.DESCR1><![CDATA[Intro College Phys I]]></A.DESCR1>
-          <A.CLASS_STAT><![CDATA[A]]></A.CLASS_STAT>
-          <A.LOCATION><![CDATA[TCEASTBANK]]></A.LOCATION>
-          <A.INSTRUCTION_MODE><![CDATA[P]]></A.INSTRUCTION_MODE>
-          <A.DESCR2><![CDATA[In Person Term Based]]></A.DESCR2>
-          <A.ENRL_CAP>18</A.ENRL_CAP>
-          <A.ENRL_TOT>18</A.ENRL_TOT>
-          <A.UNITS_MINIMUM>4</A.UNITS_MINIMUM>
-          <A.UNITS_MAXIMUM>4</A.UNITS_MAXIMUM>
-          <A.GRADING_BASIS><![CDATA[OPT]]></A.GRADING_BASIS>
-          <A.XLATLONGNAME><![CDATA[Student Option]]></A.XLATLONGNAME>
-          <A.CRS_TOPIC_ID>0</A.CRS_TOPIC_ID>
-          <A.DESCRFORMAL/>
-          <A.SCHEDULE_PRINT><![CDATA[Y]]></A.SCHEDULE_PRINT>
-          <A.EQUIV_CRSE_ID/>
-          <A.CRSE_REPEATABLE><![CDATA[N]]></A.CRSE_REPEATABLE>
-          <A.UNITS_REPEAT_LIMIT>4</A.UNITS_REPEAT_LIMIT>
-          <A.CRSE_REPEAT_LIMIT>1</A.CRSE_REPEAT_LIMIT>
-          <A.CLASS_MTG_NBR>1</A.CLASS_MTG_NBR>
-          <A.FACILITY_ID><![CDATA[PHYS000130]]></A.FACILITY_ID>
-          <A.MEETING_TIME_START>16:40</A.MEETING_TIME_START>
-          <A.MEETING_TIME_END>18:35</A.MEETING_TIME_END>
-          <A.MON><![CDATA[M]]></A.MON>
-          <A.TUES/>
-          <A.WED/>
-          <A.UM_THURS/>
-          <A.FRI/>
-          <A.SAT/>
-          <A.UM_SUNDAY/>
-          <A.START_DT>2014-09-02</A.START_DT>
-          <A.END_DT>2014-12-10</A.END_DT>
-          <A.INSTR_ASSIGN_SEQ>4</A.INSTR_ASSIGN_SEQ>
-          <A.EMPLID><![CDATA[0000000]]></A.EMPLID>
-          <A.INSTR_ROLE><![CDATA[PI]]></A.INSTR_ROLE>
-          <A.SCHED_PRINT_INSTR><![CDATA[N]]></A.SCHED_PRINT_INSTR>
-          <A.CRSE_ATTR/>
-          <A.CRSE_ATTR_VALUE/>
-          <A.START_DT_CHN/>
-          <A.END_DT_AFT/>
-          <A.UM_ENRL_CAP2>0</A.UM_ENRL_CAP2>
-          <A.RQRMNT_GROUP/>
-          <A.CLASS_NOTES_SEQ>0</A.CLASS_NOTES_SEQ>
-          <A.DESCR3><![CDATA[Tate Laboratory 130]]></A.DESCR3>
-          <EXPR67_67/>
-          <A.NAME_DISPLAY><![CDATA[Vincent Noireaux]]></A.NAME_DISPLAY>
-          <A.EMAIL_ADDR><![CDATA[remove@umn.edu]]></A.EMAIL_ADDR>
-          <EXPR1_1><![CDATA[Fundamental principles of physics in the context of everyday world. Use of kinematics/dynamics principles and quantitative/qualitative problem solving techniques to understand natural phenomena. Lecture, recitation, lab.]]></EXPR1_1>
-          <A.SUBJECT_SRCH/>
-          <A.CATALOG_NBR_SRCH/>
-          <A.UM_CRSE_ATTR><![CDATA[CLE]]></A.UM_CRSE_ATTR>
-          <A.UM_CRSE_ATT_VAL><![CDATA[WI]]></A.UM_CRSE_ATT_VAL>
-          <A.DESCR50><![CDATA[Writing Intensive]]></A.DESCR50>
-          <A.COMBINED_SECTION/>
-          <A.CLASS_NBR_CMBND>0</A.CLASS_NBR_CMBND>
-          <A.SUBJECT_SRCH1/>
-          <A.CATALOG_NBR_SRCH1/>
-          <A.UM_CLASS_SECTION/>
-          <A.CRSE_ID><![CDATA[002066]]></A.CRSE_ID>
-          <A.CLASS_NBR>10788</A.CLASS_NBR>
           <A.CLASS_TYPE><![CDATA[E]]></A.CLASS_TYPE>
           <A.DESCRSHORT><![CDATA[Phys 130]]></A.DESCRSHORT>
         </row>

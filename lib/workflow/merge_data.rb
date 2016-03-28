@@ -1,7 +1,10 @@
 module PeoplesoftCourseClassData
   class MergeData
     def self.run(collections, orchestrator)
-      collections.map { |collection| collection.inject(:merge) }
+      PeoplesoftCourseClassData::StepProfiler.log("merge data starting.")
+      merged = collections.inject(:merge)
+      PeoplesoftCourseClassData::StepProfiler.log("merge data completed.")
+      merged
     end
   end
 end
