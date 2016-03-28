@@ -16,7 +16,7 @@ module PeoplesoftCourseClassData
       <<-EOXML
           <qas:QAS_EXEQRYSYNCPOLL_REQ_MSG>
              <qas1:QAS_EXEQRYSYNCPOLL_REQ>
-                <QueryName>UMSR_ECAS_COURSE_CATALOG_QRY</QueryName>
+                <QueryName>UMSR_ECAS_COURSE_CATALOG_QRY3</QueryName>
                 <isConnectedQuery>N</isConnectedQuery>
                 <OwnerType>PUBLIC</OwnerType>
                 <BlockSizeKB>0</BlockSizeKB>
@@ -25,17 +25,17 @@ module PeoplesoftCourseClassData
                 <OutResultFormat>NONFILE</OutResultFormat>
                 <Prompts>
                    <PROMPT>
-                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY</PSQueryName>
+                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY3</PSQueryName>
                       <UniquePromptName>INSTITUTION</UniquePromptName>
                       <FieldValue>#{institution}</FieldValue>
                    </PROMPT>
                    <PROMPT>
-                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY</PSQueryName>
+                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY3</PSQueryName>
                       <UniquePromptName>CAMPUS</UniquePromptName>
                       <FieldValue>#{campus}</FieldValue>
                    </PROMPT>
                    <PROMPT>
-                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY</PSQueryName>
+                      <PSQueryName>UMSR_ECAS_COURSE_CATALOG_QRY3</PSQueryName>
                       <UniquePromptName>STRM</UniquePromptName>
                       <FieldValue>#{term}</FieldValue>
                    </PROMPT>
