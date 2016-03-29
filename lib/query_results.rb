@@ -15,7 +15,7 @@ module PeoplesoftCourseClassData
     end
 
     def as_json
-      courses.to_json
+      PeoplesoftCourseClassData::XmlParser::CampusTermCourses.new(campus: campus, term: term, courses: courses).to_json
     end
 
     def campus

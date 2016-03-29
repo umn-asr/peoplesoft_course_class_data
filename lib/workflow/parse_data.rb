@@ -5,9 +5,7 @@ module PeoplesoftCourseClassData
       results = sources.flat_map do |source|
                   PeoplesoftCourseClassData::XmlParser::AspectParser.parse(
                     PeoplesoftCourseClassData::XmlParser::NodeSet.build(source.data),
-                    "PeoplesoftCourseClassData::XmlParser::#{source.service_name}Rows".safe_constantize,
-                    orchestrator.term,
-                    orchestrator.campus
+                    "PeoplesoftCourseClassData::XmlParser::#{source.service_name}Rows".safe_constantize
                   )
                 end
       PeoplesoftCourseClassData::StepProfiler.log("parse results completed. moving to next step")
