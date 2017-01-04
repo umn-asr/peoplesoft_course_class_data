@@ -1,12 +1,11 @@
-role :app, %w{asr-course-production.oit.umn.edu}
+role :app, %w{asr-courses-prd-web-02.oit.umn.edu}
 
 # Configuration
-set :server, 'asr-course-production.oit.umn.edu'
+set :server, 'asr-courses-prd-web-02.oit.umn.edu'
 
-server 'asr-course-production.oit.umn.edu',
+server 'asr-courses-prd-web-02.oit.umn.edu',
   roles: fetch(:roles),
   ssh_options: {
     user: fetch(:user),
     forward_agent: true,
     auth_methods: %w(publickey)}
-
