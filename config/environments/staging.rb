@@ -5,6 +5,6 @@
 #config.log_level = :debug
 module ::PeoplesoftCourseClassData
   module Config
-    PS_ENV = 'prd'
+    PS_ENV = 'qat'
   end
 end
