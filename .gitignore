@@ -1,6 +1,5 @@
 .bundle/*
 vendor/*
-config/credentials.rb
 log/*
 tmp/*
 .capistrano/*
