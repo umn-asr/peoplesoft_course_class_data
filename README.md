@@ -1,5 +1,5 @@
 ## Peoplesoft Course Class Data
-A service for extracting Univeristy of MN course class data from an Orcale QAS endpoint and converting the denormalized xml rows it into json
+A service for extracting University of MN course class data from an Oracle QAS endpoint and converting the denormalized XML rows into JSON.
 
 Still a bit rough. Move along, nothing to see here.
 
