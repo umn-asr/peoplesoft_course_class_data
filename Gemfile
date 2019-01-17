@@ -1,6 +1,6 @@
 source "https://artifactory.umn.edu/artifactory/api/gems/asr-rubygems" do
 
-  gem 'nokogiri'
+  gem 'nokogiri', '~> 1.10.1'
   gem 'activesupport', '~> 4.2.0'
   gem 'daemon-kit'
   gem 'rake'
