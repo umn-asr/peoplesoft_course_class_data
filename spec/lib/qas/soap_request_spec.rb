@@ -53,7 +53,7 @@ RSpec.describe PeoplesoftCourseClassData::Qas::SoapRequest do
           <wsse:Security soap:mustUnderstand="1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
             <wsse:UsernameToken>
               <wsse:Username>#{credentials.username}</wsse:Username>
-              <wsse:Password>#{credentials.password}</wsse:Password>
+              <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">#{credentials.password}</wsse:Password>
             </wsse:UsernameToken>
           </wsse:Security>
         </soapenv:Header>
