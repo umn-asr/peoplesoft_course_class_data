@@ -23,7 +23,6 @@ module PeoplesoftCourseClassData
                 }
               ]
     TERMS = [
-      {term: '1199'},
       {term: '1203'},
       {term: '1205'},
       {term: '1209'},
