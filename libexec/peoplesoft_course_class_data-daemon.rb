@@ -51,7 +51,7 @@ DaemonKit::Cron.handle_exception do |job, exception|
   mail.deliver
 end
 
-DaemonKit::Cron.scheduler.cron "0 23 * * 0-6" do
+DaemonKit::Cron.scheduler.cron "45 13 * * 0-6" do
   path = "#{PeoplesoftCourseClassData::Config::FILE_ROOT}"
   env = PeoplesoftCourseClassData::Config::PS_ENV
   runner = ::RakeRunner::RakeRunner.new
