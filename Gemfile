@@ -1,23 +1,21 @@
 source "https://artifactory.umn.edu/artifactory/api/gems/asr-rubygems" do
-
-  gem 'nokogiri', '~> 1.10.1'
-  gem 'activesupport', '~> 4.2.0'
+  gem 'activesupport', '~> 6.0'
   gem 'daemon-kit'
-  gem 'rake'
-
-  # daemon-kit changes
+  gem 'i18n', '~> 0.8'
+  gem 'mail' # For reporting exceptions via mail
+  gem 'nokogiri', '~> 1.10'
+  gem 'rake', '~> 12.3'
   gem 'rufus-scheduler', '~> 2.0'
   gem 'safely' # Optional, but recommended.
-  # gem 'toadhopper' # For reporting exceptions to hoptoad
-  gem 'mail' # For reporting exceptions via mail
 
   group :development, :test do
     gem 'rspec', '~> 3.2'
   end
 
   group :development do
-    gem 'lastpassify'
+    gem 'bundler-audit'
     gem 'capistrano', '= 3.3.5'
     gem 'capistrano-bundler', '~> 1.1'
+    gem 'lastpassify'
   end
 end
