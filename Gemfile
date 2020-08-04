@@ -1,4 +1,6 @@
 source "https://artifactory.umn.edu/artifactory/api/gems/asr-rubygems" do
+  ruby '~> 2.7'
+
   gem 'activesupport', '~> 6.0'
   gem 'daemon-kit'
   gem 'i18n', '~> 0.8'
