@@ -16,7 +16,7 @@ source "https://artifactory.umn.edu/artifactory/api/gems/asr-rubygems" do
 
   group :development do
     gem 'bundler-audit'
-    gem 'capistrano', '= 3.3.5'
+    gem 'capistrano', '= 3.16.0'
     gem 'capistrano-bundler', '~> 1.1'
     gem 'lastpassify'
   end
