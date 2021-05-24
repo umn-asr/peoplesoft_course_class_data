@@ -22,9 +22,14 @@ bundle check >/dev/null 2>&1  || {
 }
 fi
 
+set +e
 lpass status | grep 'Not logged in' &> /dev/null
 if [ $? == 0 ]; then
   echo "You forgot to login to lpass CLI. Try running 'lpass login $USER@umn.edu'"
- else
-   bundle exec lastpassify config/credentials.example.yml config/credentials.yml -s -p
+  exit
+else
+  bundle exec lastpassify config/credentials.example.yml config/credentials.yml -s -p
 fi
+set -e
+
+echo "==> All done!"
