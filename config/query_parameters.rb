@@ -23,9 +23,9 @@ module PeoplesoftCourseClassData
                 }
               ]
     TERMS = [ 
-      {term: '1215'},
-      {term: '1219'},
-      {term: '1223'},
+      {term: '1225'},
+      {term: '1229'},
+      {term: '1233'},
     ]
 
     QUERY_PARAMETERS = CAMPUSES.inject([]) do |array, campus|
