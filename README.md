@@ -21,6 +21,14 @@ Still a bit rough. Move along, nothing to see here.
 
 `./script/test` will run the test suite
 
+## Testing the data feed
+
+If you need to test that the query into Peoplesoft is working - for example, if there was a change in PeopleSoft TST and they want to make sure the query still works - do the following:
+
+1) Do the development setup above
+1) In the terminal, run the following: `be rake peoplesoft_course_class_data:download\[tst\]` 
+1) This will take a long time, but you can see if it is returning any data by looking in the `tmp` directory.  If you start seeing files appearing that have the filename like `course_for__tst__UMNDL__UMNDL__1225.json` or `class_for__tst__UMNDL__UMNDL__1225.xml`, then the process is getting results from the Peoplesoft service.
+ 
 ## Deployment
 
 `./script/deploy <environment>` deploys to the provided environment.
