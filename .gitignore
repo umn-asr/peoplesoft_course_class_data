@@ -3,4 +3,5 @@ vendor/*
 log/*
 tmp/*
 .capistrano/*
+config/credentials.yml
 spec/tmp/*
