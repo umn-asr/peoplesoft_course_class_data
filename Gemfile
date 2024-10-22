@@ -1,9 +1,9 @@
 source "https://artifactory.umn.edu/artifactory/api/gems/asr-rubygems" do
-  ruby '~> 2.7'
+  ruby '~> 3.1'
 
-  gem 'activesupport', '~> 6.0'
+  gem 'activesupport', '~> 6.1'
   gem 'daemon-kit'
-  gem 'i18n', '~> 0.8'
+  gem 'i18n', '~> 1.14'
   gem 'mail' # For reporting exceptions via mail
   gem 'nokogiri', '~> 1.10'
   gem 'rake', '~> 12.3'
