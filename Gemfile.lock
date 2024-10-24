@@ -31,8 +31,6 @@ GEM
     eventmachine (1.2.7)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    lastpassify (0.6.0)
-      thor
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -93,7 +91,6 @@ DEPENDENCIES
   capistrano-bundler (~> 1.1)!
   daemon-kit!
   i18n (~> 1.14)!
-  lastpassify!
   mail!
   nokogiri (~> 1.10)!
   rake (~> 12.3)!

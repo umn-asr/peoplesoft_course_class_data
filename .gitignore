@@ -2,6 +2,8 @@
 vendor/*
 log/*
 tmp/*
+.bash_history
 .capistrano/*
+.irb_history
 config/credentials.yml
 spec/tmp/*
