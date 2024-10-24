@@ -3,6 +3,7 @@
 .bundle
 .cache/
 .dockerignore
+.env*
 .git/
 .gitconfig
 .gitignore
