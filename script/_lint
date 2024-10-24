@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+LINT_ALL=${LINT_ALL:-"false"}
+
+if [ "$LINT_ALL" = "true" ]; then
+  git config --global safe.directory "${HOME}/.local/share/ruby-advisory-db"
+  git config --global http.proxy http://kraken02.oit.umn.edu:3128
+  git config --global https.proxy https://kraken02.oit.umn.edu:3128
+  echo "==> Checking Gems..."
+  bin/bundle-audit check --update
+fi
+
+echo "==> Running Reek..."
+bin/reek
+echo "==> Running Standard..."
+bin/standardrb --no-fix
