@@ -1,4 +1,4 @@
-require 'open3'
+require "open3"
 
 module RakeRunner
   class RakeRunner
@@ -13,6 +13,7 @@ module RakeRunner
     end
 
     private
+
     def has_error?(stderr, wait_thr)
       wait_thr.value != 0 &&
         !stderr.eof?

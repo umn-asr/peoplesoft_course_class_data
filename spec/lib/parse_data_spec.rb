@@ -2,13 +2,12 @@ RSpec.describe PeoplesoftCourseClassData::ParseData do
   describe ".run" do
     it "gets the data from the sources, and parses with the appropriate parser" do
       sources = [
-                  instance_double("PeoplesoftCourseClassData::DataSource", service_name: 'Class', data: "<xml>Classes</xml>"),
-                  instance_double("PeoplesoftCourseClassData::DataSource", service_name: 'Course', data: "<xml>Courses</xml>")
-                ]
+        instance_double("PeoplesoftCourseClassData::DataSource", service_name: "Class", data: "<xml>Classes</xml>"),
+        instance_double("PeoplesoftCourseClassData::DataSource", service_name: "Course", data: "<xml>Courses</xml>")
+      ]
       orchestrator = instance_double("PeoplesoftCourseClassData::QueryResults")
 
       results = []
-
 
       sources.each do |source|
         allow(source).to receive(:data).and_return("<xml>XML!</xml>")

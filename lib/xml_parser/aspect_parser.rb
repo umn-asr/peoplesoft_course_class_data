@@ -2,7 +2,7 @@ module PeoplesoftCourseClassData
   module XmlParser
     class AspectParser
       def self.parse(node_set, row_parser)
-        self.new(node_set, row_parser).courses
+        new(node_set, row_parser).courses
       end
 
       def initialize(node_set, row_parser)

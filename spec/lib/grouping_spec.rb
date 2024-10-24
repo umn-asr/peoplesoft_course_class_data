@@ -1,11 +1,11 @@
 RSpec.describe PeoplesoftCourseClassData::Grouping do
-  let(:values)           { (10..99).to_a.take(rand(3..7)) }
-  let(:collections)   do
-                        number_of_collections = rand(3..6)
-                        number_of_collections.times.map do
-                          10.times.map { OpenStruct.new(some_attribute: values.sample) }
-                        end
-                      end
+  let(:values) { (10..99).to_a.take(rand(3..7)) }
+  let(:collections) do
+    number_of_collections = rand(3..6)
+    number_of_collections.times.map do
+      10.times.map { OpenStruct.new(some_attribute: values.sample) }
+    end
+  end
 
   subject { described_class.new(*collections) }
 

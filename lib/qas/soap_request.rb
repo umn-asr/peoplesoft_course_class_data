@@ -1,11 +1,11 @@
-require 'nokogiri'
+require "nokogiri"
 
 module PeoplesoftCourseClassData
   module Qas
     class SoapRequest
       def initialize(endpoint, credentials)
-        self.endpoint     = endpoint
-        self.credentials  = credentials
+        self.endpoint = endpoint
+        self.credentials = credentials
       end
 
       def execute_request(action, payload)
@@ -13,6 +13,7 @@ module PeoplesoftCourseClassData
       end
 
       private
+
       attr_accessor :endpoint, :credentials
 
       def run_command(action, payload)
@@ -21,11 +22,11 @@ module PeoplesoftCourseClassData
 
       def command(action, payload)
         xml = xml_request(payload)
-        "curl -s -X POST -H 'Connection: Keep-Alive' -H 'User-Agent: Apache-HttpClient/4.1.1 (java 1.5)' -H 'Expect: ' -H 'SOAPAction: \"#{action}\"' -H 'Content-type: text\/xml;charset=UTF-8' -H 'Accept-Encoding: gzip,deflate' -d '#{xml}' #{endpoint}"
+        "curl -s -X POST -H 'Connection: Keep-Alive' -H 'User-Agent: Apache-HttpClient/4.1.1 (java 1.5)' -H 'Expect: ' -H 'SOAPAction: \"#{action}\"' -H 'Content-type: text/xml;charset=UTF-8' -H 'Accept-Encoding: gzip,deflate' -d '#{xml}' #{endpoint}"
       end
 
       def xml_request(payload)
-        xml_request = <<-EOXML.gsub(/[\t\r\n\f]/, '')
+        <<-EOXML.gsub(/[\t\r\n\f]/, "")
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:qas="http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_GETQUERYRESULTS_REQ_MSG.VERSION_1" xmlns:qas1="http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_GETQUERYRESULTS_REQ.VERSION_1">
         #{soap_header}
           <soapenv:Body>

@@ -8,7 +8,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ParsedRow do
     end
 
     it "gets the associated value from the xml file" do
-      expect(subject.course__course_id).to eq('795342')
+      expect(subject.course__course_id).to eq("795342")
     end
 
     context "when no type is specified" do
@@ -25,29 +25,29 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ParsedRow do
     end
 
     context "namespaced elements" do
-      let(:namespace) { 'http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_XMLP_RESP.VERSION_1' }
+      let(:namespace) { "http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_XMLP_RESP.VERSION_1" }
       subject { InheritsFromParsedRow.new(namespaced_node_set, namespace) }
 
       it "finds namespaces elements if the NAMESPACE is set" do
-        expect(subject.course__course_id).to eq('795342')
+        expect(subject.course__course_id).to eq("795342")
       end
     end
   end
 
   class InheritsFromParsedRow < PeoplesoftCourseClassData::XmlParser::ParsedRow
     ROW_MAPPING = {
-                    course__course_id: {
-                      xml_field:  'A.CRSE_ID'
-                    },
-                    course__enrollment_cap: {
-                      xml_field:  'A.ENRL_CAP',
-                      type:       'integer'
-                    },
-                    course__section__credits_maximum: {
-                      xml_field:  'A.UNITS_MAXIMUM',
-                      type:       'float'
-                    }
-                  }
+      course__course_id: {
+        xml_field: "A.CRSE_ID"
+      },
+      course__enrollment_cap: {
+        xml_field: "A.ENRL_CAP",
+        type: "integer"
+      },
+      course__section__credits_maximum: {
+        xml_field: "A.UNITS_MAXIMUM",
+        type: "float"
+      }
+    }
 
     configure
   end
@@ -60,11 +60,10 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ParsedRow do
             <A.UNITS_MAXIMUM>3.5</A.UNITS_MAXIMUM>
             <A.ENRL_CAP>25</A.ENRL_CAP>
             </my_xml>
-          EOXML
-    nokogiri_doc = Nokogiri::XML(xml) do |config|
+    EOXML
+    Nokogiri::XML(xml) do |config|
       config.default_xml.noblanks
     end
-    nokogiri_doc
   end
 
   def namespaced_node_set
@@ -88,10 +87,9 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ParsedRow do
       </soapenv:Body>
     </soapenv:Envelope>
 
-          EOXML
-    nokogiri_doc = Nokogiri::XML(xml) do |config|
+    EOXML
+    Nokogiri::XML(xml) do |config|
       config.default_xml.noblanks
     end
-    nokogiri_doc
   end
 end

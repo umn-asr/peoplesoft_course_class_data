@@ -14,6 +14,7 @@ module PeoplesoftCourseClassData
       end
 
       private
+
       attr_accessor :env
 
       def endpoint

@@ -1,5 +1,4 @@
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
-
   describe ".configure_attributes" do
     let(:attributes) { [:attribute_id, :description] }
 
@@ -18,19 +17,21 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     end
 
     it "adds private setters for each item" do
-      attributes_and_setters = attributes.inject({}) { |hash, attribute| hash[attribute]= "#{attribute.to_s}=".to_sym; hash}
+      attributes_and_setters = attributes.each_with_object({}) { |attribute, hash|
+        hash[attribute] = :"#{attribute}="
+      }
 
       attributes_and_setters.each do |attribute, setter|
         value = rand(1..10)
         subject.send setter, value
-        expect(subject.send attribute).to eq(value)
+        expect(subject.send(attribute)).to eq(value)
         expect(subject).not_to respond_to("#{attribute}=")
       end
     end
   end
 
   describe ".new" do
-    class Book < described_class;
+    class Book < described_class
       def self.attributes
         [:book_id, :title]
       end
@@ -42,10 +43,10 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
       configure_attributes(attributes + child_collections)
     end
 
-    let(:id)          { rand(100..999) }
-    let(:title)       { id.next.to_s }
-    let(:chapters)    { rand(10..20).times.map { Object.new } }
-    let(:appendices)  { rand(1..5).times.map { Object.new }   }
+    let(:id) { rand(100..999) }
+    let(:title) { id.next.to_s }
+    let(:chapters) { rand(10..20).times.map { Object.new } }
+    let(:appendices) { rand(1..5).times.map { Object.new } }
 
     it "assigns arguments to the attributes" do
       subject = Book.new(book_id: id, title: title)
@@ -59,14 +60,12 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
       expect(subject.chapters.entries).to eq(chapters.entries)
       expect(subject.appendices.entries).to eq(appendices.entries)
     end
-
   end
 
-
   describe "equality" do
-    subject { TestInstructor.new(name: 'Jane Schmoe', email: 'jane@umn.edu') }
+    subject { TestInstructor.new(name: "Jane Schmoe", email: "jane@umn.edu") }
     context "when the other has the same attribute values" do
-      let(:other) { TestInstructor.new(name: 'Jane Schmoe', email: 'jane@umn.edu') }
+      let(:other) { TestInstructor.new(name: "Jane Schmoe", email: "jane@umn.edu") }
 
       it "is equal" do
         expect(subject).to eql(other)
@@ -85,9 +84,9 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
     end
 
     context "when the other has a different attribute" do
-      let(:other_name)  { TestInstructor.new(name: 'Joe Schmoe', email: 'jane@umn.edu') }
-      let(:other_email) { TestInstructor.new(name: 'Jane Schmoe', email: 'joe@umn.edu') }
-      let(:other_all)   { TestInstructor.new(name: 'Joe Schmoe', email: 'joe@umn.edu') }
+      let(:other_name) { TestInstructor.new(name: "Joe Schmoe", email: "jane@umn.edu") }
+      let(:other_email) { TestInstructor.new(name: "Jane Schmoe", email: "joe@umn.edu") }
+      let(:other_all) { TestInstructor.new(name: "Joe Schmoe", email: "joe@umn.edu") }
 
       it "is not equal" do
         [other_name, other_email, other_all].each do |other|
@@ -109,7 +108,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         configure_attributes(attributes + child_collections)
       end
 
-      let(:different_class_instance) { Contact.new(name: 'Jane Schmoe', email: 'jane@umn.edu') }
+      let(:different_class_instance) { Contact.new(name: "Jane Schmoe", email: "jane@umn.edu") }
       it "is not equal" do
         expect(subject).not_to eq(different_class_instance)
       end
@@ -121,23 +120,23 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
   end
 
   describe "#merge" do
-    let(:jane)              { TestInstructor.new(name: 'Jane Schmoe', email: 'jane@umn.edu') }
-    let(:joe)               { TestInstructor.new(name: 'Joe Schmoe', email: 'joe@umn.edu') }
-    let(:combined_3456)     { TestCombinedSection.new(catalog_number: '3456') }
-    let(:combined_5120)     { TestCombinedSection.new(catalog_number: '5120') }
-    let(:jane_joe_lecture)  { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [jane, joe], combined_sections: [combined_5120]) }
-    let(:jane_lab)          { TestSection.new(class_number: "26191", number: "002", component: "LAB", instructors: [jane], combined_sections: [combined_5120]) }
-    let(:joe_lab)           { TestSection.new(class_number: "26191", number: "002", component: "LAB", instructors: [joe], combined_sections: [combined_5120]) }
-    let(:jane_lecture)      { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [jane], combined_sections: [combined_3456]) }
-    let(:joe_lecture)       { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [joe], combined_sections: [combined_3456]) }
-    let(:writing_intensive) { TestCleAttribute.new(attribute_id: 'WI', family: 'CLE') }
-    let(:phys_core)         { TestCleAttribute.new(attribute_id: 'PHYS', family: 'CLE') }
+    let(:jane) { TestInstructor.new(name: "Jane Schmoe", email: "jane@umn.edu") }
+    let(:joe) { TestInstructor.new(name: "Joe Schmoe", email: "joe@umn.edu") }
+    let(:combined_3456) { TestCombinedSection.new(catalog_number: "3456") }
+    let(:combined_5120) { TestCombinedSection.new(catalog_number: "5120") }
+    let(:jane_joe_lecture) { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [jane, joe], combined_sections: [combined_5120]) }
+    let(:jane_lab) { TestSection.new(class_number: "26191", number: "002", component: "LAB", instructors: [jane], combined_sections: [combined_5120]) }
+    let(:joe_lab) { TestSection.new(class_number: "26191", number: "002", component: "LAB", instructors: [joe], combined_sections: [combined_5120]) }
+    let(:jane_lecture) { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [jane], combined_sections: [combined_3456]) }
+    let(:joe_lecture) { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [joe], combined_sections: [combined_3456]) }
+    let(:writing_intensive) { TestCleAttribute.new(attribute_id: "WI", family: "CLE") }
+    let(:phys_core) { TestCleAttribute.new(attribute_id: "PHYS", family: "CLE") }
 
     context "first level merge" do
       subject { jane_lecture }
 
       context "when the other is not equal" do
-        let(:lab)           { TestSection.new(class_number: "26191", number: "002", component: "LAB", instructors: [jane], combined_sections: [combined_3456]) }
+        let(:lab) { TestSection.new(class_number: "26191", number: "002", component: "LAB", instructors: [jane], combined_sections: [combined_3456]) }
 
         it "returns self" do
           expect(subject.merge(lab)).to eq(subject)
@@ -162,7 +161,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         end
 
         context "and the other's combined section is not in the subject's collection" do
-          let (:other) { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [jane], combined_sections: [combined_5120]) }
+          let(:other) { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [jane], combined_sections: [combined_5120]) }
 
           it "adds the other's combined section to the collection" do
             subject.merge(other)
@@ -183,8 +182,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
           subject { TestSection.new(class_number: "26191", number: "001", component: "LEC", instructors: [instructor_spy], combined_sections: [combined_5120]) }
 
           it "merges its child with the other's child. using spies because Rspec arg matchers do not like us overwriting == " do
-            subject_jane  = subject.instructors.detect { |instructor| instructor.name == "Jane Schmoe" }
-            other_jane    = other.instructors.detect { |instructor| instructor.name == "Jane Schmoe" }
+            subject_jane = subject.instructors.detect { |instructor| instructor.name == "Jane Schmoe" }
+            other_jane = other.instructors.detect { |instructor| instructor.name == "Jane Schmoe" }
             subject.merge(other)
             expect(subject_jane).to have_received(:merge).with(other_jane)
           end
@@ -194,19 +193,19 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
 
     context "a nested merge" do
       let(:subject) {
-                      TestCourseAspect.new(
-                                                      course_id: "002066", catalog_number: "1101W", description: "description", title: "Intro College Phys I",
-                                                      sections: [jane_joe_lecture, jane_lab],
-                                                      cle_attributes: [writing_intensive]
-                                                    )
-                                                  }
-      let(:other)   {
-                      TestCourseAspect.new(
-                                                      course_id: "002066", catalog_number: "1101W", description: "description", title: "Intro College Phys I",
-                                                      sections: [joe_lab],
-                                                      cle_attributes: [writing_intensive]
-                                                    )
-                                                  }
+        TestCourseAspect.new(
+          course_id: "002066", catalog_number: "1101W", description: "description", title: "Intro College Phys I",
+          sections: [jane_joe_lecture, jane_lab],
+          cle_attributes: [writing_intensive]
+        )
+      }
+      let(:other) {
+        TestCourseAspect.new(
+          course_id: "002066", catalog_number: "1101W", description: "description", title: "Intro College Phys I",
+          sections: [joe_lab],
+          cle_attributes: [writing_intensive]
+        )
+      }
 
       it "navigates down the tree to perform a nested merge, adding joe as a lab instructor" do
         subject_lab = subject.sections.detect { |section| section == TestSection.new(class_number: "26191", number: "002", component: "LAB") }
@@ -219,19 +218,19 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
 
     context "a merge on a second collection" do
       let(:subject) {
-                      TestCourseAspect.new(
-                                            course_id: "002066", catalog_number: "1101W", description: "description", title: "Intro College Phys I",
-                                            sections: [jane_joe_lecture],
-                                            cle_attributes: [writing_intensive]
-                                          )
-                                        }
-      let(:other)   {
-                      TestCourseAspect.new(
-                                            course_id: "002066", catalog_number: "1101W", description: "description", title: "Intro College Phys I",
-                                            sections: [jane_joe_lecture],
-                                            cle_attributes: [phys_core]
-                                          )
-                                        }
+        TestCourseAspect.new(
+          course_id: "002066", catalog_number: "1101W", description: "description", title: "Intro College Phys I",
+          sections: [jane_joe_lecture],
+          cle_attributes: [writing_intensive]
+        )
+      }
+      let(:other) {
+        TestCourseAspect.new(
+          course_id: "002066", catalog_number: "1101W", description: "description", title: "Intro College Phys I",
+          sections: [jane_joe_lecture],
+          cle_attributes: [phys_core]
+        )
+      }
 
       it "adds the new item to the collection" do
         expect(subject.cle_attributes).not_to include(phys_core)
@@ -251,8 +250,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
       it "adds a 'type' key with the snake_cased version of the class name" do
         subject = TestInstructor.new(name: PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), email: PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu"))
 
-        actual_key_value_pairs    = key_value_pairs(subject.to_json)
-        expected_key_value_pairs  = key_value_pairs({"type" => TestInstructor.to_s.underscore}.to_json)
+        actual_key_value_pairs = key_value_pairs(subject.to_json)
+        expected_key_value_pairs = key_value_pairs({"type" => TestInstructor.to_s.underscore}.to_json)
         expect(actual_key_value_pairs).to include(expected_key_value_pairs)
       end
 
@@ -268,8 +267,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         it "removes namespaces from the class name" do
           subject = PeoplesoftCourseClassData::XmlParser::TestInstructor.new(name: PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), email: PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu"))
 
-          actual_key_value_pairs    = key_value_pairs(subject.to_json)
-          expected_key_value_pairs  = key_value_pairs({"type" => "test_instructor"}.to_json)
+          actual_key_value_pairs = key_value_pairs(subject.to_json)
+          expected_key_value_pairs = key_value_pairs({"type" => "test_instructor"}.to_json)
           expect(actual_key_value_pairs).to include(expected_key_value_pairs)
         end
       end
@@ -289,8 +288,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         it "the return value of the .type method is the value of the key" do
           subject = CustomTypeName.new(custom_type_name_id: PeoplesoftCourseClassData::XmlParser::Value::Integer.new(rand(1..100)))
 
-          actual_key_value_pairs    = key_value_pairs(subject.to_json)
-          expected_key_value_pairs  = key_value_pairs({"type" => CustomTypeName.type}.to_json)
+          actual_key_value_pairs = key_value_pairs(subject.to_json)
+          expected_key_value_pairs = key_value_pairs({"type" => CustomTypeName.type}.to_json)
           expect(actual_key_value_pairs).to include(expected_key_value_pairs)
         end
       end
@@ -301,8 +300,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         subject { TestInstructor.new(name: PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), email: PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu")) }
 
         it "turns the attributes into key/value pairs" do
-          actual_key_value_pairs    = key_value_pairs(subject.to_json)
-          expected_key_value_pairs  = key_value_pairs({"name" => "Jane Schmoe", "email" => "jane@umn.edu"}.to_json)
+          actual_key_value_pairs = key_value_pairs(subject.to_json)
+          expected_key_value_pairs = key_value_pairs({"name" => "Jane Schmoe", "email" => "jane@umn.edu"}.to_json)
           expect(actual_key_value_pairs).to include(expected_key_value_pairs)
         end
       end
@@ -317,13 +316,13 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         end
 
         let(:instructor) { TestInstructor.new(name: PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), email: PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu")) }
-        let(:id)         { PeoplesoftCourseClassData::XmlParser::Value::Integer.new(rand(1..100))}
+        let(:id) { PeoplesoftCourseClassData::XmlParser::Value::Integer.new(rand(1..100)) }
 
         subject { CompoundResouce.new(compound_id: id, instructor: instructor) }
 
         it "has the json representation of resource as the value of the attribute" do
-          actual_key_value_pairs      = key_value_pairs(subject.to_json)
-          key_value_pair_for_resource = key_value_pairs( { "instructor" => JSON.parse(instructor.to_json) }.to_json )
+          actual_key_value_pairs = key_value_pairs(subject.to_json)
+          key_value_pair_for_resource = key_value_pairs({"instructor" => JSON.parse(instructor.to_json)}.to_json)
           expect(actual_key_value_pairs).to include(key_value_pair_for_resource)
         end
 
@@ -331,16 +330,15 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
           subject { CompoundResouce.new(compound_id: id, instructor: nil) }
 
           it "does not add the key" do
-            actual_key_value_pairs    = key_value_pairs(subject.to_json)
+            actual_key_value_pairs = key_value_pairs(subject.to_json)
             expect(actual_key_value_pairs).not_to include("instructor")
           end
         end
-
       end
     end
 
     context "child_collections" do
-      class ResourceWithChildCollection <described_class
+      class ResourceWithChildCollection < described_class
         def self.attributes
           [:resource_id]
         end
@@ -352,11 +350,13 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
         configure_attributes(attributes + child_collections)
       end
 
-      let(:test_instructors)  { [
-                                  TestInstructor.new(name: PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), email: PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu")),
-                                  TestInstructor.new(name: PeoplesoftCourseClassData::XmlParser::Value::String.new("Joe Schmoe"), email: PeoplesoftCourseClassData::XmlParser::Value::String.new("joe@umn.edu"))
-                                  ] }
-      let(:resource_id)   { PeoplesoftCourseClassData::XmlParser::Value::Integer.new(rand(1..100))}
+      let(:test_instructors) {
+        [
+          TestInstructor.new(name: PeoplesoftCourseClassData::XmlParser::Value::String.new("Jane Schmoe"), email: PeoplesoftCourseClassData::XmlParser::Value::String.new("jane@umn.edu")),
+          TestInstructor.new(name: PeoplesoftCourseClassData::XmlParser::Value::String.new("Joe Schmoe"), email: PeoplesoftCourseClassData::XmlParser::Value::String.new("joe@umn.edu"))
+        ]
+      }
+      let(:resource_id) { PeoplesoftCourseClassData::XmlParser::Value::Integer.new(rand(1..100)) }
 
       subject { ResourceWithChildCollection.new(resource_id: resource_id, test_instructors: test_instructors) }
 
@@ -366,14 +366,14 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
       end
 
       it "assigns the json_tree representation of the collection to that key" do
-        actual_key_value_pairs    = key_value_pairs(subject.to_json)
-        expected_key_value_pairs  = key_value_pairs( { "test_instructors" => subject.test_instructors.json_tree }.to_json )
+        actual_key_value_pairs = key_value_pairs(subject.to_json)
+        expected_key_value_pairs = key_value_pairs({"test_instructors" => subject.test_instructors.json_tree}.to_json)
         expect(actual_key_value_pairs).to include(expected_key_value_pairs)
       end
     end
 
     def key_value_pairs(json_string)
-      json_string.gsub(/\{|\}/,'')
+      json_string.gsub(/\{|\}/, "")
     end
   end
 
@@ -436,5 +436,4 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Resource do
 
     configure_attributes(attributes + child_collections)
   end
-
 end

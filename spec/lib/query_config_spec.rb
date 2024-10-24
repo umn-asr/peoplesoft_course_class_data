@@ -1,8 +1,8 @@
-require_relative '../../lib/query_config'
+require_relative "../../lib/query_config"
 
 RSpec.describe PeoplesoftCourseClassData::QueryConfig do
-  let(:env)   { :prd }
-  let(:query) { {institution: 'UMNTC', campus: 'UMNTC', term: '1149'} }
+  let(:env) { :prd }
+  let(:query) { {institution: "UMNTC", campus: "UMNTC", term: "1149"} }
   subject { described_class.new(env, query) }
 
   describe "env" do

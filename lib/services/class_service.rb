@@ -5,11 +5,12 @@ module PeoplesoftCourseClassData
       self.query_runner = query_runner || PeoplesoftCourseClassData::Qas::QueryWithPolledResponse.new(soap_request)
     end
 
-    def query(institution, campus, term, &block)
-      query_runner.run(query_content(institution, campus, term), &block)
+    def query(institution, campus, term, &)
+      query_runner.run(query_content(institution, campus, term), &)
     end
 
     private
+
     attr_accessor :soap_request, :query_runner
 
     def query_content(institution, campus, term)

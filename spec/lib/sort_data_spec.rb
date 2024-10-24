@@ -8,7 +8,7 @@ RSpec.describe PeoplesoftCourseClassData::SortData do
       course_data = 10.times.map { |i| PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: course_ids.sample, catalog_number: "course_catalog_#{i}") }
       parsed_data = [class_data, course_data]
 
-      expected = Array.new
+      expected = []
 
       grouping = instance_double("PeoplesoftCourseClassData::Grouping")
       allow(PeoplesoftCourseClassData::Grouping).to receive(:group).with(parsed_data).and_return(grouping)

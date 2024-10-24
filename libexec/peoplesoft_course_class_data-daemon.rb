@@ -22,37 +22,37 @@ end
 # Some samples to get you going:
 
 # Will call #regenerate_monthly_report in 3 days from starting up
-#DaemonKit::Cron.scheduler.in("3d") do
+# DaemonKit::Cron.scheduler.in("3d") do
 #  regenerate_monthly_report()
-#end
+# end
 #
-#DaemonKit::Cron.scheduler.every "10m10s" do
+# DaemonKit::Cron.scheduler.every "10m10s" do
 #  check_score(favourite_team) # every 10 minutes and 10 seconds
-#end
+# end
 #
-#DaemonKit::Cron.scheduler.cron "0 22 * * 1-5" do
+# DaemonKit::Cron.scheduler.cron "0 22 * * 1-5" do
 #  DaemonKit.logger.info "activating security system..."
 #  activate_security_system()
-#end
+# end
 #
 # Example error handling (NOTE: all exceptions in scheduled tasks are logged)
 DaemonKit::Cron.handle_exception do |job, exception|
-  mail         = ::Mail.new
-  mail.from    = 'asrweb@umn.edu'
-  mail.to      = 'ASR-WEB-ERRORS@lists.umn.edu'
-  mail.subject = "Peoplesoft Course Class Data [#{ENV['DAEMON_ENV']}] - Exception"
+  mail = ::Mail.new
+  mail.from = "asrweb@umn.edu"
+  mail.to = "ASR-WEB-ERRORS@lists.umn.edu"
+  mail.subject = "Peoplesoft Course Class Data [#{ENV["DAEMON_ENV"]}] - Exception"
 
   mail.body = <<-EOF
     An exception occured, details below:
     Type: #{exception.class.name}
     Message: #{exception.message}
-    EOF
+  EOF
 
   mail.deliver
 end
 
 DaemonKit::Cron.scheduler.cron "0 23 * * 0-6" do
-  path = "#{PeoplesoftCourseClassData::Config::FILE_ROOT}"
+  path = PeoplesoftCourseClassData::Config::FILE_ROOT
   env = PeoplesoftCourseClassData::Config::PS_ENV
   runner = ::RakeRunner::RakeRunner.new
 
@@ -64,7 +64,6 @@ DaemonKit::Cron.scheduler.cron "0 23 * * 0-6" do
   runner.run "bundle exec rake -f #{path}/tasks/peoplesoft_course_class_data.rake peoplesoft_course_class_data:copy_good_files['#{path}/tmp','#{path}/json_tmp']"
   DaemonKit.logger.info "task: 'peoplesoft_course_class_data:copy_good_files'; status: completed"
 end
-
 
 # Run our 'cron' dameon, suspending the current thread
 DaemonKit::Cron.run

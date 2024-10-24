@@ -8,8 +8,8 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Value::Float do
     end
 
     context "when the float end in .0" do
-      let(:whole_number)  { rand(1..999) }
-      let(:whole_float)   { Float(whole_number) }
+      let(:whole_number) { rand(1..999) }
+      let(:whole_float) { Float(whole_number) }
       subject { described_class.new(whole_float) }
 
       it "does not contain the .0" do

@@ -21,7 +21,7 @@ module PeoplesoftCourseClassData
 
       def ==(other)
         return false unless self.class == other.class
-        self.course_id == other.course_id
+        course_id == other.course_id
       end
       alias_method :eql?, :==
 
@@ -34,12 +34,12 @@ module PeoplesoftCourseClassData
 
       def merge_attributes(other)
         blank_attributes.each do |attribute|
-          self.send("#{attribute}=", other.send(attribute))
+          send(:"#{attribute}=", other.send(attribute))
         end
       end
 
       def blank_attributes
-        self.class.attributes.select { |attribute| self.send(attribute).nil? || self.send(attribute) == '' }
+        self.class.attributes.select { |attribute| send(attribute).nil? || send(attribute) == "" }
       end
     end
   end
