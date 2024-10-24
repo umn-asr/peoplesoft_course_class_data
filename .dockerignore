@@ -1,10 +1,13 @@
 **/.DS_Store
 .bash_history
 .bundle
+.cache/
 .dockerignore
 .git/
+.gitconfig
 .gitignore
 .irb_history
+.local/
 .rspec
 bundle/
 compose.yaml

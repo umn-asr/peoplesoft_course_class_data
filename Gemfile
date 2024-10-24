@@ -18,5 +18,7 @@ source "https://artifactory.umn.edu/artifactory/api/gems/asr-rubygems" do
     gem 'bundler-audit'
     gem 'capistrano', '= 3.16.0'
     gem 'capistrano-bundler', '~> 1.1'
+    gem 'standard', '~> 1.41'
+    gem 'reek', '~> 6.3'
   end
 end

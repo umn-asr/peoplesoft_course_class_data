@@ -1,0 +1,48 @@
+exclude_paths:
+  - spec
+  - tmp
+
+detectors:
+  ControlParameter:
+    exclude:
+      - PeoplesoftCourseClassData
+  DataClump:
+    exclude:
+      - PeoplesoftCourseClassData
+  DuplicateMethodCall:
+    exclude:
+      - PeoplesoftCourseClassData
+  FeatureEnvy:
+    exclude:
+      - PeoplesoftCourseClassData
+  IrresponsibleModule:
+    exclude:
+      - DaemonKit
+      - Days
+      - PeoplesoftCourseClassData
+      - RakeRunner
+  ManualDispatch:
+    exclude:
+      - PeoplesoftCourseClassData
+  NestedIterators:
+    exclude:
+      - PeoplesoftCourseClassData
+  NilCheck:
+    exclude:
+      - PeoplesoftCourseClassData
+  TooManyStatements:
+    exclude:
+      - DaemonKit
+      - PeoplesoftCourseClassData
+  UncommunicativeVariableName:
+    exclude:
+      - DaemonKit
+      - PeoplesoftCourseClassData
+  UnusedParameters:
+    exclude:
+      - Days
+      - PeoplesoftCourseClassData
+  UtilityFunction:
+    exclude:
+      - PeoplesoftCourseClassData
+      - RakeRunner

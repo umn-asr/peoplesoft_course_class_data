@@ -3,7 +3,10 @@ vendor/*
 log/*
 tmp/*
 .bash_history
+.cache/
 .capistrano/*
+.gitconfig
 .irb_history
+.local/*
 config/credentials.yml
 spec/tmp/*

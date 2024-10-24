@@ -1,0 +1,15 @@
+#!/bin/bash
+set -eo pipefail
+
+cd "$(dirname "$0")/.."
+
+LINT_ALL="false"
+if [[ $1 == "all" ]]; then
+  LINT_ALL="true"
+fi
+
+docker compose run \
+  --rm \
+  --env LINT_ALL=$LINT_ALL \
+  app \
+  script/_lint

@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+docker compose run \
+  --rm \
+  app \
+  script/_autoformat
