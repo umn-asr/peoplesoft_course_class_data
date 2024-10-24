@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-cd "$(dirname "$0")/.."
+SCRIPT_PATH="$0"
+cd "$(dirname "$SCRIPT_PATH")/.."
 
 LINT_ALL=${LINT_ALL:-"false"}
 
@@ -10,6 +11,14 @@ if [ "$LINT_ALL" = "true" ]; then
   git config --global http.proxy http://kraken02.oit.umn.edu:3128
   git config --global https.proxy https://kraken02.oit.umn.edu:3128
   echo "==> Checking Gems..."
+
+  if grep -E 'bin/bundle-audit\s+check.*--ignore' "$SCRIPT_PATH" > /dev/null; then
+    echo "*****"
+    echo "⚠️  Reminder: Please review the ignored CVEs or GitHub security advisories in $SCRIPT_PATH"
+    echo "   Ensure that ignored advisories are still relevant and necessary."
+    echo "*****"
+  fi
+
   bin/bundle-audit check --update
 fi
 
