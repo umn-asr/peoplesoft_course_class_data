@@ -1,7 +1,7 @@
-require_relative '../../lib/query_results'
+require_relative "../../lib/query_results"
 
 RSpec.describe PeoplesoftCourseClassData::QueryResults do
-  let(:query_config) { instance_double("PeoplesoftCourseClassData::QueryConfig", campus: 'UMNTC', term: '1149', env: :tst) }
+  let(:query_config) { instance_double("PeoplesoftCourseClassData::QueryConfig", campus: "UMNTC", term: "1149", env: :tst) }
   subject { described_class.new(query_config) }
 
   describe "class.as_json" do
@@ -17,17 +17,17 @@ RSpec.describe PeoplesoftCourseClassData::QueryResults do
   describe "#as_json" do
     it "builds a respresentation of the campus/term class data and returns it as json" do
       campus_resource = PeoplesoftCourseClassData::XmlParser::Campus.new(campus_id: query_config.campus, abbreviation: query_config.campus)
-      term_resource   = PeoplesoftCourseClassData::XmlParser::Term.new(term_id: query_config.term, strm: query_config.term)
+      term_resource = PeoplesoftCourseClassData::XmlParser::Term.new(term_id: query_config.term, strm: query_config.term)
       courses_resource = [
-                            PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: 1),
-                            PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: 2)
-                          ]
+        PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: 1),
+        PeoplesoftCourseClassData::XmlParser::CourseAspect.new(course_id: 2)
+      ]
 
       expected = "some_json"
       campus_term_course_resource = instance_double("PeoplesoftCourseClassData::XmlParser::CampusTermCourses", to_json: expected)
 
       coerced_campus = PeoplesoftCourseClassData::XmlParser::Value::String.new(query_config.campus)
-      coerced_term   = PeoplesoftCourseClassData::XmlParser::Value::String.new(query_config.term)
+      coerced_term = PeoplesoftCourseClassData::XmlParser::Value::String.new(query_config.term)
 
       expect(PeoplesoftCourseClassData::XmlParser::Campus).to receive(:new).with(
         campus_id: coerced_campus,
@@ -59,5 +59,4 @@ RSpec.describe PeoplesoftCourseClassData::QueryResults do
       subject.run_step(next_step, results)
     end
   end
-
 end

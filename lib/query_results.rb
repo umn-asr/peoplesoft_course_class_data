@@ -1,8 +1,7 @@
 module PeoplesoftCourseClassData
   class QueryResults
-
     def self.as_json(config)
-      self.new(config).as_json
+      new(config).as_json
     end
 
     def initialize(query_config)
@@ -35,5 +34,4 @@ module PeoplesoftCourseClassData
       BuildSources.run(query_config, self)
     end
   end
-
 end

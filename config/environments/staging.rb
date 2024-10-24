@@ -2,9 +2,9 @@
 # loaded afterwards and only in the production environment
 
 # Change the production log level to debug
-#config.log_level = :debug
+# config.log_level = :debug
 module ::PeoplesoftCourseClassData
   module Config
-    PS_ENV = 'qat'
+    PS_ENV = "qat"
   end
 end

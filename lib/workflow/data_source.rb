@@ -5,7 +5,7 @@ module PeoplesoftCourseClassData
     end
 
     def initialize(service, query_config)
-      self.service      = service
+      self.service = service
       self.query_config = query_config
     end
 
@@ -17,7 +17,7 @@ module PeoplesoftCourseClassData
         service_name.downcase
       ).xml_with_path
 
-      File.open(file_path, 'w+') do |f|
+      File.open(file_path, "w+") do |f|
         f.write("<#{base_tag_name}>")
         service_instance.query(query_config.institution, query_config.campus, query_config.term) do |response|
           f.write(response)
@@ -37,14 +37,15 @@ module PeoplesoftCourseClassData
     end
 
     def service_name
-      service.to_s.demodulize.gsub(/Service\Z/, '')
+      service.to_s.demodulize.gsub(/Service\Z/, "")
     end
 
     private
+
     attr_accessor :service, :query_config
 
     def soap_request
-     @soap_request ||= PeoplesoftCourseClassData::Qas::SoapRequestBuilder.build(query_config.env)
+      @soap_request ||= PeoplesoftCourseClassData::Qas::SoapRequestBuilder.build(query_config.env)
     end
 
     def base_tag_name

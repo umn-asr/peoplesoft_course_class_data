@@ -1,7 +1,7 @@
 describe PeoplesoftCourseClassData::XmlParser::CourseAspect do
   describe ".type" do
     it "is 'course'" do
-      expect(described_class.type).to eq('course')
+      expect(described_class.type).to eq("course")
     end
   end
 
@@ -26,7 +26,6 @@ describe PeoplesoftCourseClassData::XmlParser::CourseAspect do
         sections: [],
         course_attributes: []
       }
-
     end
     describe "has an attribute in the other course aspect that doesn't exist in current course aspect" do
       it "will set the current course aspect's attribute to the other course aspect attribute" do

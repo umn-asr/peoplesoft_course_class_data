@@ -1,4 +1,4 @@
-require_relative '../../lib/services'
+require_relative "../../lib/services"
 
 RSpec.describe PeoplesoftCourseClassData::Services do
   describe ".all" do

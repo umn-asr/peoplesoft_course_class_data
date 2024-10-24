@@ -1,15 +1,15 @@
 RSpec.describe PeoplesoftCourseClassData::Qas::StartSyncPollQuery do
-  let(:soap_request_double)  { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
+  let(:soap_request_double) { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
 
   subject { PeoplesoftCourseClassData::Qas::StartSyncPollQuery.new(soap_request_double) }
 
   describe "run" do
-    let(:payload)        { "<xml>Enterprise!</xml>"}
+    let(:payload) { "<xml>Enterprise!</xml>" }
     let(:query_instance) { SecureRandom.urlsafe_base64 }
-    let(:response)       { sync_poll_response(query_instance) }
+    let(:response) { sync_poll_response(query_instance) }
 
     it "executes a soap request with an action of 'QAS_EXECUTEQRYSYNCPOLL_OPER.VERSION_1' and the query payload" do
-      expect(soap_request_double).to receive(:execute_request).with('QAS_EXECUTEQRYSYNCPOLL_OPER.VERSION_1', payload) { response }
+      expect(soap_request_double).to receive(:execute_request).with("QAS_EXECUTEQRYSYNCPOLL_OPER.VERSION_1", payload) { response }
 
       subject.run(payload)
     end
@@ -26,28 +26,28 @@ RSpec.describe PeoplesoftCourseClassData::Qas::StartSyncPollQuery do
         end
 
         it "raises a SoapEnvError" do
-          expect{ subject.run(payload) }.to raise_error(PeoplesoftCourseClassData::Qas::SoapEnvError)
+          expect { subject.run(payload) }.to raise_error(PeoplesoftCourseClassData::Qas::SoapEnvError)
         end
 
         it "has the Default Message as the text" do
-          expect{ subject.run(payload) }.to raise_error(/User password failed/)
+          expect { subject.run(payload) }.to raise_error(/User password failed/)
         end
       end
 
       context "some other goofy reponse" do
         before do
           response = Nokogiri.XML("<weirdness>Error!</weirdness>") do |config|
-                        config.default_xml.noblanks
-                      end
+            config.default_xml.noblanks
+          end
           allow(soap_request_double).to receive(:execute_request) { response }
         end
 
         it "raises an UnexpectedResponse error" do
-          expect{ subject.run(payload) }.to raise_error(PeoplesoftCourseClassData::Qas::StartSyncPollQuery::UnexpectedResponse)
+          expect { subject.run(payload) }.to raise_error(PeoplesoftCourseClassData::Qas::StartSyncPollQuery::UnexpectedResponse)
         end
 
         it "has the xml as the error message" do
-          expect{ subject.run(payload) }.to raise_error(/<weirdness>Error!<\/weirdness>/)
+          expect { subject.run(payload) }.to raise_error(/<weirdness>Error!<\/weirdness>/)
         end
       end
     end
@@ -67,11 +67,10 @@ RSpec.describe PeoplesoftCourseClassData::Qas::StartSyncPollQuery do
                       </QAS_EXEQRYSYNCPOLL_RESP_MSG>
                     </soapenv:Body>
                   </soapenv:Envelope>
-               RESPONSE
-    response = Nokogiri.XML(response) do |config|
+    RESPONSE
+    Nokogiri.XML(response) do |config|
       config.default_xml.noblanks
     end
-    response
   end
 
   def soap_error_response
@@ -96,10 +95,9 @@ RSpec.describe PeoplesoftCourseClassData::Qas::StartSyncPollQuery do
                     </SOAP-ENV:Fault>
                   </SOAP-ENV:Body>
                 </SOAP-ENV:Envelope>
-            RESPONSE
-    response = Nokogiri.XML(response) do |config|
+    RESPONSE
+    Nokogiri.XML(response) do |config|
       config.default_xml.noblanks
     end
-    response
   end
 end

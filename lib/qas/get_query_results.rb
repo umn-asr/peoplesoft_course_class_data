@@ -1,11 +1,10 @@
 module PeoplesoftCourseClassData
   module Qas
     class GetQueryResults
-
       class SoapEnvError < StandardError; end
 
       def initialize(soap_request, query_instance)
-        self.soap_request   = soap_request
+        self.soap_request = soap_request
         self.query_instance = query_instance
       end
 
@@ -14,29 +13,30 @@ module PeoplesoftCourseClassData
 
         loop do
           response = request_block(block_number)
-          if status(response) == 'queued'
+          if status(response) == "queued"
             sleep 2
-          elsif status(response) == 'blockRetrieved'
+          elsif status(response) == "blockRetrieved"
             yield response
             block_number += 1
-          elsif status(response) == 'finalBlockRetrieved'
+          elsif status(response) == "finalBlockRetrieved"
             yield response
             break
           else
-            raise SoapEnvError, response.xpath('//detail').to_s
+            raise SoapEnvError, response.xpath("//detail").to_s
           end
         end
       end
 
       private
+
       attr_accessor :soap_request, :query_instance
 
       def status(response)
-        response.xpath('//xmlns:status', 'xmlns' => 'http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_STATUS_RESP.VERSION_2').text
+        response.xpath("//xmlns:status", "xmlns" => "http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_STATUS_RESP.VERSION_2").text
       end
 
       def request_block(block_number)
-        soap_request.execute_request('QAS_GETQUERYRESULTS_OPER.VERSION_2', block_request(block_number))
+        soap_request.execute_request("QAS_GETQUERYRESULTS_OPER.VERSION_2", block_request(block_number))
       end
 
       def block_request(block_number)

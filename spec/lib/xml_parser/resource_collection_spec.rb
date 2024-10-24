@@ -1,5 +1,4 @@
 RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
-
   class TestCleAttribute < PeoplesoftCourseClassData::XmlParser::Resource
     def self.attributes
       [:attribute_id, :family]
@@ -12,11 +11,11 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
     configure_attributes(attributes)
   end
 
-  let(:wi) { PeoplesoftCourseClassData::XmlParser::Value::String.new('WI') }
-  let(:cle) { PeoplesoftCourseClassData::XmlParser::Value::String.new('CLE') }
-  let(:phys) { PeoplesoftCourseClassData::XmlParser::Value::String.new('PHYS') }
+  let(:wi) { PeoplesoftCourseClassData::XmlParser::Value::String.new("WI") }
+  let(:cle) { PeoplesoftCourseClassData::XmlParser::Value::String.new("CLE") }
+  let(:phys) { PeoplesoftCourseClassData::XmlParser::Value::String.new("PHYS") }
   let(:writing_intensive) { TestCleAttribute.new(attribute_id: wi, family: cle) }
-  let(:phys_core)         { TestCleAttribute.new(attribute_id: phys, family: cle) }
+  let(:phys_core) { TestCleAttribute.new(attribute_id: phys, family: cle) }
 
   describe "new" do
     context "with a collection" do
@@ -62,8 +61,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::ResourceCollection do
     end
 
     context "when the other's members are not the same" do
-
-      let(:other)     { described_class.new([phys_core]) }
+      let(:other) { described_class.new([phys_core]) }
       it "adds them to the cle_attributes" do
         subject.merge(other)
         expect(subject).to include(phys_core)

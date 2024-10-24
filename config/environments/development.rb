@@ -3,6 +3,6 @@
 
 module ::PeoplesoftCourseClassData
   module Config
-    PS_ENV = 'tst'
+    PS_ENV = "tst"
   end
 end

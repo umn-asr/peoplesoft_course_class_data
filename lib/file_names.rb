@@ -1,29 +1,27 @@
 module PeoplesoftCourseClassData
   class FileNames
-
     attr_reader :env, :path, :institution, :campus, :term, :prefix
 
     def self.from_file_name(name)
       path, file_name = File.split(name)
-      parsed_name = file_name.gsub(/\..+\Z/,'').split('__')
+      parsed_name = file_name.gsub(/\..+\Z/, "").split("__")
       query = {
-                institution: parsed_name[2],
-                campus: parsed_name[3],
-                term: parsed_name[4]
-              }
-
+        institution: parsed_name[2],
+        campus: parsed_name[3],
+        term: parsed_name[4]
+      }
 
       config = PeoplesoftCourseClassData::QueryConfig.new(parsed_name[1], query)
       new(config, path, parsed_name[0])
     end
 
-    def initialize(config, path, prefix="classes")
-      self.env         = config.env
+    def initialize(config, path, prefix = "classes")
+      self.env = config.env
       self.institution = config.institution
-      self.campus      = config.campus
-      self.term        = config.term
-      self.path        = path
-      self.prefix      = prefix
+      self.campus = config.campus
+      self.term = config.term
+      self.path = path
+      self.prefix = prefix
     end
 
     def xml
@@ -43,7 +41,8 @@ module PeoplesoftCourseClassData
     end
 
     private
-    attr_writer   :env, :path, :institution, :campus, :term, :prefix
+
+    attr_writer :env, :path, :institution, :campus, :term, :prefix
 
     def base_name
       "#{prefix}_for__#{env}__#{institution}__#{campus}__#{term}"
