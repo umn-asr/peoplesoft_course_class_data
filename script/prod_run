@@ -1,0 +1,39 @@
+#!/bin/bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+CONTAINER_NAME="$(basename $(pwd))"
+DOCKER_REPO_HOSTNAME="asr-docker-local.artifactory.umn.edu"
+IMAGE_NAME="$DOCKER_REPO_HOSTNAME/$CONTAINER_NAME:latest"
+
+if [ $# -eq 0 ]; then
+  echo "Provide an environment: script/prod_run [production|staging]"
+  exit 1
+fi
+
+ENVIRONMENT=$1
+echo "==> Populating environment variables for '${ENVIRONMENT}'..."
+
+docker run \
+  -it --rm --pull=always \
+  -e LASTPASS_USERNAME=$(whoami) \
+  -v "$(pwd):/workdir" \
+  asrcustomsolutions/lastpass:latest \
+  ./script/_populate_env "$ENVIRONMENT"
+
+echo "==> Building container for ${IMAGE_NAME}"
+./script/prod_build
+
+echo "==> Running container for ${IMAGE_NAME}"
+source ".env.${ENVIRONMENT}"
+
+docker run \
+  --rm \
+  --name "${CONTAINER_NAME}" \
+  --env DAEMON_ENV="${ENVIRONMENT}" \
+  --env ENVIRONMENT="${ENVIRONMENT}" \
+  --env INTEGRATION_BROKER_PASSWORD="${INTEGRATION_BROKER_PASSWORD}" \
+  --env INTEGRATION_BROKER_URL="${INTEGRATION_BROKER_URL}" \
+  --env INTEGRATION_BROKER_USER="${INTEGRATION_BROKER_USER}" \
+  "$IMAGE_NAME"

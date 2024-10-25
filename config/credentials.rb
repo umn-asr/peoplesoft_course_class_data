@@ -2,7 +2,7 @@ require "yaml"
 
 module PeoplesoftCourseClassData
   module Config
-    credentials = YAML.load_file("config/credentials.yml")
+    credentials = YAML.load_file("#{DAEMON_ROOT}/config/credentials.yml")
 
     CREDENTIALS = {
       dev: {
