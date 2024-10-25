@@ -17,6 +17,15 @@ RUN groupadd -g $GID app \
   && useradd --create-home --no-log-init -u $UID -g $GID app \
   && chown app:app -R $HOME
 
+# install production dependencies
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+  cron \
+  msmtp \
+  msmtp-mta \
+  && rm -rf /var/cache/apt/archives /var/lib/apt/lists/* \
+  && chmod u+s /usr/sbin/cron
+
 
 ### builder ###
 FROM base AS builder
@@ -32,6 +41,36 @@ RUN apt-get update \
   git \
   && rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
+
+### bundle ###
+FROM builder AS bundle
+
+WORKDIR "/tmp"
+
+# install production ruby gems
+COPY lib lib
+COPY Gemfile Gemfile.lock ./
+RUN bundle config set deployment "true" \
+  && bundle config set without "development test" \
+  && bundle install 
+
+
+### production ###
+FROM base AS production
+
+ARG GIT_COMMIT
+
+ENV GIT_COMMIT=$GIT_COMMIT
+
+# copy the application files
+COPY --chown=app:app . $HOME
+COPY --from=bundle /usr/local/bundle /usr/local/bundle
+COPY --from=bundle --chown=app:app /tmp/vendor/bundle "${HOME}/vendor/bundle"
+
+# start the app
+USER app
+ENTRYPOINT [ "script/_prod_entrypoint" ]
+CMD ["bin/peoplesoft_course_class_data"]
 
 ### development ###
 FROM builder AS development
