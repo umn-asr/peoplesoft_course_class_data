@@ -10,6 +10,9 @@ erb "config/credentials.yml.erb" > "config/credentials.yml"
 # configure msmtp
 erb "config/msmtprc.erb" > "${HOME}/.msmtprc"
 
-echo "==> Started PeopleSoft Course Class Data"
+# initialize the whenever gem tasks
+bundle exec whenever --set "environment=$ENVIRONMENT" --update-crontab
+
+echo "==> Started PeopleSoft Course Class Data [${PS_ENV}]"
 echo "==> Using endpoint: '${INTEGRATION_BROKER_URL}'"
 exec "$@"

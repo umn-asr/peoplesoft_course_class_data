@@ -18,4 +18,9 @@ namespace :peoplesoft_course_class_data do
       sh "cp #{file} #{args.target_directory}"
     end
   end
+
+  task :download_and_copy_files, [:env, :xml_dir, :json_dir] do |t, args|
+    Rake::Task["peoplesoft_course_class_data:download"].invoke(args[:env], args[:xml_dir])
+    Rake::Task["peoplesoft_course_class_data:copy_good_files"].invoke(args[:xml_dir], args[:json_dir])
+  end
 end
