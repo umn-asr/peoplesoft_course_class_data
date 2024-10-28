@@ -2,7 +2,7 @@ require "yaml"
 
 module PeoplesoftCourseClassData
   module Config
-    credentials = YAML.load_file("#{DAEMON_ROOT}/config/credentials.yml")
+    credentials = YAML.load_file("config/credentials.yml")
 
     CREDENTIALS = {
       dev: {
@@ -15,7 +15,7 @@ module PeoplesoftCourseClassData
         username: credentials["test"]["username"],
         password: credentials["test"]["password"]
       },
-      ent: {
+      qat: {
         endpoint: "https://cs.qat.psoft.umn.edu/PSIGW/PeopleSoftServiceListeningConnector",
         username: credentials["qat"]["username"],
         password: credentials["qat"]["password"]

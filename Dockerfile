@@ -21,6 +21,7 @@ RUN groupadd -g $GID app \
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
   cron \
+  curl \
   msmtp \
   msmtp-mta \
   && rm -rf /var/cache/apt/archives /var/lib/apt/lists/* \
@@ -67,10 +68,14 @@ COPY --chown=app:app . $HOME
 COPY --from=bundle /usr/local/bundle /usr/local/bundle
 COPY --from=bundle --chown=app:app /tmp/vendor/bundle "${HOME}/vendor/bundle"
 
+# create the data processing directories
+RUN mkdir -p "${HOME}/tmp" "${HOME}/json_tmp" \
+  && chown app:app "${HOME}/tmp" "${HOME}/json_tmp"
+
 # start the app
 USER app
 ENTRYPOINT [ "script/_prod_entrypoint" ]
-CMD ["bin/peoplesoft_course_class_data"]
+CMD ["cron", "-f"]
 
 ### development ###
 FROM builder AS development

@@ -1,5 +1,6 @@
 require_relative "../../../lib/qas/get_query_results"
 require "nokogiri"
+require "securerandom"
 
 RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
   let(:soap_request_double) { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }

@@ -27,13 +27,15 @@ echo "==> Building container for ${IMAGE_NAME}"
 
 echo "==> Running container for ${IMAGE_NAME}"
 source ".env.${ENVIRONMENT}"
+PS_ENV=$([[ "${ENVIRONMENT}" == "production" ]] && echo "prd" || echo "qat")
 
 docker run \
   --rm \
+  --init \
   --name "${CONTAINER_NAME}" \
-  --env DAEMON_ENV="${ENVIRONMENT}" \
   --env ENVIRONMENT="${ENVIRONMENT}" \
   --env INTEGRATION_BROKER_PASSWORD="${INTEGRATION_BROKER_PASSWORD}" \
   --env INTEGRATION_BROKER_URL="${INTEGRATION_BROKER_URL}" \
   --env INTEGRATION_BROKER_USER="${INTEGRATION_BROKER_USER}" \
+  --env PS_ENV="${PS_ENV}" \
   "$IMAGE_NAME"

@@ -17,7 +17,6 @@ detectors:
       - PeoplesoftCourseClassData
   IrresponsibleModule:
     exclude:
-      - DaemonKit
       - Days
       - PeoplesoftCourseClassData
       - RakeRunner
@@ -32,11 +31,9 @@ detectors:
       - PeoplesoftCourseClassData
   TooManyStatements:
     exclude:
-      - DaemonKit
       - PeoplesoftCourseClassData
   UncommunicativeVariableName:
     exclude:
-      - DaemonKit
       - PeoplesoftCourseClassData
   UnusedParameters:
     exclude:
