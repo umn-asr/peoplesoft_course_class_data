@@ -1,5 +1,5 @@
 source "https://artifactory.umn.edu/artifactory/api/gems/asr-rubygems" do
-  ruby "~> 3.1"
+  ruby "~> 3.2"
 
   gem "activesupport", "~> 6.1"
   gem "i18n", "~> 1.14"
