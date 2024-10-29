@@ -4,7 +4,6 @@ log/*
 tmp/*
 .bash_history
 .cache/
-.capistrano/*
 .env.production
 .env.staging
 .gitconfig

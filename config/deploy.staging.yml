@@ -1,0 +1,14 @@
+servers:
+  app:
+    hosts:
+      - asr-container-tst-web-public-01.oit.umn.edu
+
+env:
+  clear:
+    ENVIRONMENT: "staging"
+    PS_ENV: "qat"
+
+logging:
+  driver: journald
+  options:
+    tag: "peoplesoft-course-class-data-staging"

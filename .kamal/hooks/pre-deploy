@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+SSH_USERNAME = "courses"
+
+# Executes a command on a remote host via SSH
+def ssh(host, command)
+  output = `ssh -q #{SSH_USERNAME}@#{host} "#{command}"`
+  raise "SSH command failed on #{host}" unless $?.success?
+  puts output
+end
+
+# Creates the application data volume
+def initialize_data_volume(host)
+  puts "==> Create the Courses API Docker volume"
+  ssh(host, "docker volume create courses_json_data")
+end
+
+ENV["KAMAL_HOSTS"].split(",").each do |host|
+  initialize_data_volume(host)
+end

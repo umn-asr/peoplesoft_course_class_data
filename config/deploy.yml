@@ -1,0 +1,60 @@
+# Name of your application. Used to uniquely configure containers.
+service: peoplesoft-course-class-data
+
+# Name of the container image.
+image: peoplesoft_course_class_data
+
+# Deploy to these servers
+servers:
+  app:
+    options:
+      init: true
+      volume:
+        - "courses_json_data:/home/app/json_tmp"
+
+# Credentials for your image host.
+registry:
+  server: asr-docker-local.artifactory.umn.edu
+  username:
+    - ARTIFACTORY_USERNAME
+  password:
+    - ARTIFACTORY_API_KEY
+
+# Inject ENV variables into containers (secrets come from .env).
+# Remember to run `kamal env push` after making changes!
+env:
+  secret:
+    - INTEGRATION_BROKER_PASSWORD
+    - INTEGRATION_BROKER_URL
+    - INTEGRATION_BROKER_USER
+
+# Use a different ssh user than root
+ssh:
+  user: courses
+
+# Configure builder setup.
+builder:
+  remote:
+    arch: amd64
+  args:
+    GID: 3017
+    GIT_COMMIT: <%= %x(git rev-parse HEAD) %>
+    UID: 3017
+  target: production
+
+# Configure a custom healthcheck (default is /up on port 3000)
+healthcheck:
+  cmd: echo "healthy"
+  cord: false
+  interval: 5s
+
+# Configure the role used to determine the primary_host. This host takes
+# deploy locks, runs health checks during the deploy, and follow logs, etc.
+#
+# Caution: there's no support for role renaming yet, so be careful to cleanup
+#          the previous role on the deployed hosts.
+primary_role: app
+
+# Use a specific Kamal run directory because the courses service and 
+# deployment users are shared between this project and the Courses API
+run_directory: .kamal/peoplesoft_course_class_data
