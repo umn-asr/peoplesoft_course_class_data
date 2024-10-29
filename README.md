@@ -1,14 +1,8 @@
 # Peoplesoft Course Class Data
+
 A service for extracting University of MN course class data from an Oracle QAS endpoint and converting the denormalized XML rows into JSON.
 
 Still a bit rough. Move along, nothing to see here.
-
-## Table of contents
-
-- [Development Setup](#development-setup)
-- [Running Tests](#running-tests)
-- [Deployment](#deployment)
-- [License](#license)
 
 ## Development Setup
 
@@ -26,7 +20,8 @@ Still a bit rough. Move along, nothing to see here.
 If you need to test that the query into Peoplesoft is working - for example, if there was a change in PeopleSoft TST and they want to make sure the query still works - do the following:
 
 1) Do the development setup above
-1) In the terminal, run the following: `be rake peoplesoft_course_class_data:download\[tst\]` 
+1) Run `./script/docker` to start a Docker container for local development
+1) Run the following: `bundle exec rake peoplesoft_course_class_data:download\[tst\]` 
 1) This will take a long time, but you can see if it is returning any data by looking in the `tmp` directory.  If you start seeing files appearing that have the filename like `course_for__tst__UMNDL__UMNDL__1225.json` or `class_for__tst__UMNDL__UMNDL__1225.xml`, then the process is getting results from the Peoplesoft service.
  
 ## Deployment
