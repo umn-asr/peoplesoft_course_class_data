@@ -1,6 +1,6 @@
 env :BUNDLE_APP_CONFIG, ENV["BUNDLE_APP_CONFIG"]
 env :HOME, ENV["HOME"]
-env :MAILTO, "asr-web-errors@lists.umn.edu"
+env :MAILTO, "morse255@umn.edu"
 env :PS_ENV, ENV["PS_ENV"]
 env :TMP_DIR_JSON, "#{ENV["HOME"]}/json_tmp"
 env :TMP_DIR_XML, "#{ENV["HOME"]}/tmp"
