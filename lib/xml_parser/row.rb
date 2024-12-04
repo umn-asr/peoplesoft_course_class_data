@@ -3,9 +3,9 @@ module PeoplesoftCourseClassData
     class Row
       ROW_ATTRIBUTES = {}
 
-      ROW_ATTRIBUTES.each do | method_name, config |
+      ROW_ATTRIBUTES.each do |method_name, config|
         define_method(method_name) do
-          self.send type_conversion(config), xml_value(config)
+          send type_conversion(config), xml_value(config)
         end
       end
 
@@ -19,7 +19,7 @@ module PeoplesoftCourseClassData
       attr_accessor :node_set, :namespace
 
       def type_conversion(config)
-        config[:type] || 'string'
+        config[:type] || "string"
       end
 
       def xml_value(config)
@@ -27,7 +27,7 @@ module PeoplesoftCourseClassData
       end
 
       def raw_value(xml_field)
-        node_set.xpath("ns:#{xml_field}", 'ns' => namespace).text
+        node_set.xpath("ns:#{xml_field}", "ns" => namespace).text
       end
 
       def string(value)
@@ -43,7 +43,7 @@ module PeoplesoftCourseClassData
       end
 
       def date(value)
-        Value::Date.new(Time.new(*value.split('-')))
+        Value::Date.new(Time.new(*value.split("-")))
       end
     end
   end

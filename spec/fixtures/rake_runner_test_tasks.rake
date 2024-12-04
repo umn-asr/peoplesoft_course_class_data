@@ -1,4 +1,4 @@
-require 'rake'
+require "rake"
 namespace :rake_runner_test_tasks do
   task :raise_error do |t|
     raise "error occurred"

@@ -1,9 +1,9 @@
-require_relative '../../lib/file_names'
+require_relative "../../lib/file_names"
 
 RSpec.describe PeoplesoftCourseClassData::FileNames do
-  let(:query_config)  { instance_double("PeoplesoftCourseClassData::QueryConfig", env: :tst, institution: 'UMNTC', campus: 'UMNTC', term: '1149') }
-  let(:path)          { 'path/to/some/directory' }
-  let(:prefix)        { 'prefix' }
+  let(:query_config) { instance_double("PeoplesoftCourseClassData::QueryConfig", env: :tst, institution: "UMNTC", campus: "UMNTC", term: "1149") }
+  let(:path) { "path/to/some/directory" }
+  let(:prefix) { "prefix" }
 
   subject { described_class.new(query_config, path, prefix) }
 
@@ -19,7 +19,7 @@ RSpec.describe PeoplesoftCourseClassData::FileNames do
     end
 
     it "works when the path has a trailing /" do
-      trailing_slash_path = 'path/with/trailing/slash/'
+      trailing_slash_path = "path/with/trailing/slash/"
       subject = described_class.new(query_config, trailing_slash_path, prefix)
       expect(subject.xml_with_path).to eq("#{trailing_slash_path}#{prefix}_for__#{query_config.env}__#{query_config.institution}__#{query_config.campus}__#{query_config.term}.xml")
     end
@@ -37,62 +37,59 @@ RSpec.describe PeoplesoftCourseClassData::FileNames do
     end
 
     it "works when the path has a trailing /" do
-      trailing_slash_path = 'path/with/trailing/slash/'
+      trailing_slash_path = "path/with/trailing/slash/"
       subject = described_class.new(query_config, trailing_slash_path, prefix)
       expect(subject.json_with_path).to eq("#{trailing_slash_path}#{prefix}_for__#{query_config.env}__#{query_config.institution}__#{query_config.campus}__#{query_config.term}.json")
     end
   end
 
   describe ".from_file_name" do
-    let(:file_name) { '/path/to/classes_for__dev__UMNTC__UMNRO__1149.json' }
+    let(:file_name) { "/path/to/classes_for__dev__UMNTC__UMNRO__1149.json" }
     subject { described_class.from_file_name(file_name) }
 
     it "returns 'dev' for env" do
-      expect(subject.env).to eq('dev')
+      expect(subject.env).to eq("dev")
     end
 
     it "returns 'UMNTC' for institution" do
-      expect(subject.institution).to eq('UMNTC')
+      expect(subject.institution).to eq("UMNTC")
     end
 
     it "returns 'UMNRO' for campus" do
-      expect(subject.campus).to eq('UMNRO')
+      expect(subject.campus).to eq("UMNRO")
     end
 
     it "returns '1149' for term" do
-      expect(subject.term).to eq('1149')
+      expect(subject.term).to eq("1149")
     end
 
     it "returns the path to the file for path_name" do
-      expect(subject.path).to eq('/path/to')
+      expect(subject.path).to eq("/path/to")
     end
 
     context "when no path is supplied" do
-      let(:file_name) { 'classes_for__dev__UMNTC__UMNRO__1149.json' }
+      let(:file_name) { "classes_for__dev__UMNTC__UMNRO__1149.json" }
       subject { described_class.from_file_name(file_name) }
 
-
       it "returns '.' for path" do
-        expect(subject.path).to eq('.')
+        expect(subject.path).to eq(".")
       end
 
       it "returns 'dev' for env" do
-        expect(subject.env).to eq('dev')
+        expect(subject.env).to eq("dev")
       end
 
       it "returns 'UMNTC' for institution" do
-        expect(subject.institution).to eq('UMNTC')
+        expect(subject.institution).to eq("UMNTC")
       end
 
       it "returns 'UMNRO' for campus" do
-        expect(subject.campus).to eq('UMNRO')
+        expect(subject.campus).to eq("UMNRO")
       end
 
       it "returns '1149' for term" do
-        expect(subject.term).to eq('1149')
+        expect(subject.term).to eq("1149")
       end
-
     end
   end
-
 end

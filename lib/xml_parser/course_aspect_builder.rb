@@ -1,25 +1,22 @@
 module PeoplesoftCourseClassData
   module XmlParser
-
     class CourseAspectBuilder
-
       RESOURCES = {
-          CombinedSection => "combined_section",
-          Location        => "location",
-          Instructor      => "instructor",
-          GradingBasis    => "grading_basis",
-          InstructionMode => "instruction_mode",
-          CourseAttribute => "course_attribute",
-          Equivalency     => "equivalency",
-          Subject         => "subject"
+        CombinedSection => "combined_section",
+        Location => "location",
+        Instructor => "instructor",
+        GradingBasis => "grading_basis",
+        InstructionMode => "instruction_mode",
+        CourseAttribute => "course_attribute",
+        Equivalency => "equivalency",
+        Subject => "subject"
       }
 
-      RESOURCES.each do | class_name, method_name |
+      RESOURCES.each do |class_name, method_name|
         define_method(method_name) do
           build_resource(class_name, row_values_for(method_name))
         end
       end
-
 
       def self.build_from_row(row)
         new(row).build
@@ -34,7 +31,6 @@ module PeoplesoftCourseClassData
       end
 
       def course_aspect
-
         build_resource(CourseAspect, row_values_for("course").merge(subject: subject, equivalency: equivalency, grading_basis: grading_basis, course_attributes: course_attribute, sections: section))
       end
 
@@ -46,8 +42,8 @@ module PeoplesoftCourseClassData
         build_resource(MeetingPattern, row_values_for("meeting_pattern").merge(location: location))
       end
 
-
       private
+
       attr_accessor :row
 
       def build_resource(klass, arguments)
@@ -63,14 +59,13 @@ module PeoplesoftCourseClassData
       end
 
       def all_empty_strings?(values)
-        values.reduce(true) { |result, value| result && (value == '') }
+        values.reduce(true) { |result, value| result && (value == "") }
       end
 
       def row_values_for(snake_case_resource)
-        methods_for(snake_case_resource).inject({}) do |hash, method_mapping|
+        methods_for(snake_case_resource).each_with_object({}) do |method_mapping, hash|
           value = (row.send method_mapping.method_name)
           hash[method_mapping.attribute] = value
-          hash
         end
       end
 
@@ -85,7 +80,6 @@ module PeoplesoftCourseClassData
       def row_methods
         row.class.instance_methods - Object.instance_methods
       end
-
     end
 
     class MethodMapping
@@ -104,12 +98,12 @@ module PeoplesoftCourseClassData
       end
 
       private
+
       attr_writer :method_name
 
       def parsed_name
-        method_name.to_s.split('__')
+        method_name.to_s.split("__")
       end
     end
-
   end
 end

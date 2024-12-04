@@ -1,0 +1,14 @@
+servers:
+  app:
+    hosts:
+      - asr-container-prd-web-public-02.oit.umn.edu
+
+env:
+  clear:
+    ENVIRONMENT: "production"
+    PS_ENV: "prd"
+
+logging:
+  driver: journald
+  options:
+    tag: "peoplesoft-course-class-data-production"

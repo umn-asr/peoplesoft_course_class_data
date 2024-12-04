@@ -1,11 +1,11 @@
 RSpec.describe PeoplesoftCourseClassData::Qas::QueryWithPolledResponse do
-  let(:soap_request_double)  { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
+  let(:soap_request_double) { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
 
   subject { PeoplesoftCourseClassData::Qas::QueryWithPolledResponse.new(soap_request_double) }
   describe "#run" do
     let(:start_sync_poll_query_double) { instance_double("PeoplesoftCourseClassData::Qas::StartSyncPollQuery") }
-    let(:get_query_results_double)     { instance_double("PeoplesoftCourseClassData::Qas::GetQueryResults")}
-    let(:payload)                      { "<xml>Enterprise</xml>"}
+    let(:get_query_results_double) { instance_double("PeoplesoftCourseClassData::Qas::GetQueryResults") }
+    let(:payload) { "<xml>Enterprise</xml>" }
     it "executes a StartSyncPollQuery" do
       expect(PeoplesoftCourseClassData::Qas::StartSyncPollQuery).to receive(:new).with(soap_request_double) { start_sync_poll_query_double }
       expect(start_sync_poll_query_double).to receive(:run).with(payload)

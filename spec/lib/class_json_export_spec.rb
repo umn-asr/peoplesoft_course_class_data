@@ -1,21 +1,21 @@
-require_relative '../../lib/class_json_export'
-require 'ostruct'
+require_relative "../../lib/class_json_export"
+require "ostruct"
 
 RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
-  let(:env)             { :tst }
-  let(:parameters_set)  { PeoplesoftCourseClassData::Config::QUERY_PARAMETERS }
-  let(:parameters)      { parameters_set.sample }
-  let(:path)            { File.join(PeoplesoftCourseClassData::Config::FILE_ROOT, 'spec/tmp') }
-  let(:config_double)   { instance_double(
-                                            "PeoplesoftCourseClassData::QueryConfig",
-                                            env: env,
-                                            institution: parameters[:institution],
-                                            campus: parameters[:campus],
-                                            term: parameters[:term]
-                                          )
-                        }
-  subject               { described_class.new(env, path, [parameters]) }
-
+  let(:env) { :tst }
+  let(:parameters_set) { PeoplesoftCourseClassData::Config::QUERY_PARAMETERS }
+  let(:parameters) { parameters_set.sample }
+  let(:path) { File.join(PeoplesoftCourseClassData::Config::FILE_ROOT, "spec/tmp") }
+  let(:config_double) {
+    instance_double(
+      "PeoplesoftCourseClassData::QueryConfig",
+      env: env,
+      institution: parameters[:institution],
+      campus: parameters[:campus],
+      term: parameters[:term]
+    )
+  }
+  subject { described_class.new(env, path, [parameters]) }
 
   describe "#run" do
     it "builds a QueryConfig" do
@@ -44,5 +44,4 @@ RSpec.describe PeoplesoftCourseClassData::ClassJsonExport do
       `rm -f #{path}/test.json`
     end
   end
-
 end

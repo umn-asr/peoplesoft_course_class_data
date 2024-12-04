@@ -1,26 +1,26 @@
-require_relative '../../../lib/qas/soap_request_builder'
+require_relative "../../../lib/qas/soap_request_builder"
 
 ::PeoplesoftCourseClassData::Config::CREDENTIALS = {
-                                        dev: {
-                                          endpoint: "https://dev.qas.oit.umn.edu/query",
-                                          username: "dev_username",
-                                          password: "dev_password"
-                                        },
-                                        tst: {
-                                          endpoint: "https://tst.qas.oit.umn.edu/query",
-                                          username: "tst_username",
-                                          password: "tst_password"
-                                        },
-                                        prd: {
-                                          endpoint: "https://prd.qas.oit.umn.edu/query",
-                                          username: "prd_username",
-                                          password: "prd_password"
-                                        }
-                                      }
+  dev: {
+    endpoint: "https://dev.qas.oit.umn.edu/query",
+    username: "dev_username",
+    password: "dev_password"
+  },
+  tst: {
+    endpoint: "https://tst.qas.oit.umn.edu/query",
+    username: "tst_username",
+    password: "tst_password"
+  },
+  prd: {
+    endpoint: "https://prd.qas.oit.umn.edu/query",
+    username: "prd_username",
+    password: "prd_password"
+  }
+}
 
 describe PeoplesoftCourseClassData::Qas::SoapRequestBuilder do
   let(:env) { ::PeoplesoftCourseClassData::Config::CREDENTIALS.keys.sample }
-  subject   { PeoplesoftCourseClassData::Qas::SoapRequestBuilder.new(env) }
+  subject { PeoplesoftCourseClassData::Qas::SoapRequestBuilder.new(env) }
 
   describe ".build" do
     it "instantiates a new SoapRequestBuilder with the env and calls build on it" do
@@ -29,7 +29,6 @@ describe PeoplesoftCourseClassData::Qas::SoapRequestBuilder do
       expect(soap_request_builder_double).to receive(:build).and_return(Object.new)
 
       PeoplesoftCourseClassData::Qas::SoapRequestBuilder.build(env)
-
     end
   end
 

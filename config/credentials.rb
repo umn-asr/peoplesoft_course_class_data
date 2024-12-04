@@ -8,15 +8,18 @@ module PeoplesoftCourseClassData
       dev: {
         endpoint: "https://cs.dev.psoft.umn.edu/PSIGW/PeopleSoftServiceListeningConnector",
         username: credentials["dev"]["username"],
-        password: credentials["dev"]["password"]      },
+        password: credentials["dev"]["password"]
+      },
       tst: {
         endpoint: "https://cs.tst.psoft.umn.edu/PSIGW/PeopleSoftServiceListeningConnector",
         username: credentials["test"]["username"],
-        password: credentials["test"]["password"]      },
-      ent: {
+        password: credentials["test"]["password"]
+      },
+      qat: {
         endpoint: "https://cs.qat.psoft.umn.edu/PSIGW/PeopleSoftServiceListeningConnector",
         username: credentials["qat"]["username"],
-        password: credentials["qat"]["password"]      },
+        password: credentials["qat"]["password"]
+      },
       prd: {
         endpoint: "https://cs.myu.umn.edu/PSIGW/PeopleSoftServiceListeningConnector",
         username: credentials["production"]["username"],

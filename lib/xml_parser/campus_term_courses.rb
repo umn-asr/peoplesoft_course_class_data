@@ -12,6 +12,7 @@ module PeoplesoftCourseClassData
       configure_attributes(attributes + child_collections)
 
       private
+
       def json_attributes
         super - [:type]
       end

@@ -3,7 +3,7 @@ module PeoplesoftCourseClassData
     module Value
       class Float < Value::ParsedValue
         def json_tree
-          to_s.gsub(/\.0\Z/,'')
+          to_s.gsub(/\.0\Z/, "")
         end
       end
     end

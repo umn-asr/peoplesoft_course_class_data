@@ -1,8 +1,8 @@
 RSpec.describe PeoplesoftCourseClassData::CourseService do
   describe "query" do
-    let(:args)                { ["FOO", "BAR", 1234] }
-    let(:soaprequest_double)  { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
-    let(:qas_query_double)    { instance_double("PeoplesoftCourseClassData::Qas::QueryWithPolledResponse") }
+    let(:args) { ["FOO", "BAR", 1234] }
+    let(:soaprequest_double) { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
+    let(:qas_query_double) { instance_double("PeoplesoftCourseClassData::Qas::QueryWithPolledResponse") }
 
     it "builds a query using the parameters" do
       expect(qas_query_double).to receive(:run).with(query_template(*args))
@@ -18,7 +18,7 @@ RSpec.describe PeoplesoftCourseClassData::CourseService do
   end
 
   def query_template(institution, campus, term)
-      <<-EOXML
+    <<-EOXML
           <qas:QAS_EXEQRYSYNCPOLL_REQ_MSG>
              <qas1:QAS_EXEQRYSYNCPOLL_REQ>
                 <QueryName>UMSR_ECAS_COURSE_CATALOG_QRY</QueryName>
@@ -50,6 +50,6 @@ RSpec.describe PeoplesoftCourseClassData::CourseService do
                 </FieldsFilter>
              </qas1:QAS_EXEQRYSYNCPOLL_REQ>
           </qas:QAS_EXEQRYSYNCPOLL_REQ_MSG>
-      EOXML
+    EOXML
   end
 end

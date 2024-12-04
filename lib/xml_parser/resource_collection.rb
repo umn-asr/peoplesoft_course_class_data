@@ -1,4 +1,4 @@
-require 'forwardable'
+require "forwardable"
 
 module PeoplesoftCourseClassData
   module XmlParser
@@ -21,7 +21,6 @@ module PeoplesoftCourseClassData
         else
           resources.add(other)
         end
-
       end
 
       def json_tree
@@ -29,6 +28,7 @@ module PeoplesoftCourseClassData
       end
 
       private
+
       attr_accessor :resources
     end
   end

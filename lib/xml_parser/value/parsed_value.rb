@@ -1,4 +1,4 @@
-require 'delegate'
+require "delegate"
 
 module PeoplesoftCourseClassData
   module XmlParser

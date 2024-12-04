@@ -1,10 +1,9 @@
-require_relative '../../../lib/rake_runner/rake_runner'
+require_relative "../../../lib/rake_runner/rake_runner"
 
 RSpec.describe RakeRunner::RakeRunner do
-
   subject { described_class.new }
 
-  let(:rake_file) { File.expand_path('../../../fixtures/rake_runner_test_tasks.rake',  __FILE__) }
+  let(:rake_file) { File.expand_path("../../../fixtures/rake_runner_test_tasks.rake", __FILE__) }
 
   describe "run" do
     it "raises errors when then task fails" do
@@ -22,5 +21,4 @@ RSpec.describe RakeRunner::RakeRunner do
       subject.run(cmd)
     end
   end
-
 end

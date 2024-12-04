@@ -3,7 +3,7 @@ module PeoplesoftCourseClassData
     module Value
       class Date < Value::ParsedValue
         def json_tree
-          strftime('%Y-%m-%d')
+          strftime("%Y-%m-%d")
         end
       end
     end

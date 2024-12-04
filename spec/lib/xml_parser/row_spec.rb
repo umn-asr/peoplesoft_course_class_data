@@ -1,5 +1,5 @@
 RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
-  let(:namespace)   { 'http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_XMLP_RESP.VERSION_1' }
+  let(:namespace) { "http://xmlns.oracle.com/Enterprise/Tools/schemas/QAS_QUERYRESULTS_XMLP_RESP.VERSION_1" }
   let(:row_nodeset) { row(xml) }
   subject { InheritsFromRow.new(row_nodeset, namespace) }
 
@@ -11,7 +11,7 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
     end
 
     it "gets the associated value from the xml file" do
-      expect(subject.course__course_id).to eq('795342')
+      expect(subject.course__course_id).to eq("795342")
     end
 
     context "when no type is specified" do
@@ -31,40 +31,40 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
       subject { InheritsFromRow.new(row(multi_row_xml), namespace) }
 
       it "only returns the data for the supplied row, i.e don't use //ns:key in Row to find the values" do
-        expect(subject.course__course_id).to eq('795342')
+        expect(subject.course__course_id).to eq("795342")
       end
     end
   end
 
   class InheritsFromRow < PeoplesoftCourseClassData::XmlParser::Row
     ROW_ATTRIBUTES = {
-                    course__course_id: {
-                      xml_field:  'A.CRSE_ID'
-                    },
-                    course__enrollment_cap: {
-                      xml_field:  'A.ENRL_CAP',
-                      type:       'integer'
-                    },
-                    course__section__credits_maximum: {
-                      xml_field:  'A.UNITS_MAXIMUM',
-                      type:       'float'
-                    }
-                  }
+      course__course_id: {
+        xml_field: "A.CRSE_ID"
+      },
+      course__enrollment_cap: {
+        xml_field: "A.ENRL_CAP",
+        type: "integer"
+      },
+      course__section__credits_maximum: {
+        xml_field: "A.UNITS_MAXIMUM",
+        type: "float"
+      }
+    }
 
-    ROW_ATTRIBUTES.each do | method_name, config |
+    ROW_ATTRIBUTES.each do |method_name, config|
       define_method(method_name) do
-        self.send type_conversion(config), xml_value(config)
+        send type_conversion(config), xml_value(config)
       end
     end
   end
 
   def row(xml_string)
     full_nodeset = PeoplesoftCourseClassData::XmlParser::NodeSet.build(xml_string)
-    full_nodeset.xpath('//ns:row', 'ns' => namespace).first
+    full_nodeset.xpath("//ns:row", "ns" => namespace).first
   end
 
   def xml
-    xml = <<-EOXML
+    <<-EOXML
     <?xml version="1.0" encoding="UTF-8"?>
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <soapenv:Body>
@@ -83,11 +83,11 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
         </QAS_GETQUERYRESULTS_RESP_MSG>
       </soapenv:Body>
     </soapenv:Envelope>
-          EOXML
+    EOXML
   end
 
   def multi_row_xml
-    xml = <<-EOXML
+    <<-EOXML
     <?xml version="1.0" encoding="UTF-8"?>
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <soapenv:Body>
@@ -113,6 +113,6 @@ RSpec.describe PeoplesoftCourseClassData::XmlParser::Row do
       </soapenv:Body>
     </soapenv:Envelope>
 
-          EOXML
+    EOXML
   end
 end

@@ -16,6 +16,7 @@ module PeoplesoftCourseClassData
     end
 
     private
+
     attr_accessor :items
   end
 end

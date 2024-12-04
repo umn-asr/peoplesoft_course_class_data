@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-#
-# Stub executable for peoplesoft_course_class_data
-#
-
-require File.expand_path('../../config/environment',  __FILE__)
-
-DaemonKit::Application.exec( DAEMON_ROOT + '/libexec/peoplesoft_course_class_data-daemon.rb' )

@@ -1,12 +1,39 @@
-#!/bin/sh
+#!/bin/bash
 
-# script/deploy: Deploy the application
-#   change the url opened at the end of the script to the URL of the application, if applicable
-
+# script/deploy: Deploy the application to staging or production
 
 set -e
 
 cd "$(dirname "$0")/.."
 
-echo "===> Deploying to $1"
-bundle exec cap "$1" deploy
+KAMAL_VERSION="1.9.2"
+ENVIRONMENT=$1
+
+if [ $# -eq 0 ]; then
+  echo "Provide a deploy target: script/deploy [production|staging]"
+  exit 1
+fi
+
+function kamal() {
+  docker run -it --rm \
+    -v "$(pwd):/workdir" \
+    -v "$HOME/.ssh:/root/.ssh" \
+    -v "/var/run/docker.sock:/var/run/docker.sock" \
+    ghcr.io/basecamp/kamal:v$KAMAL_VERSION "$@"
+}
+
+echo "==> Deploying"
+
+# populate the deployment environment variables
+docker run \
+  -it --rm \
+  -e LASTPASS_USERNAME=$(whoami) \
+  -v "$(pwd):/workdir" \
+  asrcustomsolutions/lastpass:latest \
+  ./script/_populate_env "$ENVIRONMENT"
+
+# push the latest environment variables using Kamal
+kamal env push --destination="$ENVIRONMENT"
+
+# deploy using Kamal
+kamal deploy --destination="$ENVIRONMENT"

@@ -10,14 +10,15 @@ module PeoplesoftCourseClassData
       end
 
       private
+
       attr_accessor :doc
 
       def row_class
-        raise 'Children must implement'
+        raise "Children must implement"
       end
 
       def noko_rows
-        doc.xpath('//ns:row', 'ns' => NAMESPACE)
+        doc.xpath("//ns:row", "ns" => NAMESPACE)
       end
     end
   end

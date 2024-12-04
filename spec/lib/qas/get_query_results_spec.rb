@@ -1,8 +1,9 @@
-require_relative '../../../lib/qas/get_query_results'
-require          'nokogiri'
+require_relative "../../../lib/qas/get_query_results"
+require "nokogiri"
+require "securerandom"
 
 RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
-  let(:soap_request_double)  { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
+  let(:soap_request_double) { instance_double("PeoplesoftCourseClassData::Qas::SoapRequest") }
   let(:query_instance) { SecureRandom.urlsafe_base64 }
 
   subject { PeoplesoftCourseClassData::Qas::GetQueryResults.new(soap_request_double, query_instance) }
@@ -14,9 +15,9 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
   describe "#poll" do
     it "sends a soap request with 'QAS_GETQUERYRESULTS_OPER.VERSION_2' and a payload containing the first block of the query instance" do
       first_block_payload = block_payload(1, query_instance)
-      expect(soap_request_double).to receive(:execute_request).with('QAS_GETQUERYRESULTS_OPER.VERSION_2', first_block_payload).and_return( queued_response)
+      expect(soap_request_double).to receive(:execute_request).with("QAS_GETQUERYRESULTS_OPER.VERSION_2", first_block_payload).and_return(queued_response)
       allow(soap_request_double).to receive(:execute_request).and_return(final_block_retrieved_response)
-      subject.poll(&Proc.new {})
+      subject.poll(&proc {})
     end
 
     context "receives a 'queued' response" do
@@ -27,14 +28,14 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
       it "sleeps" do
         expect(subject).to receive(:sleep)
 
-        subject.poll(&Proc.new {})
+        subject.poll(&proc {})
       end
 
       it "asks for the same block again" do
         first_block_payload = block_payload(1, query_instance)
-        expect(soap_request_double).to receive(:execute_request).twice.with('QAS_GETQUERYRESULTS_OPER.VERSION_2', first_block_payload)
+        expect(soap_request_double).to receive(:execute_request).twice.with("QAS_GETQUERYRESULTS_OPER.VERSION_2", first_block_payload)
 
-        subject.poll(&Proc.new {})
+        subject.poll(&proc {})
       end
     end
 
@@ -44,12 +45,12 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
       end
 
       it "asks for the next block of the response" do
-        first_block_payload  = block_payload(1, query_instance)
+        first_block_payload = block_payload(1, query_instance)
         second_block_payload = block_payload(2, query_instance)
-        expect(soap_request_double).to receive(:execute_request).with('QAS_GETQUERYRESULTS_OPER.VERSION_2', first_block_payload)
-        expect(soap_request_double).to receive(:execute_request).with('QAS_GETQUERYRESULTS_OPER.VERSION_2', second_block_payload)
+        expect(soap_request_double).to receive(:execute_request).with("QAS_GETQUERYRESULTS_OPER.VERSION_2", first_block_payload)
+        expect(soap_request_double).to receive(:execute_request).with("QAS_GETQUERYRESULTS_OPER.VERSION_2", second_block_payload)
 
-        subject.poll(&Proc.new {})
+        subject.poll(&proc {})
       end
     end
 
@@ -61,7 +62,7 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
       it "breaks" do
         expect(soap_request_double).to receive(:execute_request).once
 
-        subject.poll(&Proc.new {})
+        subject.poll(&proc {})
       end
     end
 
@@ -71,20 +72,20 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
       end
 
       it "raises an SoapEnv error" do
-        expect{ |block| subject.poll(&block)}.to raise_error(PeoplesoftCourseClassData::Qas::GetQueryResults::SoapEnvError)
+        expect { |block| subject.poll(&block) }.to raise_error(PeoplesoftCourseClassData::Qas::GetQueryResults::SoapEnvError)
       end
     end
 
     describe "yeilding the request results" do
       it "does not yield on queued responses, and yields once for each blockRetrieved and finalBlockRetrieved" do
-        queued_responses                = rand(2..5).times.map { queued_response }
-        block_retrieved_responses       = rand(1..5).times.map { block_retrieved_response }
+        queued_responses = rand(2..5).times.map { queued_response }
+        block_retrieved_responses = rand(1..5).times.map { block_retrieved_response }
         final_block_retrieved_responses = [final_block_retrieved_response]
-        all_responses                   = queued_responses + block_retrieved_responses + final_block_retrieved_responses
-        yieldable_responses             = block_retrieved_responses + final_block_retrieved_responses
+        all_responses = queued_responses + block_retrieved_responses + final_block_retrieved_responses
+        yieldable_responses = block_retrieved_responses + final_block_retrieved_responses
 
         allow(soap_request_double).to receive(:execute_request).and_return(*all_responses)
-        expect{ |block| subject.poll(&block) }.to yield_successive_args(*yieldable_responses)
+        expect { |block| subject.poll(&block) }.to yield_successive_args(*yieldable_responses)
       end
     end
   end
@@ -115,10 +116,9 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
         </soapenv:Body>
       </soapenv:Envelope>
     EOXML
-    response = Nokogiri.XML(response) do |config|
+    Nokogiri.XML(response) do |config|
       config.default_xml.noblanks
     end
-    response
   end
 
   def block_retrieved_response
@@ -208,10 +208,9 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
       </soapenv:Body>
     </soapenv:Envelope>
     EOXML
-    response = Nokogiri.XML(response) do |config|
+    Nokogiri.XML(response) do |config|
       config.default_xml.noblanks
     end
-    response
   end
 
   def final_block_retrieved_response
@@ -301,10 +300,9 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
       </soapenv:Body>
     </soapenv:Envelope>
     EOXML
-    response = Nokogiri.XML(response) do |config|
+    Nokogiri.XML(response) do |config|
       config.default_xml.noblanks
     end
-    response
   end
 
   def error_response
@@ -330,9 +328,8 @@ RSpec.describe PeoplesoftCourseClassData::Qas::GetQueryResults do
       </SOAP-ENV:Body>
     </SOAP-ENV:Envelope>
     EOXML
-    response = Nokogiri.XML(response) do |config|
+    Nokogiri.XML(response) do |config|
       config.default_xml.noblanks
     end
-    response
   end
 end

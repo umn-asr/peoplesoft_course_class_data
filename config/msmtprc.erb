@@ -1,0 +1,12 @@
+<% env = ENV.fetch("ENVIRONMENT", "unknown") %>
+# configuration file for msmtp
+# https://marlam.de/msmtp/
+
+account default
+host smtp.umn.edu
+port 587
+tls on
+tls_starttls on
+auth off
+from "PeopleSoft Course Class Data [<%= env %>] <asrwebteam@umn.edu>"
+set_from_header on

@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+# populate the secrets
+echo "==> Populating the application secrets for '${ENVIRONMENT}'"
+erb "config/credentials.yml.erb" > "config/credentials.yml"
+
+# configure msmtp
+erb "config/msmtprc.erb" > "${HOME}/.msmtprc"
+
+# initialize the whenever gem tasks
+bundle exec whenever --set "environment=$ENVIRONMENT" --update-crontab
+
+echo "==> Started PeopleSoft Course Class Data [${PS_ENV}]"
+echo "==> Using endpoint: '${INTEGRATION_BROKER_URL}'"
+exec "$@"
